@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 //TODO: Figure out a way to package all slides to avoid importing individual components
-import Gender from '../slide/Gender.js';
+/*import Gender from '../slide/Gender.js';*/
 import City from '../slide/City.js';
-import Experience from '../slide/Experience.js';
-import Salary from '../slide/Salary.js';
+/*import Experience from '../slide/Experience.js';
+import Salary from '../slide/Salary.js';*/
 import slide from './Slide.css';
 import sprite from '../Sprite.css';
-
+import getDisplayName from 'react-display-name';
+import {navigateToNextSlide, navigateToPreviousSlide} from '../SlideManager';
 /**
  * The main Slide Manager as well as Container component. This component (as of now)
  * manages the Slide Transition Rules (in a hacky way) as well as manage the data
@@ -31,32 +32,12 @@ class Slide extends Component {
 
     handleCompletionOfCurrSlideAction(data) {
         this.state.formData[this.state.activeComponent.name] = data;
-        console.log(this.state);
         this.navigateToNextSlide();
     }
 
     // TODO: Hacky Way to manage Slide Transition Rules.
     navigateToNextSlide() {
-        var nextComponent = null;
-        var label = '';
-        switch (this.state.activeComponent) {
-            case City:
-                nextComponent = Gender;
-                label = "My gender";
-                break;
-            case Gender:
-                nextComponent = Experience;
-                label = "Your joining date and total work experience";
-                break;
-            case Experience:
-                nextComponent = Salary;
-                label = "Your monthly net salary";
-                break;
-            default:
-                nextComponent = this.state.activeComponent;
-                label = this.state.activeComponentLabel;
-        }
-        this.setState({activeComponent:  nextComponent, activeComponentLabel: label})
+        this.setState(navigateToNextSlide(getDisplayName(this.state.activeComponent)));
     }
 
     navigateToNextSlideIfCurrSlideValid() {
@@ -69,26 +50,7 @@ class Slide extends Component {
 
     // TODO: Hacky Way to manage Slide Transition Rules.
     navigateToPreviousSlide() {
-        var prevComponent = null;
-        var label = '';
-        switch (this.state.activeComponent) {
-            case Gender:
-                prevComponent = City;
-                label = 'Where do you live currently?';
-                break;
-            case Experience:
-                prevComponent = Gender;
-                label = "My gender";
-                break;
-            case Salary:
-                prevComponent = Experience;
-                label = "Your joining date and total work experience";
-                break;
-            default:
-                prevComponent = this.state.activeComponent;
-                label = this.state.activeComponentLabel;
-        }
-        this.setState({activeComponent:  prevComponent, activeComponentLabel: label})
+        this.setState(navigateToPreviousSlide(getDisplayName(this.state.activeComponent)));
     }
 
     render() {
