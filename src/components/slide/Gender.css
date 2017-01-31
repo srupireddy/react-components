@@ -1,0 +1,19 @@
+.icon {
+  background-image: url(https://www.bankbazaar.com/images/sprite/sprite-gender.png);
+  background-position: 0 200px;
+  background-repeat: no-repeat;
+  height: 251px;
+  width: 71px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.iconMale {
+  composes: icon;
+  background-position: -86px -5px;
+}
+
+.iconFemale {
+  composes: icon;
+  background-position: -5px -5px;
+}
