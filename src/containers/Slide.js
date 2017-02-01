@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 //TODO: Figure out a way to package all slides to avoid importing individual components
-import Gender from '../slide/Gender.js';
-import City from '../slide/City.js';
-import Experience from '../slide/Experience.js';
-import Salary from '../slide/Salary.js';
+import Gender from '../components/Gender.js';
+import City from '../components/City.js';
+import Experience from '../components/Experience.js';
+import Salary from '../components/Salary.js';
 import slide from './Slide.css';
-import sprite from '../Sprite.css';
+import sprite from '../widgets/Sprite.css';
 
 /**
  * The main Slide Manager as well as Container component. This component (as of now)
@@ -102,14 +102,14 @@ class Slide extends Component {
                     data={this.state.formData[this.state.activeComponent.name]}
                     />
                 <div>
-          <span>
-            <a styleName="slide.controlLeft" onClick={this.navigateToPreviousSlide}>
-                <span styleName="sprite.symbolChevronLeft"></span>
-            </a>
-            <a styleName="slide.controlRight" onClick={this.navigateToNextSlideIfCurrSlideValid}>
-                <span styleName="sprite.symbolChevronRight"></span>
-            </a>
-          </span>
+                    <span>
+                        <a styleName="slide.controlLeft" onClick={this.navigateToPreviousSlide}>
+                            <span styleName="sprite.symbolChevronLeft"></span>
+                        </a>
+                        <a styleName="slide.controlRight" onClick={this.navigateToNextSlideIfCurrSlideValid}>
+                            <span styleName="sprite.symbolChevronRight"></span>
+                        </a>
+                    </span>
                     <button onClick={this.navigateToNextSlideIfCurrSlideValid}>Continue</button>
                 </div>
             </div>

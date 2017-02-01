@@ -1,5 +1,5 @@
 import React from 'react';
-import RichRadioGroup from '../../widgets/RichRadioGroup.js'
+import RichRadioGroup from '../widgets/RichRadioGroup.js'
 import CityStyle from './City.css';
 
 
