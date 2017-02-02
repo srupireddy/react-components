@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-//TODO: Figure out a way to package all slides to avoid importing individual components
-/*import Gender from '../slide/Gender.js';*/
 import City from '../slide/City.js';
-/*import Experience from '../slide/Experience.js';
-import Salary from '../slide/Salary.js';*/
 import slide from './Slide.css';
 import sprite from '../Sprite.css';
 import getDisplayName from 'react-display-name';
-import {navigateToNextSlide, navigateToPreviousSlide} from '../SlideManager';
+import {moveSlide} from '../SlideManager';
+import Constants from '../Constants.js';
 /**
  * The main Slide Manager as well as Container component. This component (as of now)
  * manages the Slide Transition Rules (in a hacky way) as well as manage the data
@@ -37,7 +34,7 @@ class Slide extends Component {
 
     // TODO: Hacky Way to manage Slide Transition Rules.
     navigateToNextSlide() {
-        this.setState(navigateToNextSlide(getDisplayName(this.state.activeComponent)));
+        this.setState(moveSlide(getDisplayName(this.state.activeComponent), Constants.NEXT,this.state.formData));
     }
 
     navigateToNextSlideIfCurrSlideValid() {
@@ -50,11 +47,11 @@ class Slide extends Component {
 
     // TODO: Hacky Way to manage Slide Transition Rules.
     navigateToPreviousSlide() {
-        this.setState(navigateToPreviousSlide(getDisplayName(this.state.activeComponent)));
+        this.setState(moveSlide(getDisplayName(this.state.activeComponent), Constants.PREVIOUS, this.state.formData));
     }
 
     render() {
-        var Component = this.state.activeComponent
+        var Component = this.state.activeComponent;
         return (
             <div styleName='slide.container'>
                 <h3 styleName='slide.header'>{this.state.activeComponentLabel}</h3>
