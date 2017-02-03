@@ -1,5 +1,7 @@
 import React from 'react';
-import RichRadioGroup from '../widgets/RichRadioGroup.js'
+import {RadioGroup} from 'react-radio-group';
+
+import RichRadio from '../widgets/RichRadio.js'
 import GenderStyle from './Gender.css';
 
 class Gender extends React.Component {
@@ -8,15 +10,8 @@ class Gender extends React.Component {
     this.handleGenderSelection = this.handleGenderSelection.bind(this);
   }
 
-  selectedValue() {
-    // By default React expects the value of a Form Element to be undefined or null for it to be uncontrolled.
-    // We shouldnt change a uncontrolled element to controlled (Refer https://github.com/facebook/react/issues/6779)
-    // Therefore explicitly setting it as ''
-    return this.props.data || ''
-  }
-
   isInValidState() {
-    return this.selectedValue() != '';
+    return this.props.data != '';
   }
 
   handleGenderSelection(value) {
@@ -29,14 +24,14 @@ class Gender extends React.Component {
       {value: 'Female', imageStyle: GenderStyle.iconFemale}
     ];
 
+    let radioItems = genderRadioItemsConfig.map(
+      (item) => (<RichRadio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-xs-6 col-sm-6 col-md-6 text-center'/>)
+    );
+
     return (
-      <RichRadioGroup
-          name='gender'
-          selectedValue={this.selectedValue()}
-          onChange={this.handleGenderSelection}
-          items={genderRadioItemsConfig}
-          itemContainerStyle='col-xs-6 col-sm-6 col-md-6 text-center'
-        />
+      <RadioGroup name='gender' selectedValue={this.props.data} onChange={this.handleGenderSelection} className="row">
+        {radioItems}
+      </RadioGroup>
     );
   }
 }

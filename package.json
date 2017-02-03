@@ -11,13 +11,18 @@
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.22.1",
+    "babel-jest": "^18.0.0",
     "babel-loader": "^6.2.10",
     "babel-plugin-react-css-modules": "^2.2.0",
+    "babel-polyfill": "^6.22.0",
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "css-loader": "^0.26.1",
+    "enzyme": "^2.7.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^18.1.0",
     "jest-enzyme": "^2.1.0",
+    "react-addons-test-utils": "^15.4.2",
     "react-hot-loader": "^1.3.1",
     "react-test-renderer": "^15.4.2",
     "style-loader": "^0.13.1",
@@ -28,5 +33,12 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-radio-group": "^3.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "//": "Configuration learnt from https://facebook.github.io/jest/docs/webpack.html",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tst/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   }
 }

@@ -1,27 +1,30 @@
 import React from 'react';
-import RichRadioGroup from '../widgets/RichRadioGroup.js'
-import CityStyle from './City.css';
+import {RadioGroup} from 'react-radio-group';
 
+import RichRadio from '../widgets/RichRadio.js'
+
+import CityStyle from './City.css';
 
 class City extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {selectedCity: this.props.data}
     this.handleCitySelection = this.handleCitySelection.bind(this);
   }
 
-  selectedValue() {
-    // By default React expects the value of a Form Element to be undefined or null for it to be uncontrolled.
-    // We shouldnt change a uncontrolled element to controlled (Refer https://github.com/facebook/react/issues/6779)
-    // Therefore explicitly setting it as ''
-    return this.props.data || ''
+  isInValidState() {
+    return selectedCity() != '';
   }
 
-  isInValidState() {
-    return this.selectedValue() != '';
+  selectedCity() {
+    return this.state.selectedCity || '';
   }
 
   handleCitySelection(value) {
-    this.props.onCompletionOfAction(value);
+    this.setState({selectedCity: value});
+    if (this.props.onCompletionOfAction) {
+      this.props.onCompletionOfAction(value);
+    }
   }
 
   render() {
@@ -32,14 +35,14 @@ class City extends React.Component {
       {value: 'Bangalore', imageStyle: CityStyle.iconBangalore}
     ];
 
+    let radioItems = cityRadioItemsConfig.map(
+      (item) => (<RichRadio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-xs-6 col-sm-2 col-md-2 text-center'/>)
+    );
+
     return (
-      <RichRadioGroup
-          name='city'
-          selectedValue={this.selectedValue()}
-          onChange={this.handleCitySelection}
-          items={cityRadioItemsConfig}
-          itemContainerStyle='col-xs-6 col-sm-2 col-md-2 text-center'
-        />
+      <RadioGroup name='city' selectedValue={this.selectedCity()} onChange={this.handleCitySelection} className="row">
+        {radioItems}
+      </RadioGroup>
     );
   }
 }
