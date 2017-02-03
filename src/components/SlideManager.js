@@ -1,3 +1,7 @@
+/**
+ * This manages the slide transition NOT using any of the third party state machine.
+ */
+
 import Gender from './slide/Gender.js';
 import City from './slide/City.js';
 import Experience from './slide/Experience.js';

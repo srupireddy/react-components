@@ -3,7 +3,7 @@ import City from '../slide/City.js';
 import slide from './Slide.css';
 import sprite from '../Sprite.css';
 import getDisplayName from 'react-display-name';
-import {moveSlide} from '../SlideManager';
+import {initSlide, moveSlide} from '../SlideManager-fsm';
 import Constants from '../Constants.js';
 /**
  * The main Slide Manager as well as Container component. This component (as of now)
@@ -20,7 +20,7 @@ import Constants from '../Constants.js';
 class Slide extends Component {
     constructor(props) {
         super(props);
-        this.state = {activeComponent: City, activeComponentLabel: 'Where do you live currently?', formData: {}}
+        this.state = initSlide();
         this.navigateToNextSlide = this.navigateToNextSlide.bind(this);
         this.navigateToPreviousSlide = this.navigateToPreviousSlide.bind(this);
         this.handleCompletionOfCurrSlideAction = this.handleCompletionOfCurrSlideAction.bind(this);
