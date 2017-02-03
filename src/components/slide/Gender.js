@@ -35,7 +35,7 @@ class Gender extends React.Component {
           selectedValue={this.selectedValue()}
           onChange={this.handleGenderSelection}
           items={genderRadioItemsConfig}
-          itemContainerStyle='col-xs-6 col-sm-6 col-md-6 text-center'
+          itemContainerStyle='col-md-3 col-xs-3 float-none inline-block'
         />
     );
   }

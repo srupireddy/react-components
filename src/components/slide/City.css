@@ -27,3 +27,8 @@
   composes: icon;
   background-position: -2px -2px;
 }
+.iconOther {
+  composes: icon;
+  background-position: -274px -2px;
+}
+

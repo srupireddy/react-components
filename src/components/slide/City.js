@@ -29,7 +29,8 @@ class City extends React.Component {
       {value: 'Chennai', imageStyle: CityStyle.iconChennai},
       {value: 'Mumbai', imageStyle: CityStyle.iconMumbai},
       {value: 'New Delhi', imageStyle: CityStyle.iconNewDelhi},
-      {value: 'Bangalore', imageStyle: CityStyle.iconBangalore}
+      {value: 'Bangalore', imageStyle: CityStyle.iconBangalore},
+      {value: 'Other', imageStyle: CityStyle.iconOther}
     ];
 
     return (
@@ -38,7 +39,7 @@ class City extends React.Component {
           selectedValue={this.selectedValue()}
           onChange={this.handleCitySelection}
           items={cityRadioItemsConfig}
-          itemContainerStyle='col-xs-6 col-sm-2 col-md-2 text-center'
+          itemContainerStyle='col-xs-2 col-sm-2 col-md-2 float-none inline-block'
         />
     );
   }
