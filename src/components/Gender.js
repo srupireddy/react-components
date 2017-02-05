@@ -3,6 +3,7 @@ import {RadioGroup} from 'react-radio-group';
 
 import RichRadio from '../widgets/RichRadio.js'
 import GenderStyle from './Gender.css';
+import RadioStyle from '../widgets/RichRadio.css';
 
 class Gender extends React.Component {
   constructor(props) {
@@ -25,11 +26,11 @@ class Gender extends React.Component {
     ];
 
     let radioItems = genderRadioItemsConfig.map(
-      (item) => (<RichRadio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-xs-6 col-sm-6 col-md-6 text-center'/>)
+      (item) => (<RichRadio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-md-3 col-xs-3 float-none inline-block'/>)
     );
 
     return (
-      <RadioGroup name='gender' selectedValue={this.props.data} onChange={this.handleGenderSelection} className="row">
+      <RadioGroup name='gender' selectedValue={this.props.data} onChange={this.handleGenderSelection} className={RadioStyle.oneRow}>
         {radioItems}
       </RadioGroup>
     );

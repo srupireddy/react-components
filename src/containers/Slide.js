@@ -4,6 +4,9 @@ import Gender from '../components/Gender.js';
 import City from '../components/City.js';
 import Experience from '../components/Experience.js';
 import Salary from '../components/Salary.js';
+
+import Arrow from '../widgets/Arrow.js';
+import Button from '../widgets/Button.js';
 import slide from './Slide.css';
 import sprite from '../widgets/Sprite.css';
 
@@ -94,23 +97,18 @@ class Slide extends Component {
     render() {
         var Component = this.state.activeComponent
         return (
-            <div styleName='slide.container'>
-                <h3 styleName='slide.header'>{this.state.activeComponentLabel}</h3>
-                <Component
+            <div className={slide.slideblock}>
+                <div className="container">
+                    <div className={slide.slideheader}>{this.state.activeComponentLabel}</div>
+                    <Component
                     ref={(instance) => this.activeComponentInstance = instance}
                     onCompletionOfAction={this.handleCompletionOfCurrSlideAction}
                     data={this.state.formData[this.state.activeComponent.name]}
                     />
-                <div>
-                    <span>
-                        <a styleName="slide.controlLeft" onClick={this.navigateToPreviousSlide}>
-                            <span styleName="sprite.symbolChevronLeft"></span>
-                        </a>
-                        <a styleName="slide.controlRight" onClick={this.navigateToNextSlideIfCurrSlideValid}>
-                            <span styleName="sprite.symbolChevronRight"></span>
-                        </a>
-                    </span>
-                    <button onClick={this.navigateToNextSlideIfCurrSlideValid}>Continue</button>
+                    <Button onClick={this.navigateToNextSlideIfCurrSlideValid}>Continue</Button>
+                    <div>
+                        <Arrow/>
+                    </div>
                 </div>
             </div>
         )

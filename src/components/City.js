@@ -4,6 +4,7 @@ import {RadioGroup} from 'react-radio-group';
 import RichRadio from '../widgets/RichRadio.js'
 
 import CityStyle from './City.css';
+import RadioStyle from '../widgets/RichRadio.css';
 
 class City extends React.Component {
   constructor(props) {
@@ -32,15 +33,16 @@ class City extends React.Component {
       {value: 'Chennai', imageStyle: CityStyle.iconChennai},
       {value: 'Mumbai', imageStyle: CityStyle.iconMumbai},
       {value: 'New Delhi', imageStyle: CityStyle.iconNewDelhi},
-      {value: 'Bangalore', imageStyle: CityStyle.iconBangalore}
+      {value: 'Bangalore', imageStyle: CityStyle.iconBangalore},
+      {value: 'Other', imageStyle: CityStyle.iconOther}
     ];
 
     let radioItems = cityRadioItemsConfig.map(
-      (item) => (<RichRadio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-xs-6 col-sm-2 col-md-2 text-center'/>)
+      (item) => (<RichRadio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-xs-2 col-sm-2 col-md-2 float-none inline-block'/>)
     );
 
     return (
-      <RadioGroup name='city' selectedValue={this.selectedCity()} onChange={this.handleCitySelection} className="row">
+      <RadioGroup name='city' selectedValue={this.selectedCity()} onChange={this.handleCitySelection} className={RadioStyle.oneRow}>
         {radioItems}
       </RadioGroup>
     );

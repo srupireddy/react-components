@@ -1,0 +1,163 @@
+/* Common CSS Style for Across Website | Begin*/
+* {
+    box-sizing: border-box;
+}
+html {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #34495e;
+    line-height: 1.72222;
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    color: #38acc9;
+    transition: all 0.25s ease 0s;
+}
+.mobile .cc-landing .offers-row a{color:#000000;}
+a:active, a:hover, a:focus, input:focus, textarea:focus, button:focus {
+    outline: 0
+}
+h1, h2, h3, h4, h5, h6, p, ul, ol, li {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    line-height: normal;
+}
+ul, ol {
+    list-style: none;
+}
+address {
+    font-style: normal;
+}
+small, .small {
+    font-size: 85%;
+}
+mark, .mark {
+    padding: .2em;
+    background-color: #fcf8e3;
+}
+.strike {
+    text-decoration: line-through;
+}
+.font-xs {
+    font-size: 10px;
+}
+.font-sm {
+    font-size: 12px;
+}
+.font-normal {
+    font-size: 14px;
+    line-height: 18px
+}
+.font-md {
+    font-size: 16px;
+    line-height: 20px
+}
+.font-lg {
+    font-size: 18px;
+    line-height: 22px
+}
+.font-xlg {
+    font-size: 20px;
+    line-height: 24px
+}
+.dontshow {
+    display: none;
+}
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+.text-center {
+    text-align: center;
+}
+.text-justify {
+    text-align: justify;
+}
+.text-nowrap {
+    white-space: nowrap;
+}
+.text-lowercase {
+    text-transform: lowercase;
+}
+.text-uppercase {
+    text-transform: uppercase;
+}
+.text-capitalize {
+    text-transform: capitalize;
+}
+.text-muted {
+    color: #777;
+}
+.text-primary {
+    color: #337ab7;
+}
+a.text-primary:hover {
+    color: #286090;
+}
+.text-success {
+    color: #3c763d;
+}
+a.text-success:hover {
+    color: #2b542c;
+}
+.text-info {
+    color: #31708f;
+}
+a.text-info:hover {
+    color: #245269;
+}
+.text-warning {
+    color: #8a6d3b;
+}
+a.text-warning:hover {
+    color: #66512c;
+}
+.text-danger {
+    color: #a94442;
+}
+a.text-danger:hover {
+    color: #843534;
+}
+.vertical-align-ttop {
+    vertical-align: text-top;
+}
+.border-right {
+    border-right: 1px solid #ccc;
+}
+.show-on-tab {
+    display: none !important
+}
+.show-on-mobile {
+    display: none !important
+}
+img {
+    vertical-align: middle;
+}
+.hide {
+    display: none !important;
+}
+.show {
+    display: block !important;
+}
+.invisible {
+    visibility: hidden;
+}
+.text-hide {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
