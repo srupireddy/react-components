@@ -1,53 +1,61 @@
-export function navigateToNextSlide(current) {
-    var nextComponent = null;
-    var label = '';
-    switch (current) {
-        case City:
-            nextComponent = 'Gender';
-            label = "My gender";
-            break;
-        case Gender:
-            nextComponent = 'Experience';
-            label = "Your joining date and total work experience";
-            break;
-        case Experience:
-            nextComponent = 'Salary';
-            label = "Your monthly net salary";
-            break;
-        default:
-            nextComponent = 'Gender';
-            label = 'My gender';
-    }
-    return {activeComponent:  nextComponent, activeComponentLabel: label};
-}
+import Gender from '../components/Gender.js';
+import City from '../components/City.js';
+import Experience from '../components/Experience.js';
+import Salary from '../components/Salary.js';
 
-export function navigateToPreviousSlide(current) {
-    var prevComponent = null;
-    var label = '';
-    switch (current) {
-        case 'Gender':
-            prevComponent = 'City';
-            label = 'Where do you live currently?';
-            break;
-        case 'Experience':
-            prevComponent = 'Gender';
-            label = "My gender";
-            break;
-        case 'Salary':
-            prevComponent = 'Experience';
-            label = "Your joining date and total work experience";
-            break;
-        default:
-            prevComponent = 'Gender';
-            label = 'My gender';
+export default class SlideManager {
+    static firstSlide() {
+        return City;
     }
-    return {activeComponent:  prevComponent, activeComponentLabel: label};
-}
 
-export function navigateToNextSlideIfCurrSlideValid() {
-    if (!this.activeComponentInstance.isInValidState()) {
-        console.log("Oopss... You have not chosen anything");
-        return;
+    static nextSlide(currentSlide) {
+        var nextComponent = null;
+        switch (currentSlide) {
+            case City:
+                nextComponent = Gender;
+                break;
+            case Gender:
+                nextComponent = Experience;
+                break;
+            case Experience:
+                nextComponent = Salary;
+                break;
+            default:
+                nextComponent = City;
+        }
+        return nextComponent;
     }
-    navigateToNextSlide();
+
+    static previousSlide(currentSlide) {
+        var prevComponent = null;
+        switch (currentSlide) {
+            case Gender:
+                prevComponent = City;
+                break;
+            case Experience:
+                prevComponent = Gender;
+                break;
+            case Salary:
+                prevComponent = Experience;
+                break;
+            default:
+                prevComponent = Gender;
+        }
+        return prevComponent;
+    }
+
+    static slideHeader(currentSlide) {
+        switch (currentSlide) {
+            case City:
+                return "Where do you live currently?";
+            case Experience:
+                return "Your joining date and total work experience";
+            case Gender:
+                return "My gender";
+            case Salary:
+                return "Your monthly net salary";
+            default:
+                return "Oops... Are you sure this can happen?";
+        }
+    }
 }

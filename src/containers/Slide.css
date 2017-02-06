@@ -1,10 +1,25 @@
-.slideblock {
+.slideContainer {
     color: #fff;
     background: #3dbfd9;
     position: relative;
     text-align: center;
     padding: 20px 0;
 }
-.slideheader {
+
+.slideHeader {
     font-size: 24px;
+}
+
+.slideControlPrev {
+    position: absolute;
+    left: 15px;
+    top: 45%;
+    margin-top: -20px;
+}
+
+.slideControlNext {
+    position: absolute;
+    right: 15px;
+    top: 45%;
+    margin-top: -20px;
 }

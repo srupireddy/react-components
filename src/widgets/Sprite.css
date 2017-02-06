@@ -1,4 +1,4 @@
-.symbols {
+.icon {
   background-image: url(https://www.bankbazaar.com/images/sprite/sprite-for-symbols-v3.png);
   background-repeat: no-repeat;
   display: inline-block;
@@ -6,12 +6,13 @@
   width: 30px;
 }
 
-.symbolChevronLeft {
-  composes: symbols;
+.iconLeft {
+  composes: icon;
   background-position: -163px -58px;
 }
 
-.symbolChevronRight {
-  composes: symbols;
+.iconRight {
+  composes: icon;
   background-position: -224px -59px;
 }
+

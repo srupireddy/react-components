@@ -17,3 +17,7 @@
   composes: icon;
   background-position: -5px -5px;
 }
+
+.container {
+  margin: 20px 0;
+}

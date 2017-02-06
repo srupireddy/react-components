@@ -1,17 +1,21 @@
-/**
- * Created by ramkumar on 2/2/17.
- */
-
 import React from 'react';
-import btnstyle from './Button.css';
 
-class Button extends React.Component {
+import ButtonStyle from './Button.css';
 
-    render(){
+export class Button extends React.Component {
+    render() {
         return (
-            <button className={btnstyle.btn}>Continue</button>
-)
-}
+            <button className={ButtonStyle.btn}>Continue</button>
+        )
+    }
 };
 
-export default Button;
+export class IconOnlyButton extends React.Component {
+    render() {
+        return (
+            <a className={ButtonStyle.icon} onClick={this.props.onClick}>
+                <span className={this.props.iconStyle}/>
+            </a>
+        )
+    }
+};

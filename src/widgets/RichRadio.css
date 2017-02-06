@@ -1,20 +1,20 @@
-label.eformColSection {
+.labelContainer {
     padding: 8px 10px;
     display: block;
     cursor: pointer;
     font-size: 14px;
     margin-bottom: 0;
 }
-label.eformColSection:hover, label.eformColSection.checked {
+
+.labelContainer:hover, 
+.labelContainer.checked {
     background: #40e0d0;
     border-radius: 5px;
 }
-.richinfo {
+
+.label {
     font-size: 15px;
     display: block;
     margin: 5px 0 0;
     font-weight: bold;
-}
-.oneRow {
-    margin: 20px 0;
 }

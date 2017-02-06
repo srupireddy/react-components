@@ -4,7 +4,6 @@ import {RadioGroup} from 'react-radio-group';
 import RichRadio from '../widgets/RichRadio.js'
 
 import CityStyle from './City.css';
-import RadioStyle from '../widgets/RichRadio.css';
 
 class City extends React.Component {
   constructor(props) {
@@ -14,7 +13,7 @@ class City extends React.Component {
   }
 
   isInValidState() {
-    return selectedCity() != '';
+    return this.selectedCity() != '';
   }
 
   selectedCity() {
@@ -42,7 +41,7 @@ class City extends React.Component {
     );
 
     return (
-      <RadioGroup name='city' selectedValue={this.selectedCity()} onChange={this.handleCitySelection} className={RadioStyle.oneRow}>
+      <RadioGroup name='city' selectedValue={this.selectedCity()} onChange={this.handleCitySelection} className={CityStyle.container}>
         {radioItems}
       </RadioGroup>
     );
