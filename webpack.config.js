@@ -1,24 +1,23 @@
-var webpack = require('webpack');
-var path = require('path');
+const Path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var BUILD_DIR = path.resolve(__dirname, 'public');
-var APP_DIR = path.resolve(__dirname, 'src');
+var BUILD_DIR = Path.resolve(__dirname, 'public');
+var APP_DIR = Path.resolve(__dirname, 'src');
 
 var config = {
     entry: [
-        'webpack-dev-server/client?http://localhost:8080/',
         APP_DIR + '/client.js'
     ],
     output: {
         path: BUILD_DIR,
         filename: 'bundle.js'
     },
-    module : {
-        loaders : [
+    module: {
+        rules: [
             {
-                test : /\.jsx?/,
-                include : APP_DIR,
-                loader : "babel-loader",
+                test: /\.jsx?/,
+                include: APP_DIR,
+                loader: "babel-loader",
                 query: {
                     plugins: [
                         'transform-react-jsx',
@@ -32,15 +31,18 @@ var config = {
                 }
             },
             {
-                test : /\.css$/,
-                include : APP_DIR,
-                loaders : [
-                    'style-loader',
-                    'css-loader?importLoader=1&modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
-                ]
+                test: /\.css$/,
+                include: APP_DIR,
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+                })
             }
         ]
-    }
+    },
+    plugins: [
+        new ExtractTextPlugin("bundle.css")
+    ]
 };
 
 module.exports = config;
