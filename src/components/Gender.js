@@ -1,7 +1,7 @@
 import React from 'react';
 import {RadioGroup} from 'react-radio-group';
 
-import RichRadio from '../widgets/RichRadio.js'
+import Radio from '../widgets/Radio.js'
 import GenderStyle from './Gender.css';
 
 class Gender extends React.Component {
@@ -25,7 +25,7 @@ class Gender extends React.Component {
     ];
 
     let radioItems = genderRadioItemsConfig.map(
-      (item) => (<RichRadio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-md-3 col-xs-3 float-none inline-block'/>)
+      (item) => (<Radio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-md-3 col-xs-3 float-none inline-block'/>)
     );
 
     return (

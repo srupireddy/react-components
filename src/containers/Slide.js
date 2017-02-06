@@ -54,10 +54,14 @@ export default class Slide extends React.Component {
                     data={this.state.formData[this.state.activeComponent.name]}
                 />
                 <div className={SlideStyle.slideControlPrev}>
-                    <IconOnlyButton onClick={this.navigateToPreviousSlide} iconStyle={Sprite.iconLeft}/>
+                    <IconOnlyButton onClick={this.navigateToPreviousSlide}>
+                        <span className={Sprite.iconLeft}/>
+                    </IconOnlyButton>
                 </div>
                 <div className={SlideStyle.slideControlNext}>
-                    <IconOnlyButton onClick={this.navigateToNextSlideIfCurrSlideValid} iconStyle={Sprite.iconRight}/>
+                    <IconOnlyButton onClick={this.navigateToNextSlideIfCurrSlideValid}>
+                        <span className={Sprite.iconRight}/>
+                    </IconOnlyButton>
                 </div>
                 <Button onClick={this.navigateToNextSlideIfCurrSlideValid}>
                     Continue
