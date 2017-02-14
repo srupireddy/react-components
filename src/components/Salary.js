@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
 
+import {Inputfield, InputfieldGroup} from '../widgets/Inputfield.js'
+
+import SalaryStyle from './Salary.scss';
+
 class Salary extends Component {
   isInValidState() {
     return true;
   }
-  
+
   render() {
     return (
-      <div>
-        Hello Salary
+      <div className={SalaryStyle.container}>
+        <InputfieldGroup />
       </div>
     )
   }

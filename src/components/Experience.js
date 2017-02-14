@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 
+import {Inputfield, InputfieldGroup} from '../widgets/Inputfield.js'
+
+import ExperienceStyle from './Experience.scss';
+
 class Experience extends Component {
   isInValidState() {
     return true;
@@ -7,9 +11,9 @@ class Experience extends Component {
   
   render() {
     return (
-      <div>
-        Hello Experience
-      </div>
+        <div className={ExperienceStyle.container}>
+        <Inputfield />
+        </div>
     )
   }
 }

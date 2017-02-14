@@ -25,7 +25,7 @@ class Gender extends React.Component {
     ];
 
     let radioItems = genderRadioItemsConfig.map(
-      (item) => (<Radio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-md-3 col-xs-3 float-none inline-block'/>)
+      (item) => (<Radio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-md-5 col-xs-5 float-none inline-block'/>)
     );
 
     return (

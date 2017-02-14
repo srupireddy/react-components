@@ -19,5 +19,6 @@
 }
 
 .container {
-  margin: 20px 0;
+  width: 600px;
+  margin: 20px auto;
 }

@@ -44,7 +44,8 @@ export default class Slide extends React.Component {
     render() {
         var Component = this.state.activeComponent
         return (
-            <div className={["container", SlideStyle.slideContainer].join(' ')}>
+            <div className={SlideStyle.slideContainer}>
+              <div className="container">
                 <div className={SlideStyle.slideHeader}>
                     {this.state.activeComponentLabel}
                 </div>
@@ -67,6 +68,7 @@ export default class Slide extends React.Component {
                     Continue
                 </Button>
             </div>
+        </div>
         )
     }
 }
