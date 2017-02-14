@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ButtonStyle from './Button.css';
+import ButtonStyle from './Button.scss';
 
 export class Button extends React.Component {
     render() {

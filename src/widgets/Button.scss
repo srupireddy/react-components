@@ -1,3 +1,5 @@
+$btn-color: #e74c3c;
+
 /* Button styles | Begin*/
 .btn {
     border: 0 none;
@@ -7,19 +9,19 @@
     padding: 10px 15px;
     cursor: pointer;
     transition: border 0.25s linear 0s, color 0.25s linear 0s, background-color 0.25s linear 0s;
-    background-color: #e74c3c;
+    background-color: $btn-color;
     color: #fff;
     text-decoration: none;
     display: inline-block;
-}
-.btn:hover {
-    background-color: #ec7063;
-    text-decoration: none;
-}
-.btn.disabled {
-    cursor: not-allowed;
-    opacity: 0.65;
-    pointer-events: none;
+    &:hover {
+        background-color: #ec7063;
+        text-decoration: none;
+    }
+    .disabled {
+        cursor: not-allowed;
+        opacity: 0.65;
+        pointer-events: none;
+    }
 }
 .btn-primary {
     background: #1abc9c;
