@@ -31,7 +31,7 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
   padding: 0 12px;
   width: 25px;
 }
-.spriteSlider {
+.icon {
   background-image: url(https://www.bankbazaar.com/images/sprite/sprite-landingpage.png);
   background-position: 0 150px;
   width: 108px;
@@ -40,7 +40,8 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
   display: inline-block!important;
   vertical-align: middle;
 }
-.iconRupee {
+.iconRupees {
+  composes: icon;
   background-position: -140px -84px;
   width: 17px;
   height: 19px;

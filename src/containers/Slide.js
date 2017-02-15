@@ -2,8 +2,8 @@ import React from 'react';
 
 import {Button, IconOnlyButton} from '../widgets/Button.js';
 import SlideManager from './SlideManager.js';
-import SlideStyle from './Slide.css';
-import Sprite from '../widgets/Sprite.css';
+import SlideStyle from './Slide.scss';
+import Sprite from '../widgets/Sprite.scss';
 
 export default class Slide extends React.Component {
     constructor(props) {

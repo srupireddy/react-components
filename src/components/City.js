@@ -3,7 +3,7 @@ import {RadioGroup} from 'react-radio-group';
 
 import Radio from '../widgets/Radio.js'
 
-import CityStyle from './City.css';
+import CityStyle from './City.scss';
 
 class City extends React.Component {
   constructor(props) {

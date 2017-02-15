@@ -1,0 +1,38 @@
+.icon {
+  background-image: url(https://www.bankbazaar.com/images/sprite/sprite-home-property.png);
+  background-repeat: no-repeat;
+  background-position: 0 200px;
+  display: inline-block;
+  width: 132px;
+  height: 132px;
+  vertical-align: middle;
+}
+
+.iconMumbai {
+  composes: icon;
+  background-position: -5px -5px;
+}
+
+.iconChennai {
+  composes: icon;
+  background-position: -147px -5px;
+}
+
+.iconNewDelhi {
+  composes: icon;
+  background-position: -289px -5px;
+}
+
+.iconBangalore {
+  composes: icon;
+  background-position: -431px -5px;
+}
+
+.iconOther {
+  composes: icon;
+  background-position: -573px -5px;
+}
+
+.container {
+  margin: 20px 0;
+}

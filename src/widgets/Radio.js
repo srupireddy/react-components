@@ -1,7 +1,7 @@
 import React from 'react';
 import {Radio} from 'react-radio-group';
 
-import RadioStyle from './Radio.css';
+import RadioStyle from './Radio.scss';
 
 export default class RichRadio extends React.Component {
     render() {

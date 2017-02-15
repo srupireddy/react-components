@@ -2,7 +2,7 @@ import React from 'react';
 import {RadioGroup} from 'react-radio-group';
 
 import Radio from '../widgets/Radio.js'
-import GenderStyle from './Gender.css';
+import GenderStyle from './Gender.scss';
 
 class Gender extends React.Component {
   constructor(props) {

@@ -15,7 +15,7 @@ export class IconTextField extends React.Component {
         return (
         <div className={TextFieldStyle.inputGroup}>
             <span className={TextFieldStyle.inputGroupIcon}>
-                <span className={[TextFieldStyle.spriteSlider, TextFieldStyle.iconRupee].join(' ')}></span>
+                <span className={TextFieldStyle.iconRupees}></span>
             </span>
             <input type="text" placeholder="Enter the Salary"  className={TextFieldStyle.bbInput}/>
         </div>
