@@ -8,7 +8,8 @@ import Sprite from '../widgets/Sprite.scss';
 export default class Slide extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {activeComponent: SlideManager.firstSlide(), activeComponentLabel: 'Where do you live currently?', formData: {}}
+        var component = SlideManager.firstSlide();
+        this.state = {activeComponent: component.name, activeComponentLabel: component.label, formData: {}};
         this.navigateToNextSlide = this.navigateToNextSlide.bind(this);
         this.navigateToPreviousSlide = this.navigateToPreviousSlide.bind(this);
         this.handleCompletionOfCurrSlideAction = this.handleCompletionOfCurrSlideAction.bind(this);
@@ -22,15 +23,18 @@ export default class Slide extends React.Component {
     }
 
     navigateToPreviousSlide() {
-        let prevComponent = SlideManager.previousSlide(this.state.activeComponent);
-        let prevComponentHeader = SlideManager.slideHeader(prevComponent);
-        this.setState({activeComponent: prevComponent, activeComponentLabel: prevComponentHeader});
+        let prevComponent = SlideManager.previous();
+        let name = prevComponent.name;
+        let prevComponentHeader = prevComponent.label;
+        this.setState({activeComponent: name, activeComponentLabel: prevComponentHeader});
     }
 
     navigateToNextSlide() {
-        let nextComponent = SlideManager.nextSlide(this.state.activeComponent);
-        let nextComponentHeader = SlideManager.slideHeader(nextComponent);
-        this.setState({activeComponent: nextComponent, activeComponentLabel: nextComponentHeader});
+        let nextComponent = SlideManager.moveSlide(this.state.activeComponent.name, "next");
+        let name = nextComponent.name;
+        let nextComponentHeader = nextComponent.label;
+        console.log("name:"+name+",label:"+nextComponentHeader);
+        this.setState({activeComponent: name, activeComponentLabel: nextComponentHeader});
     }
 
     navigateToNextSlideIfCurrSlideValid() {

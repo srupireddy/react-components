@@ -1,0 +1,24 @@
+{
+  initial: {
+    state: "City",
+    event: "init",
+    defer: "true"
+  },
+  transitions: [
+    {
+      name: "next",
+      from: "City",
+      to: "Gender"
+    },
+    {
+      name: "next",
+      from: "Gender",
+      to: "Employment"
+    },
+    {
+      name: "next",
+      from: "Employment",
+      to: "Experience"
+    }
+  ]
+}

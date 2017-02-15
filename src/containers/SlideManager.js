@@ -1,61 +1,65 @@
-import Gender from '../components/Gender.js';
-import City from '../components/City.js';
-import Experience from '../components/Experience.js';
-import Salary from '../components/Salary.js';
+import * as Components from '../components/';
+import StateMachine from '../fsm/state-machine.js';
+
+var slideTransitionRules;
+var fsm;
+var context;
+var model;
+var slideConfigs = {City:{label:'Where do you live currently?'}, Gender:{label:'My gender'}, Experience:{label:'Your joining date and total work experience'}, Employment:{label:'Type of employment'}, ProfitAfterTax:{label:'Latest year\'s profit after tax'} };
 
 export default class SlideManager {
-    static firstSlide() {
-        return City;
+
+    static loadSlideTransitionRules(context) {
+        var xhr = new XMLHttpRequest();
+        xhr.overrideMimeType("application/json");
+        xhr.open('GET', 'transitions/sample-transition.json', false);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == "200") {
+                slideTransitionRules = xhr.responseText;
+            }
+        };
+        xhr.send(null);
     }
 
-    static nextSlide(currentSlide) {
-        var nextComponent = null;
-        switch (currentSlide) {
-            case City:
-                nextComponent = Gender;
-                break;
-            case Gender:
-                nextComponent = Experience;
-                break;
-            case Experience:
-                nextComponent = Salary;
-                break;
-            default:
-                nextComponent = City;
+    static initialize(context, model) {
+        this.context = context;
+        this.model = model;
+        SlideManager.loadSlideTransitionRules(context);
+        var slideTransitions = SlideManager.convertToObject(slideTransitionRules);
+        this.fsm = StateMachine.create(slideTransitions);
+    }
+
+    static firstSlide() {
+        return SlideManager.moveSlide('','init');
+    }
+
+    static moveSlide(currentSlide, event) {
+        // invoke the function associated with event
+        if(!this.fsm[event]()) {
+            console.log("Error in slide transition from "+currentSlide);
         }
+        var nextComponent = SlideManager.convertToComponent(this.fsm.current);
+        console.log("currentSlide:"+this.fsm.current);
+        return SlideManager.getComponent(nextComponent);
+    }
+
+    static getComponent(component) {
+        var label = slideConfigs[component.name].label;
+        var nextComponent = {name:component, label:label};
         return nextComponent;
     }
 
-    static previousSlide(currentSlide) {
-        var prevComponent = null;
-        switch (currentSlide) {
-            case Gender:
-                prevComponent = City;
-                break;
-            case Experience:
-                prevComponent = Gender;
-                break;
-            case Salary:
-                prevComponent = Experience;
-                break;
-            default:
-                prevComponent = Gender;
-        }
-        return prevComponent;
+    static previous() {
+        var componentName = SlideManager.convertToComponent(this.fsm.previous());
+        return SlideManager.getComponent(componentName);
     }
 
-    static slideHeader(currentSlide) {
-        switch (currentSlide) {
-            case City:
-                return "Where do you live currently?";
-            case Experience:
-                return "Your joining date and total work experience";
-            case Gender:
-                return "My gender";
-            case Salary:
-                return "Your monthly net salary";
-            default:
-                return "Oops... Are you sure this can happen?";
-        }
+    static convertToObject(name) {
+        return eval("("+name+")");
     }
+
+    static convertToComponent(name) {
+        return eval("(Components."+name+")");
+    }
+
 }
