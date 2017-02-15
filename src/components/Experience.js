@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {Inputfield, InputfieldGroup} from '../widgets/Inputfield.js'
+import {TextField, IconTextField} from '../widgets/TextField.js'
 
 import ExperienceStyle from './Experience.scss';
 
@@ -12,7 +12,7 @@ class Experience extends Component {
   render() {
     return (
         <div className={ExperienceStyle.container}>
-        <Inputfield />
+        <TextField />
         </div>
     )
   }

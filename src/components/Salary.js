@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {Inputfield, InputfieldGroup} from '../widgets/Inputfield.js'
+import {TextField, IconTextField} from '../widgets/TextField.js'
 
 import SalaryStyle from './Salary.scss';
 
@@ -12,7 +12,7 @@ class Salary extends Component {
   render() {
     return (
       <div className={SalaryStyle.container}>
-        <InputfieldGroup />
+        <IconTextField />
       </div>
     )
   }
