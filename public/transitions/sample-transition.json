@@ -19,6 +19,11 @@
       name: "next",
       from: "Employment",
       to: "Experience"
+    },
+    {
+      name: "next",
+      from: "Experience",
+      to: "Salary"
     }
   ]
 }

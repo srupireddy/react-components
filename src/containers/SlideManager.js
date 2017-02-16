@@ -5,7 +5,7 @@ var slideTransitionRules;
 var fsm;
 var context;
 var model;
-var slideConfigs = {City:{label:'Where do you live currently?'}, Gender:{label:'My gender'}, Experience:{label:'Your joining date and total work experience'}, Employment:{label:'Type of employment'}, ProfitAfterTax:{label:'Latest year\'s profit after tax'} };
+var slideConfigs = {City:{label:'Where do you live currently?'}, Gender:{label:'My gender'}, Experience:{label:'Your joining date and total work experience'}, Employment:{label:'Type of employment'}, ProfitAfterTax:{label:'Latest year\'s profit after tax'}, Salary:{label:'Gross fixed monthly income'}};
 
 export default class SlideManager {
 
