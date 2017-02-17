@@ -6,6 +6,8 @@ import ListItem from './ListItem.js'
 
 import {TextField, IconTextField} from '../widgets/TextField.js'
 
+import ModalStyle from './Modal.scss';
+
 class CityModal extends React.Component {
     constructor (props) {
         super(props);
@@ -29,12 +31,10 @@ class CityModal extends React.Component {
        return (
             <div>
             <TextField onClick={this.handleOpenModal}/>
-            <ReactModal isOpen={this.state.showModal}>
-                    <a href="javascript:void(0)" onClick={this.handleCloseModal}>Close</a>
+            <ReactModal isOpen={this.state.showModal} className={ModalStyle.Modal} overlayClassName={ModalStyle.Overlay}>
+                    <a href="javascript:void(0)" className={ModalStyle.close} onClick={this.handleCloseModal}>X</a>
                     <IconTextField />
-
                     <ListItem />
-
             </ReactModal>
             </div>
             );

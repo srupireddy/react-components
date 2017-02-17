@@ -1,5 +1,7 @@
 import React from 'react'
 
+import ListItemlStyle from './ListItem.scss';
+
 class ListItem extends React.Component {
     constructor(props){
         super(props)
@@ -13,10 +15,12 @@ class ListItem extends React.Component {
         ];
 
         let elements = cards.map((element) => {
-            return (<li key={element.id}>{element.cityname}</li>)
+            return (<li key={element.id}><a href="">{element.cityname}</a></li>)
     })
 
-    return <ul>{elements}</ul>
+    return       <div className={ListItemlStyle.ListContainerBlock}>
+                       <ul className={ListItemlStyle.ListContainer}>{elements}</ul>
+                 </div>
     }
 }
 
