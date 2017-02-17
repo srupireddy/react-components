@@ -13,11 +13,11 @@
     {
       name: "next",
       from: "Gender",
-      to: "Employment"
+      to: "Employer"
     },
     {
       name: "next",
-      from: "Employment",
+      from: "Employer",
       to: "Experience"
     },
     {

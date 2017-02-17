@@ -40,11 +40,11 @@
       to: [
         {
           guard: function() {return model.isSalaried();},
-          target: "Employment"
+          target: "Employer"
         },
         {
           guard: function() {return model.isSalariedProfessional()},
-          target: "Employment"
+          target: "Employer"
         },
         {
           guard: function() {return model.isSelfEmployedBusiness()},
@@ -80,7 +80,7 @@
     },
     {
       name:"next",
-      from:"Employment",
+      from:"Employer",
       to:"WorkExperience"
     },
     {

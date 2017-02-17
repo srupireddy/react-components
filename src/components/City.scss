@@ -1,38 +1,38 @@
 .icon {
-  background-image: url(https://www.bankbazaar.com/images/sprite/sprite-city.png);
-  background-repeat: no-repeat;
-  background-position: -272px -138px;
-  display: inline-block;
-  width: 132px;
-  height: 132px;
-  vertical-align: middle;
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-city.png);
+    background-repeat: no-repeat;
+    background-position: -272px -138px;
+    display: inline-block;
+    width: 132px;
+    height: 132px;
+    vertical-align: middle;
 }
 
 .iconMumbai {
-  composes: icon;
-  background-position: -2px -138px;
+    composes: icon;
+    background-position: -2px -138px;
 }
 
 .iconChennai {
-  composes: icon;
-  background-position: -138px -2px;
+    composes: icon;
+    background-position: -138px -2px;
 }
 
 .iconNewDelhi {
-  composes: icon;
-  background-position: -138px -138px;
+    composes: icon;
+    background-position: -138px -138px;
 }
 
 .iconBangalore {
-  composes: icon;
-  background-position: -2px -2px;
+    composes: icon;
+    background-position: -2px -2px;
 }
 
 .iconOther {
-  composes: icon;
-  background-position: -274px -2px;
+    composes: icon;
+    background-position: -274px -2px;
 }
 
 .container {
-  margin: 20px 0;
+    margin: 20px 0;
 }

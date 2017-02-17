@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class Employment extends Component {
+export default class Employment extends React.Component {
     isInValidState() {
         return true;
     }
@@ -13,5 +13,3 @@ class Employment extends Component {
         )
     }
 }
-
-export default Employment;

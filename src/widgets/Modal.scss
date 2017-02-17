@@ -1,31 +1,31 @@
 .Modal {
-  position: relative;
-  margin: 50px auto;
-  background-color: white;
-  border-radius: 5px;
-  padding: 10px;
-  width: 920px;
+    position: relative;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    width: 920px;
 }
 
 .Overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #243342;
-  opacity: .95;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #243342;
+    opacity: .95;
 }
 
 .close {
-  position: absolute;
-  right: -21px;
-  top: -21px;
-  color: #000;
-  background-color: #fff;
-  padding: 2px 7px 0px;
-  border-radius: 5px;
-  font-size: 12px;
-  font-weight: bold;
+    position: absolute;
+    right: -21px;
+    top: -21px;
+    color: #000;
+    background-color: #fff;
+    padding: 2px 7px 0px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
