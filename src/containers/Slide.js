@@ -4,12 +4,12 @@ import {Button, IconOnlyButton} from '../widgets/Button.js';
 import SlideManager from './SlideManager.js';
 import SlideStyle from './Slide.scss';
 import Sprite from '../widgets/Sprite.scss';
+import { connect } from 'react-redux';
+import { addAttribute, loadSlide, previousSlide, nextSlide } from '../actions/actions.js';
 
-export default class Slide extends React.Component {
+class Slide extends React.Component {
     constructor(props) {
         super(props);
-        var component = SlideManager.firstSlide();
-        this.state = {activeComponent: component.name, activeComponentLabel: component.label, formData: {}};
         this.navigateToNextSlide = this.navigateToNextSlide.bind(this);
         this.navigateToPreviousSlide = this.navigateToPreviousSlide.bind(this);
         this.handleCompletionOfCurrSlideAction = this.handleCompletionOfCurrSlideAction.bind(this);
@@ -17,24 +17,18 @@ export default class Slide extends React.Component {
     }
 
     handleCompletionOfCurrSlideAction(data) {
-        this.state.formData[this.state.activeComponent.name] = data;
-        console.log(this.state);
-        this.navigateToNextSlide();
+        this.props.dispatch(addAttribute(this.props.state.viewState.component.name, data));
+        this.navigateToNextSlide(data);
     }
 
     navigateToPreviousSlide() {
-        let prevComponent = SlideManager.previous();
-        let name = prevComponent.name;
-        let prevComponentHeader = prevComponent.label;
-        this.setState({activeComponent: name, activeComponentLabel: prevComponentHeader});
+        var data = this.props.state[this.props.state.viewState.component.name];
+        this.props.dispatch(previousSlide(this.props.state.viewState.component.name, data));
     }
 
-    navigateToNextSlide() {
-        let nextComponent = SlideManager.moveSlide(this.state.activeComponent.name, "next");
-        let name = nextComponent.name;
-        let nextComponentHeader = nextComponent.label;
-        console.log("name:"+name+",label:"+nextComponentHeader);
-        this.setState({activeComponent: name, activeComponentLabel: nextComponentHeader});
+    navigateToNextSlide(data) {
+        var data = this.props.state[this.props.state.viewState.component.name];
+        this.props.dispatch(nextSlide(this.props.state.viewState.component.name, data));
     }
 
     navigateToNextSlideIfCurrSlideValid() {
@@ -46,17 +40,20 @@ export default class Slide extends React.Component {
     }
 
     render() {
-        var Component = this.state.activeComponent
+        var Component = this.props.state.viewState.component;
+        var componentName = Component.name;
+        var data = this.props.state[componentName];
+        var slideHeader = this.props.state.viewState.label;
         return (
             <div className={SlideStyle.slideContainer}>
               <div className="container">
                 <div className={SlideStyle.slideHeader}>
-                    {this.state.activeComponentLabel}
+                    {slideHeader}
                 </div>
                 <Component
                     ref={(instance) => this.activeComponentInstance = instance}
                     onCompletionOfAction={this.handleCompletionOfCurrSlideAction}
-                    data={this.state.formData[this.state.activeComponent.name]}
+                    data={data}
                 />
                 <div className={SlideStyle.slideControlPrev}>
                     <IconOnlyButton onClick={this.navigateToPreviousSlide}>
@@ -76,3 +73,10 @@ export default class Slide extends React.Component {
         )
     }
 }
+
+//pass application state as a property to the component
+function mapStateToProps(state) {
+    return {state:state};
+}
+
+export default connect(mapStateToProps)(Slide);
