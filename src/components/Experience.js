@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {TextField, IconTextField} from '../widgets/HTMLInputElements'
 import ExperienceStyle from './Experience.scss';
+import TextFieldStyle from '../widgets/TextField.scss';
 
 export default class Experience extends React.Component {
     isInValidState() {
@@ -11,7 +11,7 @@ export default class Experience extends React.Component {
     render() {
         return (
             <div className={ExperienceStyle.container}>
-                <IconTextField/>
+                <input type="text" value={this.props.value} placeholder="Enter your details"  className={TextFieldStyle.bbInput}/>
             </div>
         )
     }

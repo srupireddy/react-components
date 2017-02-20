@@ -1,8 +1,7 @@
 import React from 'react';
 
-import {TextField, IconTextField} from '../widgets/HTMLInputElements'
-
 import EmployerStyle from './Employer.scss';
+import TextFieldStyle from '../widgets/TextField.scss';
 
 export default class Employer extends React.Component {
     isInValidState() {
@@ -12,7 +11,7 @@ export default class Employer extends React.Component {
     render() {
         return (
             <div className={EmployerStyle.container}>
-                    <TextField/>
+                <input type="text" value={this.props.value} placeholder="Enter your details"  className={TextFieldStyle.bbInput}/>
             </div>
         )
     }

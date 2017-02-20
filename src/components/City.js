@@ -1,12 +1,12 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-import {TextField, RadioWithImageLabel} from '../widgets/HTMLInputElements'
+import {DecorateWithImageAndLabel} from '../widgets/Decorator';
 
 import CityStyle from './City.scss';
-import RadioStyle from '../widgets/Radio.scss'
 import ModalStyle from '../widgets/Modal.scss';
 import ListItemStyle from '../widgets/List.scss';
+import TextFieldStyle from '../widgets/TextField.scss';
 
 const titleCase = require('title-case');
 
@@ -116,10 +116,16 @@ const allCities = [
 export default class City extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {selectedCity: this.props.data, otherCitiesModalVisible: false}
-        this.handleCitySelection = this.handleCitySelection.bind(this);
-        this.openOtherCitiesModal = this.openOtherCitiesModal.bind(this);
-        this.closeOtherCitiesModal = this.closeOtherCitiesModal.bind(this);
+        this.state = {selectedCity: this.props.data, otherCitiesModalVisible: false};   
+    }
+
+    render() {
+        return (
+            <div className={CityStyle.container}>
+                {this.tier1CityOptions()}
+                {this.otherCityOption()}
+            </div>
+        );
     }
 
     isInValidState() {
@@ -130,7 +136,7 @@ export default class City extends React.Component {
         return this.state.selectedCity || '';
     }
 
-    handleCitySelection(event) {
+    handleCitySelection = (event) => {
         event.preventDefault();
         let value = event.target.dataset.value;
         this.setState({selectedCity: value});
@@ -139,36 +145,29 @@ export default class City extends React.Component {
         }
     }
 
-    render() {
-        console.log(allCities);
-        return (
-            <div className={CityStyle.container}>
-                {this.tier1CityOptions()}
-                {this.otherCityOption()}
-            </div>
-        );
-    }
-
-    tier1CityOptions() {
+    tier1CityOptions = () => {
         let radioItems = allCities.filter(function(city) {return city.group === 'FOCUS'}).map(
             (item) => (
-                <RadioWithImageLabel 
-                    key={item.city}
-                    name="city" 
-                    value={item.city}
-                    label={titleCase(item.city)}
-                    imageStyle= {CityStyle['icon' + titleCase(item.city).replace(' ', '')]}
-                    containerStyle="col-xs-2 col-sm-2 col-md-2 float-none inline-block"
-                    onChange={this.handleCitySelection}
-                    checked={this.selectedCity() === item.city}
-                />
+                <DecorateWithImageAndLabel key={item.city} containerStyle="col-xs-2 col-sm-2 col-md-2 float-none inline-block" imageStyle={CityStyle['icon' + titleCase(item.city).replace(' ', '')]} label={titleCase(item.city)}>
+                    <input type="radio" value={item.city} data-value={item.city} 
+                        name='city' onChange={this.handleCitySelection} checked={this.selectedCity() === item.city}/>
+                </DecorateWithImageAndLabel>
             )
         );
 
         return radioItems
     }
 
-    otherCityOption() {
+    otherCityOption = () => {
+        return (
+            <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 float-none inline-block" imageStyle={CityStyle.iconOther} label="Other City">
+                <input type="text" value={this.selectedCity()} placeholder="Enter your details"  className={TextFieldStyle.bbInput}  onClick={this.openOtherCitiesModal}/>
+                {this.otherCityModal()}
+            </DecorateWithImageAndLabel>
+        )       
+    }
+
+    otherCityModal = () => {
         let listItems = allCities.map(
             (item) => (
                 <li key={item.city} onClick={this.handleCitySelection}><a href="" data-value={item.city}>{titleCase(item.city)}</a></li>
@@ -176,36 +175,21 @@ export default class City extends React.Component {
         );
 
         return (
-            <div className="col-xs-2 col-sm-2 col-md-2 float-none inline-block">
-                <label className={RadioStyle.labelContainer}>
-                    <span className={CityStyle.iconOther}/>
-                    <span className={RadioStyle.label}>
-                        Other City
-                    </span>
-                    <TextField  value={this.selectedCity()} onClick={this.openOtherCitiesModal}/>
-                    <Modal isOpen={this.state.otherCitiesModalVisible} className={ModalStyle.modal} overlayClassName={ModalStyle.overlay}  contentLabel="Other Cities Modal">
-                        <a href="javascript:void(0)" className={ModalStyle.close} onClick={this.closeOtherCitiesModal}>X</a>
-                        <TextField value={this.selectedCity()}/>
-                        <div className={ListItemStyle.listContainer}>
-                            <ul className={ListItemStyle.list}>{listItems}</ul>
-                        </div>            
-                    </Modal>    
-                </label>
-            </div>       
-        )
-                
+            <Modal isOpen={this.state.otherCitiesModalVisible} className={ModalStyle.modal} overlayClassName={ModalStyle.overlay}  contentLabel="Other Cities Modal">
+                <a href="javascript:void(0)" className={ModalStyle.close} onClick={this.closeOtherCitiesModal}>X</a>
+                <input type="text" value={this.selectedCity()} placeholder="Enter your details"  className={TextFieldStyle.bbInput}/>
+                <div className={ListItemStyle.listContainer}>
+                    <ul className={ListItemStyle.list}>{listItems}</ul>
+                </div>            
+            </Modal>    
+        );
     }
 
-    openOtherCitiesModal() {
+    openOtherCitiesModal = () => {
         this.setState({otherCitiesModalVisible: true});
     }
 
-    closeOtherCitiesModal() {
+    closeOtherCitiesModal = () => {
         this.setState({otherCitiesModalVisible: false});
-    }
-
-    static allCities() {
-        return [ 
-        ]
     }
 }

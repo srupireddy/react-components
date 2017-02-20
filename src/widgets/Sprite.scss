@@ -16,3 +16,22 @@
     background-position: -224px -59px;
 }
 
+
+
+.symbol {
+  background-image: url(https://www.bankbazaar.com/images/sprite/sprite-landingpage.png);
+  background-position: 0 150px;
+  width: 108px;
+  height: 108px;
+  background-repeat: no-repeat;
+  display: inline-block!important;
+  vertical-align: middle;
+}
+
+.symbolRupee {
+  composes: symbol;
+  background-position: -140px -84px;
+  width: 17px;
+  height: 19px;
+  vertical-align: middle;
+}

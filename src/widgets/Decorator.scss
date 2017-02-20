@@ -18,3 +18,19 @@
     margin: 5px 0 0;
     font-weight: bold;
 }
+
+.inputGroup {
+  display: table;
+  width: 100%;
+  position: relative;
+}
+
+.inputGroupIcon {
+  background-color: #34495e;
+  border: 0 none;
+  vertical-align: middle;
+  border-radius: 4px 0 0 4px;
+  display: table-cell;
+  padding: 0 12px;
+  width: 25px;
+}

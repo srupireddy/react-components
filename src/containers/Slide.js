@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {Button, IconOnlyButton} from '../widgets/HTMLInputElements';
 import SlideManager from './SlideManager.js';
 
 import SlideStyle from './Slide.scss';
+import ButtonStyle from '../widgets/Button.scss';
 import Sprite from '../widgets/Sprite.scss';
 import { connect } from 'react-redux';
 import { addAttribute, loadSlide, previousSlide, nextSlide } from '../actions/actions.js';
@@ -57,18 +57,18 @@ class Slide extends React.Component {
                     data={data}
                 />
                 <div className={SlideStyle.slideControlPrev}>
-                    <IconOnlyButton onClick={this.navigateToPreviousSlide}>
+                    <button className={ButtonStyle.icon} onClick={this.navigateToPreviousSlide}>
                         <span className={Sprite.iconLeft}/>
-                    </IconOnlyButton>
+                    </button>
                 </div>
                 <div className={SlideStyle.slideControlNext}>
-                    <IconOnlyButton onClick={this.navigateToNextSlideIfCurrSlideValid}>
+                    <button className={ButtonStyle.icon} onClick={this.navigateToNextSlideIfCurrSlideValid}>
                         <span className={Sprite.iconRight}/>
-                    </IconOnlyButton>
+                    </button>
                 </div>
-                <Button onClick={this.navigateToNextSlideIfCurrSlideValid}>
+                <button className={ButtonStyle.btn} onClick={this.navigateToNextSlideIfCurrSlideValid}>
                     Continue
-                </Button>
+                </button>
             </div>
         </div>
         )
