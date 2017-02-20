@@ -4,7 +4,8 @@ import StateMachine from '../fsm/state-machine.js';
 var slideTransitionRules;
 var fsm;
 var context;
-var model;
+var prefillModel; //model loaded from the server, used as a fallback, it's not mutated
+var model; //model cloned from prefillModel, gets updated as user changes the data, final object pushed to server
 var slideConfigs = {
     City: {label:'Where do you live currently?'}, 
     Gender: {label:'My gender'}, 
@@ -12,7 +13,8 @@ var slideConfigs = {
     EmploymentType: {label:'Type of employment'},
     Employer: {label: 'Your company name'}, 
     ProfitAfterTax: {label:'Latest year\'s profit after tax'}, 
-    Salary: {label:'Gross fixed monthly income'}
+    Salary: {label:'Gross fixed monthly income'},
+    OtherCity: {label: 'Temporary Component'}
 };
 
 export default class SlideManager {
@@ -29,31 +31,31 @@ export default class SlideManager {
         xhr.send(null);
     }
 
-    static initialize(context, model) {
+    static initialize(context) {
         this.context = context;
-        this.model = model;
         SlideManager.loadSlideTransitionRules(context);
         var slideTransitions = SlideManager.convertToObject(slideTransitionRules);
         this.fsm = StateMachine.create(slideTransitions);
     }
 
-    static firstSlide() {
-        return SlideManager.moveSlide('','init');
+    static firstSlide(model) {
+        return SlideManager.moveSlide(model,'','init');
     }
 
-    static moveSlide(currentSlide, event) {
+    static moveSlide(model, currentSlide, event) {
         // invoke the function associated with event
-        if(!this.fsm[event]()) {
+        if(!this.fsm[event](model)) {
             console.log("Error in slide transition from "+currentSlide);
         }
         var nextComponent = SlideManager.convertToComponent(this.fsm.current);
         console.log("currentSlide:"+this.fsm.current);
-        return SlideManager.getComponent(nextComponent);
+        return SlideManager.constructViewState(nextComponent);
     }
 
-    static getComponent(component) {
+    static constructViewState(component) {
         var label = slideConfigs[component.name].label;
-        var nextComponent = {name:component, label:label};
+        //construct the view state. As of now, this holds only one configurable property i.e. label.
+        var nextComponent = {viewState: {component:component, label:label}};
         return nextComponent;
     }
 

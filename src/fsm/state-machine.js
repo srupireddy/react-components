@@ -142,21 +142,21 @@
         //===========================================================================
 
         buildEvent: function(name, map) {
-            return function() {
+            return function(model) {
 
-                var selectTarget = function(map, from) {
+                var selectTarget = function(map, from, model) {
                     var params = map[from];
                     var to;
-                    if(params instanceof Object) {
+                    if(params instanceof Array) {
                         for(var i=0;i<params.length;i++) {
                             var entry = params[i];
-                            var guard = entry.guard;
+                            var condition = entry.guard;
                             //invoke the guard function
-                            if (!entry.guard || (entry.guard &&
-                                entry.guard())) { //TODO: Evaluate the arguments to be passed
+                            if (!condition || (condition &&
+                                condition(model, from))) {
                                 // set the target into to
                                 if (entry.target) {
-                                    to = target;
+                                    to = entry.target;
                                     break;
                                 }
                             }
@@ -168,7 +168,7 @@
                 };
 
                 var from  = this.current;
-                var to    = selectTarget(map, from);
+                var to    = selectTarget(map, from, model);
                 var args  = Array.prototype.slice.call(arguments); // turn arguments into pure array
 
                 if (this.transition)
