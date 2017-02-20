@@ -61,7 +61,7 @@ export default class SlideManager {
 
     static previous() {
         var componentName = SlideManager.convertToComponent(this.fsm.previous());
-        return SlideManager.getComponent(componentName);
+        return SlideManager.constructViewState(componentName);
     }
 
     static convertToObject(name) {
