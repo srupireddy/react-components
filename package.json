@@ -38,7 +38,8 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-modal": "^1.6.5",
-    "react-rangeslider": "^2.0.1"
+    "react-rangeslider": "^2.0.1",
+    "title-case": "^2.1.0"
   },
   "jest": {
     "moduleNameMapper": {

@@ -7,7 +7,7 @@ import RadioStyle from './Radio.scss';
 export class TextField extends React.Component {
     render() {
         return (
-            <input type="text" placeholder="Enter your details"  className={TextFieldStyle.bbInput} onClick={this.props.onClick}/>
+            <input type="text" value={this.props.value} placeholder="Enter your details"  className={TextFieldStyle.bbInput} onClick={this.props.onClick}/>
         )
     }
 };
@@ -19,7 +19,7 @@ export class IconTextField extends React.Component {
                 <span className={TextFieldStyle.inputGroupIcon}>
                     <span className={TextFieldStyle.iconRupees}></span>
                 </span>
-                <input type="text" placeholder="Enter the details"  className={TextFieldStyle.bbInput}/>
+                <input type="text" value={this.props.value} placeholder="Enter the details"  className={TextFieldStyle.bbInput}/>
             </div>
         )
     }
@@ -52,7 +52,7 @@ export class RadioWithImageLabel extends React.Component {
                 <label className={RadioStyle.labelContainer}>
                     <span className={this.props.imageStyle}/>
                     <span className={RadioStyle.label}>{this.props.label}</span>
-                    <input type="radio" value={this.props.value} name={this.props.name} onChange={this.props.onChange} checked={this.props.checked} />
+                    <input type="radio" value={this.props.value} data-value={this.props.value} name={this.props.name} onChange={this.props.onChange} checked={this.props.checked} />
                 </label>
             </div>
         );
