@@ -2,6 +2,8 @@ import React from 'react';
 
 import {IconTextField} from '../widgets/HTMLInputElements'
 
+import Negative from '../widgets/RangeSlider.js'
+
 import SalaryStyle from './Salary.scss';
 
 export default class Salary extends React.Component {
@@ -11,8 +13,11 @@ export default class Salary extends React.Component {
 
     render() {
         return (
-            <div className={SalaryStyle.container}>
-                <IconTextField />
+            <div>
+                <div className={SalaryStyle.container}>
+                  <IconTextField />
+                </div>
+                <Negative />
             </div>
         )
     }

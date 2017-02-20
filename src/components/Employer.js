@@ -1,5 +1,9 @@
 import React from 'react';
 
+import {TextField, IconTextField} from '../widgets/HTMLInputElements'
+
+import EmployerStyle from './Employer.scss';
+
 export default class Employer extends React.Component {
     isInValidState() {
         return true;
@@ -7,8 +11,8 @@ export default class Employer extends React.Component {
 
     render() {
         return (
-            <div>
-                Hello Employer
+            <div className={EmployerStyle.container}>
+                    <TextField/>
             </div>
         )
     }
