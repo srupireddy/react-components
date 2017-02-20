@@ -1,10 +1,10 @@
 import React from 'react';
-import {RadioGroup} from 'react-radio-group';
 
-import Radio from '../widgets/Radio.js'
+import {RadioWithImageLabel} from '../widgets/HTMLInputElements'
+
 import GenderStyle from './Gender.scss';
 
-class Gender extends React.Component {
+export default class Gender extends React.Component {
     constructor(props) {
         super(props);
         this.handleGenderSelection = this.handleGenderSelection.bind(this);
@@ -14,26 +14,36 @@ class Gender extends React.Component {
         return this.props.data != '';
     }
 
-    handleGenderSelection(value) {
+    handleGenderSelection(event) {
+        let value = event.target.value;
         this.props.onCompletionOfAction(value);
     }
 
     render() {
         let genderRadioItemsConfig = [
-            {value: 'Male', imageStyle: GenderStyle.iconMale},
-            {value: 'Female', imageStyle: GenderStyle.iconFemale}
+            {value: 'Male', label: 'Male', imageStyle: GenderStyle.iconMale},
+            {value: 'Female', label: 'Female', imageStyle: GenderStyle.iconFemale}
         ];
 
         let radioItems = genderRadioItemsConfig.map(
-            (item) => (<Radio key={item.value} value={item.value} imageStyle={item.imageStyle} containerStyle='col-md-5 col-xs-5 float-none inline-block'/>)
+            (item) => (
+                <RadioWithImageLabel 
+                    key={item.value}
+                    name="gender" 
+                    value={item.value}
+                    label={item.label}
+                    imageStyle={item.imageStyle} 
+                    containerStyle="col-md-5 col-xs-5 float-none inline-block"
+                    onChange={this.handleGenderSelection}
+                    checked={this.props.data === item.value}
+                />
+            )
         );
 
         return (
-            <RadioGroup name='gender' selectedValue={this.props.data} onChange={this.handleGenderSelection} className={GenderStyle.container}>
+            <div className={GenderStyle.container}>
                 {radioItems}
-            </RadioGroup>
-        );
+            </div>            
+        )
     }
 }
-
-export default Gender;

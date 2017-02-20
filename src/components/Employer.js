@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ProfitAfterTax extends React.Component {
+export default class Employer extends React.Component {
     isInValidState() {
         return true;
     }
@@ -8,9 +8,8 @@ export default class ProfitAfterTax extends React.Component {
     render() {
         return (
             <div>
-                Hello ProfitAfterTax
+                Hello Employer
             </div>
         )
     }
 }
-

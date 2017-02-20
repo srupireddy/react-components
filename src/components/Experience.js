@@ -1,12 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-import CityModal from '../widgets/Modal.js'
-
-import {TextField, IconTextField} from '../widgets/TextField.js'
-
+import {TextField, IconTextField} from '../widgets/HTMLInputElements'
 import ExperienceStyle from './Experience.scss';
 
-class Experience extends Component {
+export default class Experience extends React.Component {
     isInValidState() {
         return true;
     }
@@ -14,10 +11,8 @@ class Experience extends Component {
     render() {
         return (
             <div className={ExperienceStyle.container}>
-                <CityModal />
+                <IconTextField/>
             </div>
         )
     }
 }
-
-export default Experience;

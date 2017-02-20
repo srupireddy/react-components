@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-import {TextField, IconTextField} from '../widgets/TextField.js'
+import {IconTextField} from '../widgets/HTMLInputElements'
 
 import SalaryStyle from './Salary.scss';
 
-class Salary extends Component {
+export default class Salary extends React.Component {
     isInValidState() {
         return true;
     }
@@ -17,5 +17,3 @@ class Salary extends Component {
         )
     }
 }
-
-export default Salary;
