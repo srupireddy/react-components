@@ -23,7 +23,7 @@ class Negative extends React.Component {
     render () {
         const {value} = this.state
         return (
-            <div className="slide slideHorizontal">
+            <div className="slide slideHorizontalnew">
                 <Slider min={0} max={120000} value={value} onChange={this.handleChange}/>
             </div>
         )
