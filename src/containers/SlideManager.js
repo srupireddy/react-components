@@ -55,7 +55,7 @@ export default class SlideManager {
     static constructViewState(component) {
         var label = slideConfigs[component.name].label;
         //construct the view state. As of now, this holds only one configurable property i.e. label.
-        var nextComponent = {viewState: {component:component, label:label}};
+        var nextComponent = {currentState: {component:component, label:label}};
         return nextComponent;
     }
 

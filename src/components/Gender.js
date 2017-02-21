@@ -4,6 +4,8 @@ import {DecorateWithImageAndLabel} from '../widgets/Decorator';
 
 import GenderStyle from './Gender.scss';
 
+import { collectData } from '../actions/actions.js';
+
 export default class Gender extends React.Component {
     static options = ['Male', 'Female'];
 
@@ -17,7 +19,9 @@ export default class Gender extends React.Component {
 
     handleGenderSelection = (event) => {
         let value = event.target.value;
-        this.props.onCompletionOfAction(value);
+        var modelPath = 'Gender';
+        this.props.eventHandler(collectData(modelPath, value));
+        //this.props.onCompletionOfAction(value);
     }
 
     render() {

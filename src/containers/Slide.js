@@ -2,41 +2,33 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SlideManager from './SlideManager.js';
-import { addAttribute, loadSlide, previousSlide, nextSlide } from '../actions/actions.js';
+import {previousSlide} from '../actions/actions.js'
 
 import SlideStyle from './Slide.scss';
 import ButtonStyle from '../widgets/Button.scss';
 import Sprite from '../widgets/Sprite.scss';
 
 class Slide extends React.Component {
-    handleCompletionOfCurrSlideAction = (data) => {
-        this.props.dispatch(addAttribute(this.props.state.viewState.component.name, data));
-        this.navigateToNextSlide(data);
-    }
 
     navigateToPreviousSlide = () => {
         var data = this.props.state[this.props.state.viewState.component.name];
         this.props.dispatch(previousSlide(this.props.state.viewState.component.name, data));
     }
 
-    navigateToNextSlide = (data) => {
-        var data = this.props.state[this.props.state.viewState.component.name];
-        this.props.dispatch(nextSlide(this.props.state.viewState.component.name, data));
-    }
-
+	//TODO: revisit this..ideally, it should be with individual component
     navigateToNextSlideIfCurrSlideValid = () => {
-        if (!this.activeComponentInstance.isInValidState()) {
+        /*if (!this.activeComponentInstance.isInValidState()) {
             console.log("Oopss... You have not chosen anything");
             return;
         }
-        this.navigateToNextSlide();
+        this.navigateToNextSlide();*/
     }
 
     render() {
-        var Component = this.props.state.viewState.component;
+        var Component = this.props.state.currentState.component;
         var componentName = Component.name;
-        var data = this.props.state[componentName];
-        var slideHeader = this.props.state.viewState.label;
+        var data = this.props.state.model != undefined ? this.props.state.model[componentName] : '';
+        var slideHeader = this.props.state.currentState.label;
         return (
             <div className={SlideStyle.slideContainer}>
               <div className="container">
@@ -45,7 +37,7 @@ class Slide extends React.Component {
                 </div>
                 <Component
                     ref={(instance) => this.activeComponentInstance = instance}
-                    onCompletionOfAction={this.handleCompletionOfCurrSlideAction}
+                    eventHandler={this.props.dispatch}
                     data={data}
                 />
                 <div className={SlideStyle.slideControlPrev}>

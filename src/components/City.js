@@ -10,6 +10,8 @@ import TextFieldStyle from '../widgets/TextField.scss';
 
 const titleCase = require('title-case');
 
+import { collectData } from '../actions/actions.js';
+
 export default class City extends React.Component {
     constructor(props) {
         super(props);
@@ -37,9 +39,11 @@ export default class City extends React.Component {
         event.preventDefault();
         let value = event.target.dataset.value;
         this.setState({selectedCity: value});
-        if (this.props.onCompletionOfAction) {
+        var modelPath = 'City';
+        this.props.eventHandler(collectData(modelPath, value));
+        /*if (this.props.onCompletionOfAction) {
             this.props.onCompletionOfAction(value);
-        }
+        }*/
     }
 
     tier1CityOptions = () => {

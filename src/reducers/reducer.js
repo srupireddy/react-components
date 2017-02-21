@@ -10,39 +10,35 @@
  */
 
 import ActionTypes from '../actions/actions';
-import merge from 'lodash/merge';
 import Immutable from 'immutable';
 import SlideManager from '../containers/SlideManager'
 
-const initialState = {};
-
-const addAttribute = function(state, action) {
+const reducer = function(state, action) {
     switch (action.type) {
-        case 'ADD_ATTRIBUTE':
+        case 'COLLECT_DATA':
             var current = Immutable.Map(state);
 
-            // data model
+            if(state.model == null || state.model == undefined) {
+                var emptyModel = {model:{}};
+                current = Immutable.Map(emptyModel).merge(current);
+            }
+            // construct data model from the action
             var dataObj = {};
-            dataObj[action.name] = action.data;
+            dataObj[action.modelPath] = action.data;
             var dataModelMap = Immutable.Map(dataObj);
 
-            var modified = current.merge(dataModelMap);
+            //merge model contents
+            var modelContents = dataModelMap.merge(Immutable.Map(current.toJS().model));
+            dataModelMap = Immutable.Map({model:modelContents.toJS()});
 
-            return modified.toJS();
-        case 'LOAD_SLIDE':
-            var viewState = SlideManager.firstSlide(state);
-            var current = Immutable.Map(state);
+            //merge view and model
+            var modified = Immutable.Map(current).merge(dataModelMap);
+            var modifiedModel = modified.toJS();
+
+            //determine the next slide
+            var viewState = SlideManager.moveSlide(modifiedModel, action.modelPath, 'next');
             var viewStateMap = Immutable.Map(viewState);
-            var modified = current.merge(viewStateMap);
-            return modified.toJS();
-        case 'NEXT_SLIDE':
-            var current = Immutable.Map(state);
-
-            //view model
-            var viewState = SlideManager.moveSlide(state, action.name, 'next');
-            var viewStateMap = Immutable.Map(viewState);
-
-            var modified = current.merge(viewStateMap);
+            modified = modified.merge(viewStateMap);
 
             return modified.toJS();
         case 'PREVIOUS_SLIDE':
@@ -60,5 +56,5 @@ const addAttribute = function(state, action) {
     }
 }
 
-export {addAttribute};
+export {reducer};
 
