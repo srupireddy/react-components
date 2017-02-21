@@ -1,0 +1,49 @@
+.container {
+    width: 600px;
+    margin: 20px auto;
+}
+
+.icon {
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-employment.png);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    height: 108px;
+    width: 108px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.iconSalaried {
+    composes: icon;
+}
+
+.iconSalariedProfessional {
+    composes: icon;
+    background-position: -108px 0;
+}
+
+.iconSelfEmployedBusiness {
+    composes: icon;
+    background-position: -216px 0;
+}
+
+.iconSelfEmployedProfessional {
+    composes: icon;
+    background-position: -324px 0;
+}
+
+.iconStudent {
+    composes: icon;
+    background-position: -432px 0;
+}
+
+.iconRetired {
+    composes: icon;
+    background-position: -540px 0;
+}
+
+.iconHomemaker {
+    composes: icon;
+    background-position: -648px 0;
+}
+

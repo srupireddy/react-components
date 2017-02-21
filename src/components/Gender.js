@@ -5,6 +5,8 @@ import {DecorateWithImageAndLabel} from '../widgets/Decorator';
 import GenderStyle from './Gender.scss';
 
 export default class Gender extends React.Component {
+    static options = ['Male', 'Female'];
+
     constructor(props) {
         super(props);
     }
@@ -19,16 +21,11 @@ export default class Gender extends React.Component {
     }
 
     render() {
-        let genderRadioItemsConfig = [
-            {value: 'Male', label: 'Male', imageStyle: GenderStyle.iconMale},
-            {value: 'Female', label: 'Female', imageStyle: GenderStyle.iconFemale}
-        ];
-
-        let radioItems = genderRadioItemsConfig.map(
-            (item) => (
-                <DecorateWithImageAndLabel key={item.value} containerStyle="col-md-5 col-xs-5 float-none inline-block" imageStyle={GenderStyle['icon' + item.value]} label={item.value}>
-                    <input type="radio" value={item.value} data-value={item.value} 
-                        name='gender' onChange={this.handleGenderSelection} checked={this.props.data === item.value}/>
+        let radioItems = Gender.options.map(
+            (option) => (
+                <DecorateWithImageAndLabel key={option} imageStyle={GenderStyle['icon' + option]} label={option} containerStyle="col-md-5 col-xs-5 float-none inline-block" >
+                    <input type="radio" value={option}
+                        name='gender' onChange={this.handleGenderSelection} checked={this.props.data === option}/>
                 </DecorateWithImageAndLabel>
             )
         );
