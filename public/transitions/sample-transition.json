@@ -1,6 +1,6 @@
 {
   initial: {
-    state: "City",
+    state: "Experience",
     event: "init",
     defer: "true"
   },
