@@ -16,7 +16,7 @@ export default class EmploymentType extends React.Component {
     render() {
         let radioItems = EmploymentType.options.map(
             (option) => (
-                <DecorateWithImageAndLabel key={option} containerStyle="col-md-3 col-xs-3 col-sm-3 float-none inline-block" imageStyle={EmploymentTypeStyle['icon' + titleCase(option).replace(/ /g, '')]} label={titleCase(option)}>
+                <DecorateWithImageAndLabel key={option} containerStyle="col-md-3 col-xs-3 col-sm-3 radio-col" imageStyle={EmploymentTypeStyle['icon' + titleCase(option).replace(/ /g, '')]} label={titleCase(option)}>
                     <input type="radio" value={option}
                         name='employmentType' onChange={this.handleEmploymentTypeSelection} checked={this.props.data === option.value}/>
                 </DecorateWithImageAndLabel>
@@ -24,7 +24,7 @@ export default class EmploymentType extends React.Component {
         );
 
         return (
-            <div className={EmploymentType.container}>
+            <div className={EmploymentTypeStyle.container}>
                 {radioItems}
             </div>            
         )

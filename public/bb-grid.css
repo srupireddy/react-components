@@ -17,6 +17,12 @@
 }
 .float-none{float: none !important}
 .inline-block{display: inline-block}
+.radio-col {
+    display: inline-block;
+    float: none !important;
+    vertical-align: top;
+    margin-bottom: 5px;
+}
 @media (min-width: 768px) {
     .container {
         width: 750px;
