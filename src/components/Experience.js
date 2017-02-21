@@ -2,7 +2,7 @@ import React from 'react';
 
 import {TextField, IconTextField} from '../widgets/HTMLInputElements'
 
-import RangeSlider from '../widgets/RangeSliderNew.js'
+import RangeSliderNew from '../widgets/RangeSliderNew.js'
 
 import ExperienceStyle from './Experience.scss';
 
@@ -18,9 +18,7 @@ export default class Experience extends React.Component {
                 <IconTextField/>
 
             </div>
-
-         <RangeSlider/>
-
+         <RangeSliderNew/>
         </div>
 )
     }

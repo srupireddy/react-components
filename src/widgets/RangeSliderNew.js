@@ -11,6 +11,8 @@ const Range = createSliderWithTooltip(Slider.Range);
 const Handle = Slider.Handle;
 
 
+const marks = {100 : handle };
+
 const handle = (props) => {
     const { value, dragging, index, ...restProps } = props;
     return (
@@ -24,11 +26,9 @@ export default class RangeSlider extends React.Component {
         isInValidState() {
             return true;
         }
-
-
         render() {
             return (
-                    <div className="sliderHorizontal clearfix">
+                    <div className="slideHorizontalnew clearfix">
              <Slider min={0} max={120000} step={1000} handle={handle} />
             </div>
     )

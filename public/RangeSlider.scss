@@ -1,4 +1,4 @@
-/*
+
 .slide, .rangeslider__handle {
   background-image: url(https://www.bankbazaar.com/images/sprite/elig-slider-v1.png);
   height: 80px;
@@ -37,15 +37,15 @@
   cursor: pointer;
   z-index: 1;
 }
-*/
 
-.sliderHorizontal, .rc-slider-handle {
+
+.slideHorizontalnew, .rc-slider-handle {
   background-image: url(https://www.bankbazaar.com/images/sprite/elig-slider-v1.png);
   height: 80px;
   text-align: center;
 }
 
-.sliderHorizontal {
+.slideHorizontalnew {
   background-position: 0 -140px;
   width: 810px;
   position: relative;
