@@ -19,7 +19,7 @@ export default class Experience extends React.Component {
     render() {
         return (
             <div>
-                <Calendar variant='YearAndMonthOnly'/>
+                <Calendar variant='YearAndMonthOnly' headerSuffix='Joining'/>
                 <Duration min={0} max={120000} value={5000} step={1000}/>
             </div>
         )
