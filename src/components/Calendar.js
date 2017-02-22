@@ -1,5 +1,6 @@
 import React from 'react';
 import Moment from 'moment';
+import GeneralUtils from '../utils/GeneralUtils';
 
 import TableStyle from '../widgets/Table.scss';
 import HeadingStyle from '../widgets/Heading.scss';
@@ -42,7 +43,7 @@ export default class Calendar extends React.Component {
                 <div className={HeadingStyle.subHeading}>Year of Joining</div>
                 <table className={TableStyle.curvedTable}>
                     <tbody>
-                        {renderedYears.inGroupsOf(2).map(
+                        {GeneralUtils.iterateArrayInGroupsOf(renderedYears, 2).map(
                             (row, index) => (
                                 <tr key={index}>
                                     {row.map(
