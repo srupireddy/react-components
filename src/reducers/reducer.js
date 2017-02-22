@@ -28,7 +28,7 @@ const reducer = function(state, action) {
             var dataModelMap = Immutable.Map(dataObj);
 
             //merge model contents
-            var modelContents = dataModelMap.merge(Immutable.Map(current.toJS().model));
+            var modelContents = Immutable.Map(current.toJS().model).merge(dataModelMap);
             dataModelMap = Immutable.Map({model:modelContents.toJS()});
 
             //merge view and model
@@ -36,7 +36,7 @@ const reducer = function(state, action) {
             var modifiedModel = modified.toJS();
 
             //determine the next slide
-            var viewState = SlideManager.moveSlide(modifiedModel, action.modelPath, 'next');
+            var viewState = SlideManager.moveSlide(modifiedModel.model, action.modelPath, 'next');
             var viewStateMap = Immutable.Map(viewState);
             modified = modified.merge(viewStateMap);
 

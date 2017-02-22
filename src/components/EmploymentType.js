@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { collectData } from '../actions/actions.js';
+
 import {DecorateWithImageAndLabel} from '../widgets/Decorator';
 
 import EmploymentTypeStyle from './EmploymentType.scss';
@@ -32,6 +34,7 @@ export default class EmploymentType extends React.Component {
 
     handleEmploymentTypeSelection = (event) => {
         let value = event.target.value;
-        this.props.onCompletionOfAction(value);
+        var modelPath = 'EmploymentType';
+        this.props.eventHandler(collectData(modelPath, value));
     }
 }

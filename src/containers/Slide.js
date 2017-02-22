@@ -11,8 +11,8 @@ import Sprite from '../widgets/Sprite.scss';
 class Slide extends React.Component {
 
     navigateToPreviousSlide = () => {
-        var data = this.props.state[this.props.state.viewState.component.name];
-        this.props.dispatch(previousSlide(this.props.state.viewState.component.name, data));
+        var data = this.props.state[this.props.state.currentState.component.name];
+        this.props.dispatch(previousSlide(this.props.state.currentState.component.name, data));
     }
 
 	//TODO: revisit this..ideally, it should be with individual component
