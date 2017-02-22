@@ -45,7 +45,7 @@ export default class City extends React.Component {
     tier1CityOptions = () => {
         let radioItems = City.options.filter(function(city) {return city.group === 'FOCUS'}).map(
             (item) => (
-                <DecorateWithImageAndLabel key={item.city} containerStyle="col-xs-2 col-sm-2 col-md-2 float-none inline-block" imageStyle={CityStyle['icon' + titleCase(item.city).replace(/ /g, '')]} label={titleCase(item.city)}>
+                <DecorateWithImageAndLabel key={item.city} containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={CityStyle['icon' + titleCase(item.city).replace(/ /g, '')]} label={titleCase(item.city)}>
                     <input type="radio" value={item.city} data-value={item.city} 
                         name='city' onChange={this.handleCitySelection} checked={this.selectedCity() === item.city}/>
                 </DecorateWithImageAndLabel>
@@ -57,7 +57,7 @@ export default class City extends React.Component {
 
     otherCityOption = () => {
         return (
-            <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 float-none inline-block" imageStyle={CityStyle.iconOther} label="Other City">
+            <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={CityStyle.iconOther} label="Other City">
                 <input type="text" value={this.selectedCity()} placeholder="Enter your details"  className={TextFieldStyle.bbInput}  onClick={this.openOtherCitiesModal}/>
                 {this.otherCityModal()}
             </DecorateWithImageAndLabel>
