@@ -5,7 +5,7 @@ import ProfitAfterTax from './ProfitAfterTax.js';
 import Salary from './Salary.js';
 import Employer from './Employer.js';
 import EmploymentType from './EmploymentType.js';
+import Calendar from './Calendar.js';
+import Duration from './Duration.js'
 
-import OtherCity from './OtherCity.js';
-
-export {Gender, City, Experience, ProfitAfterTax, Salary, EmploymentType, Employer, OtherCity};
+export {Gender, City, Experience, ProfitAfterTax, Salary, EmploymentType, Employer, Calendar, Duration};

@@ -4,8 +4,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import GeneralUtils from '../utils/GeneralUtils';
 
-import TableStyle from '../widgets/Table.scss';
-import HeadingStyle from '../widgets/Heading.scss';
+import CalendarStyle from './Calendar.scss';
 
 export default class Calendar extends BaseComponent {
     static propTypes = {
@@ -89,15 +88,15 @@ const YearPicker = (props) => {
 
     return (
         <div style={{width: "200px", display: "inline-block", padding: "0 10px"}}>
-            <div className={HeadingStyle.subHeading}>{props.header || 'Year'}</div>
-            <table className={TableStyle.curvedTable}>
+            <div className={CalendarStyle.tableHeading}>{props.header || 'Year'}</div>
+            <table className={CalendarStyle.curvedTable}>
                 <tbody>
                     {GeneralUtils.iterateArrayInGroupsOf(availableYears, 2).map(
                         (row, index) => (
                             <tr key={index}>
                                 {row.map(
                                     (cell) => (
-                                        <td key={cell.value} style={{width: "100px"}} className={props.selectedYear === cell.value ? TableStyle.selected :  ""}>
+                                        <td key={cell.value} style={{width: "100px"}} className={props.selectedYear === cell.value ? CalendarStyle.selected :  ""}>
                                             <a data-value={cell.value} onClick={props.onClick}>{cell.label}</a>
                                         </td>
                                     )
@@ -116,15 +115,15 @@ const MonthPicker = (props) => {
 
     return (
         <div style={{width: "300px", display: "inline-block", padding: "0 10px"}}>
-            <div className={HeadingStyle.subHeading}>{props.header || 'Year'}</div>
-            <table className={TableStyle.curvedTable}>
+            <div className={CalendarStyle.tableHeading}>{props.header || 'Year'}</div>
+            <table className={CalendarStyle.curvedTable}>
                 <tbody>
                     {GeneralUtils.iterateArrayInGroupsOf(availableMonths, 3).map(
                         (row, index) => (
                             <tr key={index}>
                                 {row.map(
                                     (cell) => (
-                                        <td key={cell.value} style={{width: "100px"}} className={props.selectedMonth === cell.value ? TableStyle.selected :  ""}>
+                                        <td key={cell.value} style={{width: "100px"}} className={props.selectedMonth === cell.value ? CalendarStyle.selected :  ""}>
                                             <a data-value={cell.value} onClick={props.onClick}>{cell.label}</a>
                                         </td>
                                     )
