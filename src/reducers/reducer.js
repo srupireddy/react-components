@@ -36,7 +36,7 @@ const reducer = function(state, action) {
             var modifiedModel = modified.toJS();
 
             //determine the next slide
-            var viewState = SlideManager.moveSlide(modifiedModel.model, action.modelPath, 'next');
+            var viewState = state.slideManager.moveSlide(modifiedModel.model, action.modelPath, 'next');
             var viewStateMap = Immutable.Map(viewState);
             modified = modified.merge(viewStateMap);
 
@@ -45,7 +45,7 @@ const reducer = function(state, action) {
             var current = Immutable.Map(state);
 
             //view model
-            var viewState = SlideManager.previous();
+            var viewState = state.slideManager.previous();
             var viewStateMap = Immutable.Map(viewState);
 
             var modified = current.merge(viewStateMap);

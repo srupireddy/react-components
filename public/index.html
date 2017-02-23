@@ -13,6 +13,54 @@
 </head>
 <body>
     <div id="root" />
+    <script type="text/javascript">
+        var slideTransitionRules = {
+            initial: {
+                state: "City",
+                event: "init",
+                defer: "true"
+            },
+            transitions: [
+                {
+                name: "next",
+                from: "City",
+                to: "Gender"
+                },
+                {
+                name: "next",
+                from: "Gender",
+                to: "EmploymentType"
+                },
+                {
+                name: "next",
+                from: "EmploymentType",
+                to: [
+                    {
+                    guard:function(model, from) {return model[from]=='SALARIED' || model[from]=='SALARIED_PROFESSIONAL';},
+                    target:"Salary"
+                    },
+                    {
+                    guard:function(model, from) {return model[from]=='SELF_EMPLOYED_BUSINESS' || model[from]=='SELF_EMPLOYED_PROFESSIONAL';},
+                    target:"ProfitAfterTax"
+                    },
+                    {
+                    guard:function(model, from) {return model[from]=='STUDENT' || model[from]=='RETIRED' || model[from] == 'HOMEMAKER';},
+                    target:"DOB"
+                    }
+                ]
+                },
+                {
+                name: "next",
+                from: "Employer",
+                to: "Experience"
+                },{
+                name: "next",
+                from: "Experience",
+                to: "Salary"
+                }
+            ]
+        }
+    </script>
     <script src="bundle.js" type="text/javascript"></script>
 </body>
 </html>

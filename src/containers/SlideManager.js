@@ -1,74 +1,48 @@
 import * as Components from '../components/';
 import StateMachine from '../fsm/state-machine.js';
-
-var slideTransitionRules;
-var fsm;
-var context;
-var prefillModel; //model loaded from the server, used as a fallback, it's not mutated
-var model; //model cloned from prefillModel, gets updated as user changes the data, final object pushed to server
-var slideConfigs = {
-    City: {label:'Where do you live currently?'}, 
-    Gender: {label:'My gender'}, 
-    Experience: {label:'Your joining date and total work experience'}, 
-    EmploymentType: {label:'Type of employment'},
-    Employer: {label: 'Your company name'}, 
-    ProfitAfterTax: {label:'Latest year\'s profit after tax'}, 
-    Salary: {label:'Gross fixed monthly income'},
-    OtherCity: {label: 'Temporary Component'}
-};
+import { createStore } from 'redux';
+import {reducer} from '../reducers/reducer.js';
 
 export default class SlideManager {
+    constructor(rules) {
+        this.fsm = StateMachine.create(rules);
 
-    static loadSlideTransitionRules(context) {
-        var xhr = new XMLHttpRequest();
-        xhr.overrideMimeType("application/json");
-        xhr.open('GET', 'transitions/sample-transition.json', false);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == "200") {
-                slideTransitionRules = xhr.responseText;
-            }
-        };
-        xhr.send(null);
+        this.moveSlide({}, '', 'init');
+        this.store = createStore(reducer, this.viewComponent());
     }
 
-    static initialize(context) {
-        this.context = context;
-        SlideManager.loadSlideTransitionRules(context);
-        var slideTransitions = SlideManager.convertToObject(slideTransitionRules);
-        this.fsm = StateMachine.create(slideTransitions);
+    datastore = () => {
+        return this.store;
     }
 
-    static firstSlide(model) {
-        return SlideManager.moveSlide(model,'','init');
+    viewComponent = () => {
+        let component = this.convertToComponent(this.fsm.current);
+        return this.constructViewState(component);
     }
 
-    static moveSlide(model, currentSlide, event) {
+    moveSlide = (model, currentSlide, event) => {
         // invoke the function associated with event
         if(!this.fsm[event](model)) {
             console.log("Error in slide transition from "+currentSlide);
         }
-        var nextComponent = SlideManager.convertToComponent(this.fsm.current);
+        var nextComponent = this.convertToComponent(this.fsm.current);
         console.log("currentSlide:"+this.fsm.current);
-        return SlideManager.constructViewState(nextComponent);
+        return this.constructViewState(nextComponent);
     }
 
-    static constructViewState(component) {
-        var label = slideConfigs[component.name].label;
+    constructViewState = (component) => {
+        var label = "Hello"; //slideConfigs[component.name].label;
         //construct the view state. As of now, this holds only one configurable property i.e. label.
-        var nextComponent = {currentState: {component:component, label:label}};
+        var nextComponent = {currentState: {component:component, label:label}, slideManager: this};
         return nextComponent;
     }
 
-    static previous() {
-        var componentName = SlideManager.convertToComponent(this.fsm.previous());
-        return SlideManager.constructViewState(componentName);
+    previous = () => {
+        var componentName = this.convertToComponent(this.fsm.previous());
+        return this.constructViewState(componentName);
     }
 
-    static convertToObject(name) {
-        return eval("("+name+")");
-    }
-
-    static convertToComponent(name) {
+    convertToComponent(name) {
         return eval("(Components."+name+")");
     }
 
