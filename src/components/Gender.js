@@ -16,7 +16,7 @@ export default class Gender extends BaseComponent {
     render() {
         let radioItems = Gender.options.map(
             (option) => (
-                <DecorateWithImageAndLabel key={option} imageStyle={GenderStyle['icon' + option]} label={option} containerStyle="col-md-5 col-xs-5 float-none inline-block" >
+                <DecorateWithImageAndLabel key={option} imageStyle={GenderStyle['icon' + option]} label={option} containerStyle="col-md-5 col-xs-5 radio-col" >
                     <input type="radio" value={option}
                         name='gender' onChange={this.handleGenderSelection} checked={this.props.data === option}/>
                 </DecorateWithImageAndLabel>

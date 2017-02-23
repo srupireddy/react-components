@@ -3,6 +3,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var BUILD_DIR = Path.resolve(__dirname, 'public');
 var APP_DIR = Path.resolve(__dirname, 'src');
+var STYLE_DIR = Path.resolve(__dirname, 'src/styles');
 
 var config = {
     entry: [
@@ -33,9 +34,18 @@ var config = {
             {
                 test: /\.s?css$/,
                 include: APP_DIR,
+                exclude: STYLE_DIR,
                 loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: 'css-loader?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]!sass-loader'
+                })
+            },
+            {
+                test: /\.s?css$/,
+                include: STYLE_DIR,
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader!sass-loader'
                 })
             }
         ]
