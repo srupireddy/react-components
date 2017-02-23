@@ -1,10 +1,7 @@
 import React from 'react';
+import BaseComponent from './BaseComponent';
 
-export default class ProfitAfterTax extends React.Component {
-    isInValidState() {
-        return true;
-    }
-
+export default class ProfitAfterTax extends BaseComponent {
     render() {
         return (
             <div>

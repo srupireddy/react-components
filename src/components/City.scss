@@ -1,4 +1,4 @@
-.icon {
+.iconResidence {
     background-image: url(https://www.bankbazaar.com/images/sprite/sprite-city.png);
     background-repeat: no-repeat;
     background-position: -272px -138px;
@@ -8,31 +8,62 @@
     vertical-align: middle;
 }
 
-.iconMumbai {
-    composes: icon;
+.iconResidenceMumbai {
+    composes: iconResidence;
     background-position: -2px -138px;
 }
 
-.iconChennai {
-    composes: icon;
+.iconResidenceChennai {
+    composes: iconResidence;
     background-position: -138px -2px;
 }
 
-.iconNewDelhi {
-    composes: icon;
+.iconResidenceNewDelhi {
+    composes: iconResidence;
     background-position: -138px -138px;
 }
 
-.iconBangalore {
-    composes: icon;
+.iconResidenceBangalore {
+    composes: iconResidence;
     background-position: -2px -2px;
 }
 
-.iconOther {
-    composes: icon;
+.iconResidenceOther {
+    composes: iconResidence;
     background-position: -274px -2px;
 }
 
-.container {
-    margin: 20px 0;
+.iconProperty {
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-home-property.png);
+    background-repeat: no-repeat;
+    background-position: 0 200px;
+    display: inline-block;
+    width: 132px;
+    height: 132px;
+    vertical-align: middle;
+}
+
+.iconPropertyMumbai {
+    composes: iconProperty;
+    background-position: -5px -5px;
+}
+
+.iconPropertyChennai {
+    composes: iconProperty;
+    background-position: -147px -5px;
+}
+
+.iconPropertyNewDelhi {
+    composes: iconProperty;
+    background-position: -289px -5px;
+}
+
+.iconPropertyBangalore {
+    composes: iconProperty;
+    background-position: -431px -5px;
+}
+
+.iconPropertyOther {
+    composes: iconProperty;
+    background-position: -573px -5px;
 }

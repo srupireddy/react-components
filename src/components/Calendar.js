@@ -1,4 +1,5 @@
 import React from 'react';
+import BaseComponent from './BaseComponent.js';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import GeneralUtils from '../utils/GeneralUtils';
@@ -6,7 +7,7 @@ import GeneralUtils from '../utils/GeneralUtils';
 import TableStyle from '../widgets/Table.scss';
 import HeadingStyle from '../widgets/Heading.scss';
 
-export default class Calendar extends React.Component {
+export default class Calendar extends BaseComponent {
     static propTypes = {
         variant: React.PropTypes.oneOf(['Default', 'YearAndMonthOnly']),
         headerSuffix: React.PropTypes.string
@@ -26,14 +27,6 @@ export default class Calendar extends React.Component {
         datePresenterVisible: false
     }
 
-    constructor(props) {
-        super(props);
-    }
-
-    isInValidState() {
-        return true;
-    }
-    
     render() {
         switch(this.props.variant) {
             case "YearAndMonthOnly": return this.renderVariantYearAndMonth();

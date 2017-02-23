@@ -1,9 +1,10 @@
 import React from 'react';
+import BaseComponent from './BaseComponent';
 import Slider from 'react-rangeslider';
 
 import TextFieldStyle from '../widgets/TextField.scss';
 
-export default class Duration extends React.Component {
+export default class Duration extends BaseComponent{
     static propTypes = {
         min: React.PropTypes.number.isRequired,
         max: React.PropTypes.number.isRequired,
@@ -20,15 +21,10 @@ export default class Duration extends React.Component {
         allowGranularValue: true
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {value: this.props.value || 0};
+    state = {
+        value: this.props.value || 0
     }
 
-    isInValidState() {
-        return true;
-    }
-    
     render() {
         //TODO: Programatically determine the background image to be rendered for the ruler.
         let ruler = "slide slideHorizontal";

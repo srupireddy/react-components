@@ -1,27 +1,16 @@
 import React from 'react';
+import BaseComponent from './BaseComponent.js';
 
 import {DecorateWithImageAndLabel} from '../widgets/Decorator';
 
 import GenderStyle from './Gender.scss';
 
-import { collectData } from '../actions/actions.js';
-
-export default class Gender extends React.Component {
+export default class Gender extends BaseComponent {
     static options = ['Male', 'Female'];
-
-    constructor(props) {
-        super(props);
-    }
-
-    isInValidState() {
-        return this.props.data != '';
-    }
 
     handleGenderSelection = (event) => {
         let value = event.target.value;
-        var modelPath = 'Gender';
-        this.props.eventHandler(collectData(modelPath, value));
-        //this.props.onCompletionOfAction(value);
+        this.props.handler.onCompletion(this.props.modelKey, value);
     }
 
     render() {
@@ -35,7 +24,7 @@ export default class Gender extends React.Component {
         );
 
         return (
-            <div className={GenderStyle.container}>
+            <div style={{...this.props.style, width: '600px'}}>
                 {radioItems}
             </div>            
         )

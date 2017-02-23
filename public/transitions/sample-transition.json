@@ -8,20 +8,6 @@
     {
       name: "next",
       from: "City",
-      to: [
-        {
-          guard:function(model, from) {return model[from]=='Other';},
-          target:"OtherCity"
-        },
-        {
-          guard:function(model, from) {return model[from]!='Other';},
-          target:"Gender"
-        }
-      ]
-    },
-    {
-      name: "next",
-      from: "OtherCity",
       to: "Gender"
     },
     {

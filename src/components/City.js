@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 
+import BaseComponent from './BaseComponent';
 import {DecorateWithImageAndLabel} from '../widgets/Decorator';
 
 import CityStyle from './City.scss';
@@ -10,25 +11,19 @@ import TextFieldStyle from '../widgets/TextField.scss';
 
 const titleCase = require('title-case');
 
-import { collectData } from '../actions/actions.js';
-
-export default class City extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {selectedCity: this.props.data, otherCitiesModalVisible: false};   
+export default class City extends BaseComponent {
+    state = {
+        selectedCity: this.props.data, 
+        otherCitiesModalVisible: false
     }
 
     render() {
         return (
-            <div className={CityStyle.container}>
+            <div style={{...this.props.style}}>
                 {this.tier1CityOptions()}
                 {this.otherCityOption()}
             </div>
         );
-    }
-
-    isInValidState() {
-        return this.selectedCity() != '';
     }
 
     selectedCity() {
@@ -39,17 +34,13 @@ export default class City extends React.Component {
         event.preventDefault();
         let value = event.target.dataset.value;
         this.setState({selectedCity: value});
-        var modelPath = 'City';
-        this.props.eventHandler(collectData(modelPath, value));
-        /*if (this.props.onCompletionOfAction) {
-            this.props.onCompletionOfAction(value);
-        }*/
+        this.props.handler.onCompletion(this.props.modelKey, value);
     }
 
     tier1CityOptions = () => {
         let radioItems = City.options.filter(function(city) {return city.group === 'FOCUS'}).map(
             (item) => (
-                <DecorateWithImageAndLabel key={item.city} containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={CityStyle['icon' + titleCase(item.city).replace(/ /g, '')]} label={titleCase(item.city)}>
+                <DecorateWithImageAndLabel key={item.city} containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={CityStyle['iconResidence' + titleCase(item.city).replace(/ /g, '')]} label={titleCase(item.city)}>
                     <input type="radio" value={item.city} data-value={item.city} 
                         name='city' onChange={this.handleCitySelection} checked={this.selectedCity() === item.city}/>
                 </DecorateWithImageAndLabel>
@@ -61,7 +52,7 @@ export default class City extends React.Component {
 
     otherCityOption = () => {
         return (
-            <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={CityStyle.iconOther} label="Other City">
+            <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={CityStyle.iconResidenceOther} label="Other City">
                 <input type="text" value={this.selectedCity()} placeholder="Enter your details"  className={TextFieldStyle.bbInput}  onClick={this.openOtherCitiesModal}/>
                 {this.otherCityModal()}
             </DecorateWithImageAndLabel>
