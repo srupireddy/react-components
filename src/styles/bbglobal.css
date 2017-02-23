@@ -439,8 +439,8 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
 /*Font Style | Begin*/
 @font-face {
     font-family: 'Lato';
-    src: url('/styles/fonts/lato/lato-reg-webfont.eot');
-    src: url('/styles/fonts/lato/lato-reg-webfont.eot?#iefix') format('embedded-opentype'), url('/styles/fonts/lato/lato-reg-webfont.woff') format('woff'), url('/styles/fonts/lato/lato-reg-webfont.ttf') format('truetype'), url('/styles/fonts/lato/lato-reg-webfont.svg#latoregular') format('svg');
+    src: url('https://www.bankbazaar.com/styles/fonts/lato/lato-reg-webfont.eot');
+    src: url('https://www.bankbazaar.com/styles/fonts/lato/lato-reg-webfont.eot?#iefix') format('embedded-opentype'), url('https://www.bankbazaar.com/styles/fonts/lato/lato-reg-webfont.woff') format('woff'), url('/styles/fonts/lato/lato-reg-webfont.ttf') format('truetype'), url('https://www.bankbazaar.com/styles/fonts/lato/lato-reg-webfont.svg#latoregular') format('svg');
     font-weight: normal;
     font-style: normal
 }
