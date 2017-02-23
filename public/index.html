@@ -37,11 +37,11 @@
                 to: [
                     {
                     guard:function(model, from) {return model[from]=='SALARIED' || model[from]=='SALARIED_PROFESSIONAL';},
-                    target:"Salary"
+                    target:"Experience"
                     },
                     {
                     guard:function(model, from) {return model[from]=='SELF_EMPLOYED_BUSINESS' || model[from]=='SELF_EMPLOYED_PROFESSIONAL';},
-                    target:"ProfitAfterTax"
+                    target:"Experience"
                     },
                     {
                     guard:function(model, from) {return model[from]=='STUDENT' || model[from]=='RETIRED' || model[from] == 'HOMEMAKER';},
@@ -51,8 +51,8 @@
                 },
                 {
                 name: "next",
-                from: "Employer",
-                to: "Experience"
+                from: "Experience",
+                to: "Employer"
                 },{
                 name: "next",
                 from: "Experience",
