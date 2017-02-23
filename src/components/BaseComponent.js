@@ -7,4 +7,7 @@ export default class BaseComponent extends React.Component {
         handler: React.PropTypes.instanceOf(ActionHandler).isRequired
     }
 
+    notifyCompletion = (value) => {
+        this.props.handler.onCompletion(this.props.modelKey, value);
+    }
 }

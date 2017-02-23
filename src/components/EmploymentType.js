@@ -29,6 +29,6 @@ export default class EmploymentType extends BaseComponent {
 
     handleEmploymentTypeSelection = (event) => {
         let value = event.target.value;
-        this.props.handler.onCompletion(this.props.modelKey, value);
+        this.notifyCompletion(value);
     }
 }

@@ -34,7 +34,7 @@ export default class City extends BaseComponent {
         event.preventDefault();
         let value = event.target.dataset.value;
         this.setState({selectedCity: value});
-        this.props.handler.onCompletion(this.props.modelKey, value);
+        this.notifyCompletion(value);
     }
 
     tier1CityOptions = () => {

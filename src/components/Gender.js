@@ -10,7 +10,7 @@ export default class Gender extends BaseComponent {
 
     handleGenderSelection = (event) => {
         let value = event.target.value;
-        this.props.handler.onCompletion(this.props.modelKey, value);
+        this.notifyCompletion(value);
     }
 
     render() {
