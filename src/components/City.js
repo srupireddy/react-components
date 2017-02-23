@@ -7,7 +7,6 @@ import {DecorateWithImageAndLabel} from '../widgets/Decorator';
 import CityStyle from './City.scss';
 import ModalStyle from '../widgets/Modal.scss';
 import ListItemStyle from '../widgets/List.scss';
-import TextFieldStyle from '../widgets/TextField.scss';
 
 const titleCase = require('title-case');
 
@@ -53,7 +52,7 @@ export default class City extends BaseComponent {
     otherCityOption = () => {
         return (
             <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={CityStyle.iconResidenceOther} label="Other City">
-                <input type="text" value={this.selectedCity()} placeholder="Enter your details"  className={TextFieldStyle.bbInput}  onClick={this.openOtherCitiesModal}/>
+                <input type="text" value={this.selectedCity()} placeholder="Enter your details" onClick={this.openOtherCitiesModal}/>
                 {this.otherCityModal()}
             </DecorateWithImageAndLabel>
         )       
@@ -69,7 +68,7 @@ export default class City extends BaseComponent {
         return (
             <Modal isOpen={this.state.otherCitiesModalVisible} className={ModalStyle.modal} overlayClassName={ModalStyle.overlay}  contentLabel="Other Cities Modal">
                 <a href="javascript:void(0)" className={ModalStyle.close} onClick={this.closeOtherCitiesModal}>X</a>
-                <input type="text" value={this.selectedCity()} placeholder="Enter your details"  className={TextFieldStyle.bbInput}/>
+                <input type="text" value={this.selectedCity()} placeholder="Enter your details" />
                 <div className={ListItemStyle.listContainer}>
                     <ul className={ListItemStyle.list}>{listItems}</ul>
                 </div>            

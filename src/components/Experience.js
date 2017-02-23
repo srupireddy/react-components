@@ -5,8 +5,6 @@ import BaseComponent from './BaseComponent';
 import Duration from './Duration.js';
 import Calendar from './Calendar.js';
 
-import TextFieldStyle from '../widgets/TextField.scss';
-
 export default class Experience extends BaseComponent {
     render() {
         return (

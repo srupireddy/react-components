@@ -2,8 +2,6 @@ import React from 'react';
 import BaseComponent from './BaseComponent';
 import Slider from 'react-rangeslider';
 
-import TextFieldStyle from '../widgets/TextField.scss';
-
 export default class Duration extends BaseComponent{
     static propTypes = {
         min: React.PropTypes.number.isRequired,
@@ -31,7 +29,7 @@ export default class Duration extends BaseComponent{
         return (
             <div>
                 {this.props.allowGranularValue &&
-                    <input type="text" value={this.state.value} onChange={this.handleTextFieldValueChange} className={TextFieldStyle.bbInput}/>
+                    <input type="text" value={this.state.value} onChange={this.handleTextFieldValueChange}/>
                 }
                 <div className={ruler}>
                     <Slider value={this.state.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleSliderValueChange}/>
