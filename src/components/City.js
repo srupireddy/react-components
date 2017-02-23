@@ -6,7 +6,6 @@ import {DecorateWithImageAndLabel} from '../widgets/Decorator';
 
 import CityStyle from './City.scss';
 import ModalStyle from '../widgets/Modal.scss';
-import ListItemStyle from '../widgets/List.scss';
 
 const titleCase = require('title-case');
 
@@ -69,8 +68,8 @@ export default class City extends BaseComponent {
             <Modal isOpen={this.state.otherCitiesModalVisible} className={ModalStyle.modal} overlayClassName={ModalStyle.overlay}  contentLabel="Other Cities Modal">
                 <a href="javascript:void(0)" className={ModalStyle.close} onClick={this.closeOtherCitiesModal}>X</a>
                 <input type="text" value={this.selectedCity()} placeholder="Enter your details" />
-                <div className={ListItemStyle.listContainer}>
-                    <ul className={ListItemStyle.list}>{listItems}</ul>
+                <div className={CityStyle.listContainer}>
+                    <ul className={CityStyle.list}>{listItems}</ul>
                 </div>            
             </Modal>    
         );

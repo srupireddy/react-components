@@ -6,7 +6,6 @@ import SlideManager from './SlideManager.js';
 import {collectData, previousSlide} from '../actions/actions.js'
 
 import SlideStyle from './Slide.scss';
-import ButtonStyle from '../widgets/Button.scss';
 import Sprite from '../widgets/Sprite.scss';
 
 //TODO: Figure out how I can create an Anonymous Class definition inside Slide class itself rather
@@ -53,16 +52,16 @@ class Slide extends React.Component {
                             style={{margin: '20px auto'}}
                             />
                     <div className={SlideStyle.slideControlPrev}>
-                        <button className={ButtonStyle.icon} onClick={this.navigateToPreviousSlide}>
+                        <button className={SlideStyle.icon} onClick={this.navigateToPreviousSlide}>
                             <span className={Sprite.iconLeft}/>
                         </button>
                     </div>
                     <div className={SlideStyle.slideControlNext}>
-                        <button className={ButtonStyle.icon} onClick={this.navigateToNextSlideIfAllowed}>
+                        <button className={SlideStyle.icon} onClick={this.navigateToNextSlideIfAllowed}>
                             <span className={Sprite.iconRight}/>
                         </button>
                     </div>
-                    <button className={ButtonStyle.btn} onClick={this.navigateToNextSlideIfAllowed}>
+                    <button className="btn" onClick={this.navigateToNextSlideIfAllowed}>
                         Continue
                     </button>
                 </div>
