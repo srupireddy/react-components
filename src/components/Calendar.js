@@ -35,7 +35,7 @@ export default class Calendar extends BaseComponent {
 
     renderVariantYearAndMonth() {
         return (
-            <div className="row">
+            <div className={CalendarStyle.calendarSection}>
                 {this.state.yearPresenterVisible &&
                     <YearPicker selectedYear={this.state.selectedYear} onClick={this.handleYearSelection} header={this.props.headerSuffix ? "Year of " + this.props.headerSuffix : "Year"}/>
                 }

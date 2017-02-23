@@ -29,7 +29,7 @@ export default class Duration extends BaseComponent{
         return (
             <div>
                 {this.props.allowGranularValue &&
-                    <input type="text" value={this.state.value} onChange={this.handleTextFieldValueChange}/>
+                    <div style={{...this.props.style, width: '300px', margin:'0 auto'}}> <input type="text" value={this.state.value} onChange={this.handleTextFieldValueChange}/> </div>
                 }
                 <div className={ruler}>
                     <Slider value={this.state.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleSliderValueChange}/>
