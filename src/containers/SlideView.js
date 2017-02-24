@@ -16,8 +16,12 @@ export default class Slide extends React.Component {
             }
 
             onCompletion = (modelKey, payload) => {
-                console.log("Component with Model Key = " + modelKey + " involved the onCompletion Handler with the Payload = " + payload);
-                this.props.augmentModel(modelKey, payload);
+                this.props.componentCompleteDataCollected(modelKey, payload);
+                this.props.navigateToNextSlide();
+
+                // TODO: Figure out how we can update the SlideView when Slide Manager changes outside of dispatch. Thats why manually firing 
+                // another dispatch action again. 
+                this.props.componentCompleteDataCollected();
             }
         }(props);
     }
