@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import {Store} from 'redux';
 
 import * as Components from '../components/';
 import StateMachine from '../fsm/state-machine.js';
@@ -17,12 +16,17 @@ const slideManager = new class {
         
     }
 
-    nextSlide = () => {
-        if(!this.fsm['next']({})) {
+    nextSlide = (model) => {
+        if(!this.fsm['next'](model)) {
             console.log("Error in transition the Slide from " + currentSlide);
         }
         console.log("Successfully transitioned to the new Slide " + this.fsm.current);
         this.update();
+    }
+
+    nextSlideIfAllowed = (model) => {
+        //TODO: Check the ALLOW
+        nextSlide(model);
     }
 
     update() {
@@ -40,7 +44,7 @@ const mapStateToProps = (state) => {
         modelKey: slideManager.slideModelKey,
         navigateToPreviousSlide: slideManager.previousSlide,
         navigateToNextSlide: slideManager.nextSlide,
-        navigateToNextSlideIfAllowed: slideManager.nextSlide
+        navigateToNextSlideIfAllowed: slideManager.nextSlideIfAllowed
     }
 }
 

@@ -5,7 +5,7 @@ import ButtonStyle from '../widgets/Button.scss';
 import Sprite from '../widgets/Sprite.scss';
 import ActionHandler from '../components/ActionHandler';
 
-export default class Slide extends React.Component {
+export default class SlideView extends React.Component {
     constructor(props) {
         super(props);
 
@@ -17,11 +17,13 @@ export default class Slide extends React.Component {
 
             onCompletion = (modelKey, payload) => {
                 this.props.componentCompleteDataCollected(modelKey, payload);
-                this.props.navigateToNextSlide();
+
+                let activeModel = this.context.store.getState().slide.activeModel 
+                this.props.navigateToNextSlide(activeModel);
 
                 // TODO: Figure out how we can update the SlideView when Slide Manager changes outside of dispatch. Thats why manually firing 
                 // another dispatch action again. 
-                this.props.componentCompleteDataCollected();
+                this.props.componentCompleteDataCollected('test', 'test');
             }
         }(props);
     }
@@ -56,3 +58,7 @@ export default class Slide extends React.Component {
         )
     }
 }
+
+SlideView.contextTypes = {
+  store: React.PropTypes.object.isRequired
+};

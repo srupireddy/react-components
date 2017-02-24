@@ -24,18 +24,8 @@ const flattenReducer = (state = {}, action) => {
     return state;
 }
 
-const stateMachineReducer = (state = {}, action) => {
-    switch (action.type) {
-        case ActionType.COMPONENT_COMPLETE_DATA_COLLECTED:
-            return Map(state).merge(Map().set(action.modelKey, action.value)).toJS();
-        default:
-            return state;
-    }
-}
-
 export const slideStateReducer = combineReducers({
     activeModel: activeModelReducer,
     modelsHistory: historyReducer,
-    historyFlattened:  flattenReducer,
-    stateMachine: stateMachineReducer
+    historyFlattened:  flattenReducer
 });
