@@ -179,15 +179,14 @@
 
         //===========================================================================
 
-        selectTarget: function(from, map) {
+        selectTarget: function(from, map, context) {
             return map[from] || (map[StateMachine.WILDCARD] != StateMachine.WILDCARD ? map[StateMachine.WILDCARD] : from) || from;
         },
 
         buildEvent: function(name, map) {
-            return function() {
-
+            return function(context) {
                 var from = this.current;
-                var to = StateMachine.selectTarget(from, map);
+                var to = StateMachine.selectTarget(from, map, context);
                 var args = Array.prototype.slice.call(arguments); // turn arguments into pure array
 
                 if (this.transition)

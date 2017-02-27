@@ -21,11 +21,20 @@ export default class SlideView extends React.Component {
                 let activeModel = this.context.store.getState().slide.activeModel 
                 this.props.navigateToNextSlide(activeModel);
 
-                // TODO: Figure out how we can update the SlideView when Slide Manager changes outside of dispatch. Thats why manually firing 
-                // another dispatch action again. 
-                this.props.componentCompleteDataCollected('test', 'test');
+                this.refreshView();
             }
         }(props);
+    }
+
+    refreshView = () => {
+        // TODO: Figure out how we can update the SlideView when Slide Manager changes outside of dispatch. Thats why manually firing 
+        // another dispatch action again and forceUpdate is also not working as the SlideManager state is not getting mapped to props. 
+        this.props.componentCompleteDataCollected('test', 'test');
+    }
+
+    previousSlide = () => {
+        this.props.navigateToPreviousSlide();
+        this.refreshView();
     }
 
     render() {
@@ -41,7 +50,7 @@ export default class SlideView extends React.Component {
                             style={{margin: '20px auto'}}
                             />
                     <div className={SlideStyle.slideControlPrev}>
-                        <button className={ButtonStyle.icon} onClick={this.props.navigateToPreviousSlide}>
+                        <button className={ButtonStyle.icon} onClick={this.previousSlide}>
                             <span className={Sprite.iconLeft}/>
                         </button>
                     </div>

@@ -1,19 +1,21 @@
 import { connect } from 'react-redux';
 
 import * as Components from '../components/';
-import StateMachine from '../fsm/state-machine.js';
+import StateMachine from '../utils/StateMachine.js';
 import SlideView from './SlideView.js';
 import {componentCompleteDataCollectedAction} from './SlideActions.js';
 
 const slideManager = new class {
     constructor() {
-        this.fsm = StateMachine.create(slideTransitionRules);
+        this.transitionHistory = [];
+        this.fsm = this.createStateMachine();
         this.fsm.init();
         this.update();
     }
 
     previousSlide = () => {
-        
+        this.fsm.goBack();
+        this.update();
     }
 
     nextSlide = (model) => {
@@ -34,6 +36,21 @@ const slideManager = new class {
         this.slideComponent = eval("(Components." + this.fsm.current + ")");
         this.slideTitle = this.slideComponent.name;
         this.slideModelKey = this.slideComponent.name;
+    }
+
+    createStateMachine() {
+        let fsm = StateMachine.create(slideTransitionRules);
+        let transitionHistory = this.transitionHistory;
+        fsm.onafterevent = function(event, from, to, args) {
+            transitionHistory.push(from)            
+        }
+        fsm.goBack = function() {
+            var previousState = transitionHistory.pop();
+            this.current = previousState;
+            return previousState;
+        }
+
+        return fsm;
     }
 };
 
