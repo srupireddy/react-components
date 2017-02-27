@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {combineReducers, createStore } from 'redux';
 
-import Slide from './containers/SlideManager.js';
-import {slideStateReducer} from './containers/SlideStateReducer';
+import Slide from './slideCore/SlideManager.js';
+import {slideStateReducer} from './slideCore/SlideStateReducer';
 
 /*BB Global Style*/
 import './styles/bootstrap.css';
