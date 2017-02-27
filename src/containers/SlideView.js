@@ -17,13 +17,21 @@ export default class SlideView extends React.Component {
 
             onCompletion = (modelKey, payload) => {
                 this.props.componentCompleteDataCollected(modelKey, payload);
-
                 let activeModel = this.context.store.getState().slide.activeModel 
                 this.props.navigateToNextSlide(activeModel);
-
                 this.refreshView();
             }
         }(props);
+    }
+
+    previousSlide = () => {
+        this.props.navigateToPreviousSlide();
+        this.refreshView();
+    }
+
+    nextSlideIfAllowed = () => {
+        this.props.navigateToNextSlideIfAllowed();
+        this.refreshView();
     }
 
     refreshView = () => {
@@ -32,12 +40,8 @@ export default class SlideView extends React.Component {
         this.props.componentCompleteDataCollected('test', 'test');
     }
 
-    previousSlide = () => {
-        this.props.navigateToPreviousSlide();
-        this.refreshView();
-    }
-
     render() {
+        let data = this.context.store.getState().slide.activeModel[this.props.component.name];
         return (
             <div className={SlideStyle.slideContainer}>
                 <div className="container">
@@ -47,6 +51,7 @@ export default class SlideView extends React.Component {
                     <this.props.component ref={(instance) => this.activeComponentInstance = instance}
                             modelKey={this.props.modelKey}
                             handler={this.componentActionHandler}
+                            data={data}
                             style={{margin: '20px auto'}}
                             />
                     <div className={SlideStyle.slideControlPrev}>
@@ -55,11 +60,11 @@ export default class SlideView extends React.Component {
                         </button>
                     </div>
                     <div className={SlideStyle.slideControlNext}>
-                        <button className={ButtonStyle.icon} onClick={this.props.navigateToNextSlideIfAllowed}>
+                        <button className={ButtonStyle.icon} onClick={this.nextSlideIfAllowed}>
                             <span className={Sprite.iconRight}/>
                         </button>
                     </div>
-                    <button className={ButtonStyle.btn} onClick={this.props.navigateToNextSlideIfAllowed}>
+                    <button className={ButtonStyle.btn} onClick={this.nextSlideIfAllowed}>
                         Continue
                     </button>
                 </div>

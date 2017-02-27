@@ -28,7 +28,7 @@ const slideManager = new class {
 
     nextSlideIfAllowed = (model) => {
         //TODO: Check the ALLOW
-        nextSlide(model);
+        this.nextSlide(model);
     }
 
     update() {
