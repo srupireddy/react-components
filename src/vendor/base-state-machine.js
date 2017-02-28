@@ -72,8 +72,10 @@
                 add(events[n]);
 
             for (var name in map) {
-                if (map.hasOwnProperty(name))
+                if (map.hasOwnProperty(name)) {
                     fsm[name] = StateMachine.buildEvent(name, map[name]);
+                    fsm['peek.' + name] = StateMachine.computeTargetState(name, map[name]);
+                }
             }
 
             for (var name in callbacks) {
@@ -178,22 +180,36 @@
         },
 
         //===========================================================================
+        computeTargetState: function(eventName, rulesForEvent) {
+            return function(from, args)  {
+                var rulesForFromState = rulesForEvent[from];
+                if (rulesForFromState instanceof Array) {
+                    // Loop through the possible transitions available from the current state for the event and pick the first winner.
+                    for (var i=0; i<rulesForFromState.length; i++) {
+                        var transitionRule=rulesForFromState[i];
+                        if (!transitionRule.guard || transitionRule.guard(args, from)) {
+                            return transitionRule.target;
+                        }
+                    }
+                    // No condition evaluated to TRUE. Just return the FROM state.
+                    return from;
+                }
 
-        selectTarget: function(from, map, context) {
-            return map[from] || (map[StateMachine.WILDCARD] != StateMachine.WILDCARD ? map[StateMachine.WILDCARD] : from) || from;
+                return rulesForFromState || (rulesForEvent[StateMachine.WILDCARD] != StateMachine.WILDCARD ? rulesForEvent[StateMachine.WILDCARD] : from) || from;
+            }
         },
 
         buildEvent: function(name, map) {
-            return function(context) {
+            return function() {
                 var from = this.current;
-                var to = StateMachine.selectTarget(from, map, context);
-                var args = Array.prototype.slice.call(arguments); // turn arguments into pure array
+                var args = Array.prototype.slice.call(arguments, 1); // turn arguments into pure array
+                var to = this['peek.' + name](from, args);
 
                 if (this.transition)
                     return this.error(name, from, to, args, StateMachine.Error.PENDING_TRANSITION, "event " + name + " inappropriate because previous transition did not complete");
 
                 if (this.cannot(name))
-                    return this.error(name, from, to, args, StateMachine.Error.INVALID_TRANSITION, "event " + name + " inappropriate in current state " + this.current);
+                    return this.error(name, from, to, args, StateMachine.Error.INVALID_TRANSITION, "event " + name + " inappropriate in current state " + from);
 
                 if (false === StateMachine.beforeEvent(this, name, from, to, args))
                     return StateMachine.Result.CANCELLED;
