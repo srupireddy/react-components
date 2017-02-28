@@ -15,32 +15,13 @@ export default class SlideView extends React.Component {
             }
 
             onCompletion = (modelKey, payload) => {
-                this.props.componentCompleteDataCollected(modelKey, payload);
-                let activeModel = this.context.store.getState().slide.activeModel 
-                this.props.navigateToNextSlide(activeModel);
-                this.refreshView();
+                this.props.componentDataCollected(modelKey, payload);
             }
         }(props);
     }
 
-    previousSlide = () => {
-        this.props.navigateToPreviousSlide();
-        this.refreshView();
-    }
-
-    nextSlideIfAllowed = () => {
-        this.props.navigateToNextSlideIfAllowed();
-        this.refreshView();
-    }
-
-    refreshView = () => {
-        // TODO: Figure out how we can update the SlideView when Slide Manager changes outside of dispatch. Thats why manually firing 
-        // another dispatch action again and forceUpdate is also not working as the SlideManager state is not getting mapped to props. 
-        this.props.componentCompleteDataCollected('test', 'test');
-    }
-
     render() {
-        let data = this.context.store.getState().slide.activeModel[this.props.component.name];
+        let data = this.props.prefillData[this.props.modelKey];
         return (
             <div className={SlideStyle.slideContainer}>
                 <div className="container">
@@ -54,16 +35,16 @@ export default class SlideView extends React.Component {
                             style={{margin: '20px auto'}}
                             />
                     <div className={SlideStyle.slideControlPrev}>
-                        <button className={SlideStyle.icon} onClick={this.previousSlide}>
+                        <button className={SlideStyle.icon} onClick={this.props.goBackToPreviousSlide}>
                             <span className={Sprite.iconLeft}/>
                         </button>
                     </div>
                     <div className={SlideStyle.slideControlNext}>
-                        <button className={SlideStyle.icon} onClick={this.nextSlideIfAllowed}>
+                        <button className={SlideStyle.icon} onClick={this.props.gotoNextSlideIfAllowed}>
                             <span className={Sprite.iconRight}/>
                         </button>
                     </div>
-                    <button className="btn" onClick={this.nextSlideIfAllowed}>
+                    <button className="btn" onClick={this.props.gotoNextSlideIfAllowed}>
                         Continue
                     </button>
                 </div>
