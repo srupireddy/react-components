@@ -13,7 +13,7 @@
                 event: "init",
                 defer: "true"
             },
-            transitions: [
+            events: [
                 {
                 name: "next",
                 from: "City",
@@ -34,7 +34,7 @@
                     },
                     {
                     guard:function(model, from) {return model[from]=='SELF_EMPLOYED_BUSINESS' || model[from]=='SELF_EMPLOYED_PROFESSIONAL';},
-                    target:"Experience"
+                    target:"Salary"
                     },
                     {
                     guard:function(model, from) {return model[from]=='STUDENT' || model[from]=='RETIRED' || model[from] == 'HOMEMAKER';},
