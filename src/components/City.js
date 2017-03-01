@@ -51,7 +51,7 @@ export default class City extends BaseComponent {
     otherCityOption = () => {
         return (
             <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={CityStyle.iconResidenceOther} label="Other City">
-                <input type="text" value={this.selectedCity()} placeholder="Enter your details" onClick={this.openOtherCitiesModal}/>
+                <input type="text" value={this.selectedCity()} placeholder="Enter your details" onClick={this.openOtherCitiesModal} onChange={this.handleCitySelection}/>
                 {this.otherCityModal()}
             </DecorateWithImageAndLabel>
         )       
