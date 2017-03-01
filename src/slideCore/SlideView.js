@@ -35,16 +35,16 @@ export default class SlideView extends React.Component {
                             style={{margin: '20px auto'}}
                             />
                     <div className={SlideStyle.slideControlPrev}>
-                        <button className={SlideStyle.icon} onClick={this.props.goBackToPreviousSlide}>
+                        <button className={SlideStyle.icon} onClick={this.props.goBackToPreviousSlide} style={{display: this.props.canGoBack ? "" : "none" }}>
                             <span className={Sprite.iconLeft}/>
                         </button>
                     </div>
                     <div className={SlideStyle.slideControlNext}>
-                        <button className={SlideStyle.icon} onClick={this.props.gotoNextSlideIfAllowed}>
+                        <button className={SlideStyle.icon} onClick={this.props.gotoNextSlideIfAllowed} disabled={!this.props.canGoForward}>
                             <span className={Sprite.iconRight}/>
                         </button>
                     </div>
-                    <button className="btn" onClick={this.props.gotoNextSlideIfAllowed}>
+                    <button className="btn" onClick={this.props.gotoNextSlideIfAllowed} disabled={!this.props.canGoForward}>
                         Continue
                     </button>
                 </div>

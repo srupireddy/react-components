@@ -45,7 +45,7 @@
     "react-rangeslider": "^2.0.1",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0",
+    "redux-undo": "^1.0.0-beta9-7",
     "title-case": "^2.1.0"
   },
   "jest": {

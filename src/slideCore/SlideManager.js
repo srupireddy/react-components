@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
+import { ActionCreators as UndoActionCreators } from 'redux-undo'
 
 import * as Components from '../components/';
 import StateMachine from '../vendor/state-machine.js';
 import SlideView from './SlideView.js';
-import {updateModelAndShowNextSlide, goBackToPreviousSlide} from './SlideActions.js';
+import {nextSlideAction} from './SlideActions.js';
 
 const slideManager = new class {
     constructor() {
@@ -27,7 +28,7 @@ const slideManager = new class {
 };
 
 const mapStateToProps = (state) => {
-    let activeSlide = state.slide.transitions.activeSlide || slideManager.initialSlide();
+    let activeSlide = state.slide.present.activeSlide || slideManager.initialSlide();
     let slideComponent = eval("(Components." + activeSlide + ")");
     let slideTitle = slideComponent.name;
     let slideModelKey = slideComponent.name;
@@ -36,20 +37,19 @@ const mapStateToProps = (state) => {
         title: slideTitle,
         component: slideComponent,
         modelKey: slideModelKey,
-        prefillData: state.slide.prefillData,
-        navigateToPreviousSlide: slideManager.previousSlide,
-        navigateToNextSlide: slideManager.nextSlide,
-        navigateToNextSlideIfAllowed: slideManager.nextSlideIfAllowed
+        prefillData: {},//state.slide.prefillData,
+        canGoBack: state.slide.past.length > 0,
+        canGoForward: true
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         componentDataCollected: (key, payload) => {
-            dispatch(updateModelAndShowNextSlide(key, payload, slideManager));
+            dispatch(nextSlideAction(key, payload, slideManager));
         },
         goBackToPreviousSlide: () => {
-            dispatch(goBackToPreviousSlide(slideManager));   
+            dispatch(UndoActionCreators.undo());   
         }
     }
 }

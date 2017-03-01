@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {combineReducers, createStore, applyMiddleware, compose} from 'redux';
-import thunk from 'redux-thunk'
+import {combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
 
 import Slide from './slideCore/SlideManager.js';
-import {slideStateReducer} from './slideCore/SlideStateReducer';
+import SlideStateReducer from './slideCore/SlideStateReducer';
 
 /*BB Global Style*/
 import './styles/bootstrap.css';
@@ -16,11 +15,11 @@ import './styles/react-tooltip.css';
 import './styles/react-rangeslider.css';
 import './styles/react-datepicker.css';
 
-let rootReducer = combineReducers({slide: slideStateReducer});
+let rootReducer = combineReducers({slide: SlideStateReducer});
 let preloadedState = {}
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const globalStore = createStore(rootReducer, preloadedState, composeEnhancers(applyMiddleware(thunk)));
+const reduxToolEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const globalStore = createStore(rootReducer, preloadedState, reduxToolEnhancer);
 
 ReactDOM.render(
     <Provider store={globalStore}>
