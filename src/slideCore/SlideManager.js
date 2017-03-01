@@ -28,7 +28,7 @@ const slideManager = new class {
 };
 
 const mapStateToProps = (state) => {
-    let activeSlide = state.slide.present.activeSlide || slideManager.initialSlide();
+    let activeSlide = state.slide.main.present.activeSlide || slideManager.initialSlide();
     let slideComponent = eval("(Components." + activeSlide + ")");
     let slideTitle = slideComponent.name;
     let slideModelKey = slideComponent.name;
@@ -37,8 +37,8 @@ const mapStateToProps = (state) => {
         title: slideTitle,
         component: slideComponent,
         modelKey: slideModelKey,
-        prefillData: {},//state.slide.prefillData,
-        canGoBack: state.slide.past.length > 0,
+        prefillData: state.slide.prefillData,
+        canGoBack: state.slide.main.past.length > 0,
         canGoForward: true
     }
 }
