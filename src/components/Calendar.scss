@@ -1,6 +1,7 @@
-.calendarSection {
+.calendarContainer {
     margin: 20px auto 40px;
 }
+
 .curvedTable {
     border-collapse: separate;
     border: solid #ddd 1px;
@@ -12,6 +13,7 @@
     margin: 0 auto 5px;
     text-align: center;
     font-size: 14px;
+    width: 100%;
 
     tbody > tr:first-child > td:first-child {
         border-top-left-radius: 6px;
@@ -50,4 +52,8 @@
     padding: 5px 7px;
     font-weight: bold;
     font-size: 16px;
+}
+
+.highlight {
+    color: #ffff7b;
 }
