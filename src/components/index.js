@@ -6,6 +6,6 @@ import Salary from './Salary.js';
 import Employer from './Employer.js';
 import EmploymentType from './EmploymentType.js';
 import Calendar from './Calendar.js';
-import Duration from './Duration.js'
+import Income from './Income.js'
 
-export {Gender, City, Experience, ProfitAfterTax, Salary, EmploymentType, Employer, Calendar, Duration};
+export {Gender, City, Experience, ProfitAfterTax, Salary, EmploymentType, Employer, Calendar, Income};

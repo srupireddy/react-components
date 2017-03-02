@@ -2,7 +2,7 @@ import React from 'react';
 import BaseComponent from './BaseComponent';
 import Slider from 'react-rangeslider';
 
-export default class Duration extends BaseComponent{
+export default class Income extends BaseComponent{
     static propTypes = {
         min: React.PropTypes.number.isRequired,
         max: React.PropTypes.number.isRequired,
@@ -42,7 +42,7 @@ export default class Duration extends BaseComponent{
         //TODO: Programatically generate the background image to be rendered for the ruler.
         switch (this.props.max) {
             case 7: return "ruler-0-7";
-            case 70: return "ruler-0-70";
+            case 70: return "ruler-18-70";
             case 120000: return "ruler-0-120000";
             default: return "ruler-blank";
         }

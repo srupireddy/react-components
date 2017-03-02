@@ -2,9 +2,9 @@ import React from 'react';
 import BaseComponent from './BaseComponent.js';
 import VendorDatePicker from 'react-datepicker';
 import moment from 'moment';
+import Slider from 'react-rangeslider';
 
 import GeneralUtils from '../utils/GeneralUtils';
-import Duration from './Duration.js';
 
 import CalendarStyle from './Calendar.scss';
 
@@ -72,6 +72,7 @@ class Last5YearsVariant extends React.Component {
 
 class DOBVariant extends React.Component {
     state = {
+        age: 18,    //TODO: What should be this value and how we should default it from the DOB.
         selectedYear: null,
         selectedYearMonth: null,
         selectedDate: null,
@@ -86,7 +87,9 @@ class DOBVariant extends React.Component {
 
         return (
             <div className={CalendarStyle.calendarContainer}>
-                <Duration min={18} max={70} step={1} allowGranularValue={false} onChange={this.computeYearFromAge}/>
+                <div className="slider-horizontal-ruler ruler-18-70">
+                    <Slider value={this.state.age} min={18} max={70} step={1} onChange={this.computeYearFromAge}/>
+                </div>
                 <div className="row" style={{width: "700px", margin: "0 auto"}}>
                     <div className="col-md-6">
                         {this.state.yearMonthPresenterVisible &&
@@ -109,8 +112,7 @@ class DOBVariant extends React.Component {
     }
 
     computeYearFromAge = (age) => {
-        console.log(age);
-        this.setState({selectedYear: moment().subtract(age+1, 'years').format('YYYY'), yearMonthPresenterVisible: true})
+        this.setState({age: age, selectedYear: moment().subtract(age+1, 'years').format('YYYY'), yearMonthPresenterVisible: true})
     }
 
     handleYearMonthSelection = (event) => {
