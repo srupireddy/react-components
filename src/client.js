@@ -12,7 +12,7 @@ import './styles/bbglobal.css';
 
 /*React Component Style*/
 import './styles/react-tooltip.css';
-import './styles/react-rangeslider.css';
+import './styles/react-rangeslider.scss';
 import './styles/react-datepicker.css';
 
 let rootReducer = combineReducers({slide: SlideStateReducer});

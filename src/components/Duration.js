@@ -24,18 +24,28 @@ export default class Duration extends BaseComponent{
     }
 
     render() {
-        //TODO: Programatically determine the background image to be rendered for the ruler.
-        let ruler = "slide slideHorizontal";
         return (
             <div>
                 {this.props.allowGranularValue &&
-                    <div style={{...this.props.style, width: '300px', margin:'0 auto'}}> <input type="text" value={this.state.value} onChange={this.handleTextFieldValueChange}/> </div>
+                    <div style={{...this.props.style, width: '300px', margin:'0 auto'}}>
+                        <input type="text" value={this.state.value} onChange={this.handleTextFieldValueChange}/>
+                    </div>
                 }
-                <div className={ruler}>
-                    <Slider value={this.state.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleSliderValueChange}/>
+                <div className={["slider-horizontal-ruler", this.rulerToBeUsed()].join(' ')}>
+                    <Slider value={this.state.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.handleSliderValueChange} onChangeComplete={this.handleSliderValueChangeCompleted}/>
                 </div>
             </div>
         )
+    }
+
+    rulerToBeUsed() {
+        //TODO: Programatically generate the background image to be rendered for the ruler.
+        switch (this.props.max) {
+            case 7: return "ruler-0-7";
+            case 70: return "ruler-0-70";
+            case 120000: return "ruler-0-120000";
+            default: return "ruler-blank";
+        }
     }
 
     handleTextFieldValueChange = (event) => {
@@ -46,9 +56,18 @@ export default class Duration extends BaseComponent{
         value = Math.max(value, this.props.min);
         value = Math.min(value, this.props.max);
         this.setState({value: parseInt(value)});
+        if (this.props.onChange) {
+            this.props.onChange(value);
+        }
     }
 
     handleSliderValueChange = (value) => {
         this.setState({value: value});
+    }
+
+    handleSliderValueChangeCompleted = (event) => {
+        if (this.props.onChange) {
+            this.props.onChange(this.state.value);
+        }
     }
 }
