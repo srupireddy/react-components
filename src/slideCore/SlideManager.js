@@ -8,11 +8,14 @@ import {nextSlideAction} from './SlideActions.js';
 
 const slideManager = new class {
     constructor() {
-        this.fsm = this.createStateMachine();
+        var config = slideManagerConfig;
+        this.firstSlide = config.firstSlide;
+        this.slidesConfig = this.createSlidesConfigMap(config.slides);
+        this.fsm = this.createStateMachine(this.firstSlide, config.transitions);
     }
 
-    initialSlide = () => {
-        return this.fsm.current;
+    configForSlide = (key) => {
+        return this.slidesConfig[key];
     }
 
     peekIntoNextSlide = (currentSlide, model) => {
@@ -58,23 +61,34 @@ const slideManager = new class {
         return inputElement;
     }
 
-    createStateMachine() {
-        let fsm = StateMachine.create(slideTransitionRules);
-        fsm.init();
+    createSlidesConfigMap(slides) {
+        var config = {};
+        slides.forEach(function(slide, index){
+            config[slide.modelKey] = slide;
+        });
+        return config;
+    }
+
+    createStateMachine(firstSlide, transitions) {
+        let events = transitions.map((rule) => {rule['name'] = 'next'; return rule;});
+        let fsmConfig = {initial: firstSlide, events: events};
+        let fsm = StateMachine.create(fsmConfig);
         return fsm;
     }
 };
 
 const mapStateToProps = (state) => {
-    let activeSlide = state.slide.main.present.activeSlide || slideManager.initialSlide();
-    let slideComponent = eval("(Components." + activeSlide + ")");
-    let slideTitle = slideComponent.name;
-    let slideModelKey = slideComponent.name;
+    let activeSlideId = state.slide.main.present.activeSlide || slideManager.firstSlide;
+    console.log("Going to render the Slide with ID = " + activeSlideId);
+
+    let slideConfig = slideManager.configForSlide(activeSlideId);
+    let slideComponent = eval("(Components." + slideConfig.component + ")");
 
     return {
-        title: slideTitle,
+        title: slideConfig.title,
         component: slideComponent,
-        modelKey: slideModelKey,
+        componentProps:  slideConfig.properties,
+        modelKey: activeSlideId,
         prefillData: state.slide.prefillData,
         canGoBack: state.slide.main.past.length > 0,
         canGoForward: true

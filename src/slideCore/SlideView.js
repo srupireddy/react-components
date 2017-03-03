@@ -33,6 +33,7 @@ export default class SlideView extends React.Component {
                             handler={this.componentActionHandler}
                             data={data}
                             style={{margin: '20px auto'}}
+                            {...this.props.componentProps}
                             />
                     <div className={SlideStyle.slideControlPrev}>
                         <button type="button" className={SlideStyle.icon} onClick={this.props.goBackToPreviousSlide} style={{display: this.props.canGoBack ? "" : "none" }}>

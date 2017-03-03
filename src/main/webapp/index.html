@@ -7,63 +7,86 @@
 <body>
     <div id="elig-slide-content" />
     <script type="text/javascript">
-	var slideConfigs = {
-	        City: {label:'Where do you live currently?', mapping:'city.name'},
-	        Gender: {label:'My gender', mapping:'gender'},
-	        Experience: {label:'Your joining date and total work experience', mapping:'joiningDate'},
-	        EmploymentType: {label:'Type of employment', mapping:'typeOfEmployment'},
-	        Employer: {label: 'Your company name', mapping:'companyIWorkFor.name'},
-	        ProfitAfterTax: {label:'Latest year\'s profit after tax'},
-	        Salary: {label:'Gross fixed monthly income'},
-        	OtherCity: {label: 'Temporary Component'}
-	};
-	
-        var slideTransitionRules = {
-            initial: {
-                state: "City",
-                event: "init",
-                defer: "true"
-            },
-            events: [
+        var slideManagerConfig = {
+            firstSlide: 'residentCity',
+            slides: [
                 {
-                    name: "next",
-                    from: "City",
-                    to: "Gender"
+                    modelKey: 'residentCity',
+                    title: 'Where do you live currently?',
+                    component: 'City',
+                    properties: {
+                        variant: 'Resident' 
+                    }
                 },
                 {
-                    name: "next",
-                    from: "Gender",
-                    to: "EmploymentType"
+                    modelKey: 'gender',
+                    title: 'My gender',
+                    component: 'Gender'
                 },
                 {
-                    name: "next",
-                    from: "EmploymentType",
-                    to: [
-                        {
-                            guard:function(model, from) {return model[from]=='SALARIED' || model[from]=='SALARIED_PROFESSIONAL';},
-                            target:"Experience"
-                        },
-                        {
-                            guard:function(model, from) {return model[from]=='SELF_EMPLOYED_BUSINESS' || model[from]=='SELF_EMPLOYED_PROFESSIONAL';},
-                            target:"Salary"
-                        },
-                        {
-                            guard:function(model, from) {return model[from]=='STUDENT' || model[from]=='RETIRED' || model[from] == 'HOMEMAKER';},
-                            target:"DOB"
+                    modelKey: 'propertyCity',
+                    title: 'City in which property is based',
+                    component: 'City',
+                    properties: {
+                        variant: 'Property' 
+                    }
+                },
+                {
+                    modelKey: 'employmentType',
+                    title: 'Type of employment',
+                    component: 'EmploymentType'
+                },
+                {
+                    modelKey: 'employer',
+                    title: 'Company I work for',
+                    component: 'Employer'
+                },
+                {
+                    modelKey: 'joiningDate',
+                    title: 'Joining date with your current organisation',
+                    component: 'WorkExperience'
+                },
+                {
+                    modelKey: 'grossMonthlyIncome',
+                    title: 'Gross fixed monthly income',
+                    component: 'Income',
+                    properties: {
+                        min: 3000,
+                        max: 9999999,
+                        step: 1000,
+                        tooltip: {
+                            text: 'Enter your gross monthly salary as per his/her your monthly payslip before deductions. Include only direct deposit or cheque payments. Exclude payments in hard cash and in-kind components.'
                         }
-                    ]
+                    }
                 },
                 {
-                    name: "next",
-                    from: "Experience",
-                    to: "Employer"
-                },{
-                    name: "next",
-                    from: "Experience",
-                    to: "Salary"
+                    modelKey: 'annualBonus',
+                    title: 'Total annual bonus (optional)',
+                    component: 'Income',
+                    properties: {
+                        max: 4 * 'grossMonthlyIncome',
+                        tooltip: {
+                            text: 'Enter your annual bonus, if any, excluding any cash component.'
+                        }
+                    }
+                },
+                {
+                    modelKey: "dob",
+                    title: "What's your age (years completed)?",
+                    component: 'Calendar',
+                    properties: {
+                        variant: 'DOB'
+                    }
                 }
+            ],
+            transitions: [
+                    {from: "residentCity",   to: "gender"},
+                    {from: "gender",         to: "employmentType"},
+                    {from: "employmentType", to: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
+                    {from: "employmentType", to: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
+                    {from: "employmentType", to: "dob", guard: function(model, from) {return model['employmentType'] == 'STUDENT' || model['employmentType'] == 'RETIRED' || model['employmentType'] == 'HOMEMAKER'}},
             ]
-        }
+        };
     </script>
     <script src="/scripts/eligibility/bundle.js" type="text/javascript"></script>
 </body>
