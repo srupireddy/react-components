@@ -7,6 +7,17 @@
 <body>
     <div id="elig-slide-content" />
     <script type="text/javascript">
+	var slideConfigs = {
+	        City: {label:'Where do you live currently?', mapping:'city.name'},
+	        Gender: {label:'My gender', mapping:'gender'},
+	        Experience: {label:'Your joining date and total work experience', mapping:'joiningDate'},
+	        EmploymentType: {label:'Type of employment', mapping:'typeOfEmployment'},
+	        Employer: {label: 'Your company name', mapping:'companyIWorkFor.name'},
+	        ProfitAfterTax: {label:'Latest year\'s profit after tax'},
+	        Salary: {label:'Gross fixed monthly income'},
+        	OtherCity: {label: 'Temporary Component'}
+	};
+	
         var slideTransitionRules = {
             initial: {
                 state: "City",
