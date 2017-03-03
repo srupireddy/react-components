@@ -5,8 +5,9 @@ build
 node_modules
 ncp-debug.log
 npm-debug.log
-/*.map
-/*bundle.js
-/src/main
+*.map
+*bundle.js
+*bundle.css
 .idea
 *.iml
+target
