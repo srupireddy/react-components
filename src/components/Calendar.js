@@ -10,7 +10,7 @@ import CalendarStyle from './Calendar.scss';
 
 export default class Calendar extends BaseComponent {
     static propTypes = {
-        variant: React.PropTypes.oneOf(['Default', 'Last5Years', 'DOB']),
+        variant: React.PropTypes.oneOf(['Default', 'Last5Years', 'DOB']).isRequired,
         titleSuffix: React.PropTypes.string
     };
 
