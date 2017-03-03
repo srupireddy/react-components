@@ -10,22 +10,26 @@ import ModalStyle from '../widgets/Modal.scss';
 const titleCase = require('title-case');
 
 export default class City extends BaseComponent {
+    static propTypes = {
+        variant: React.PropTypes.oneOf(['Resident', 'Property'])
+    };
+
+    static defaultProps = {
+        variant: 'Resident'
+    }
+
     state = {
-        selectedCity: this.props.data, 
-        otherCitiesModalVisible: false
+        selectedCity: this.props.data || '', 
     }
 
     render() {
+        var variantStyle = this.props.variant == 'ResidentCity' ? 'iconResidence' : 'iconProperty';
         return (
             <div style={{...this.props.style}}>
-                {this.tier1CityOptions()}
-                {this.otherCityOption()}
+                <TopTierCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                <OtherCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
             </div>
         );
-    }
-
-    selectedCity() {
-        return this.state.selectedCity || '';
     }
 
     handleCitySelection = (event) => {
@@ -35,56 +39,8 @@ export default class City extends BaseComponent {
         this.notifyCompletion(value);
     }
 
-    tier1CityOptions = () => {
-        let radioItems = City.options.filter(function(city) {return city.group === 'FOCUS'}).map(
-            (item) => (
-                <DecorateWithImageAndLabel key={item.city} containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={CityStyle['iconResidence' + titleCase(item.city).replace(/ /g, '')]} label={titleCase(item.city)}>
-                    <input type="radio" value={item.city} data-value={item.city} 
-                        name='city' onChange={this.handleCitySelection} checked={this.selectedCity() === item.city}/>
-                </DecorateWithImageAndLabel>
-            )
-        );
-
-        return radioItems
-    }
-
-    otherCityOption = () => {
-        return (
-            <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={CityStyle.iconResidenceOther} label="Other City">
-                <input type="text" value={this.selectedCity()} placeholder="Enter your details" onClick={this.openOtherCitiesModal} onChange={this.handleCitySelection}/>
-                {this.otherCityModal()}
-            </DecorateWithImageAndLabel>
-        )       
-    }
-
-    otherCityModal = () => {
-        let listItems = City.options.map(
-            (item) => (
-                <li key={item.city} onClick={this.handleCitySelection}><a href="" data-value={item.city}>{titleCase(item.city)}</a></li>
-            )
-        );
-
-        return (
-            <Modal isOpen={this.state.otherCitiesModalVisible} className={ModalStyle.modal} overlayClassName={ModalStyle.overlay}  contentLabel="Other Cities Modal">
-                <a href="javascript:void(0)" className={ModalStyle.close} onClick={this.closeOtherCitiesModal}>X</a>
-                <input type="text" value={this.selectedCity()} placeholder="Enter your details" />
-                <div className={CityStyle.listContainer}>
-                    <ul className={CityStyle.list}>{listItems}</ul>
-                </div>            
-            </Modal>    
-        );
-    }
-
-    openOtherCitiesModal = () => {
-        this.setState({otherCitiesModalVisible: true});
-    }
-
-    closeOtherCitiesModal = () => {
-        this.setState({otherCitiesModalVisible: false});
-    }
-
     //TODO: Temporarily hardcoded here. Actually this should be given by the server.  
-    static options = [
+    static allCities = [
         {"state": "ANDHRA PRADESH", "city": "GUNTUR", "group": "SECONDARY_CITIES"}, 
         {"state": "ASSAM", "city": "GUWAHATI", "group": "SECONDARY_CITIES"}, 
         {"state": "BIHAR", "city": "PATNA", "group": "SECONDARY_CITIES"}, 
@@ -187,3 +143,61 @@ export default class City extends BaseComponent {
         {"state": "WEST BENGAL", "city": "KOLKATA", "group": "PRIMARY_CITIES"}
     ]    
 }
+
+const TopTierCities = ({selectedCity, variantStyle, onClick}) => {
+    let radioItems = City.allCities.filter(function(city) {return city.group === 'FOCUS'}).map(
+        (item) => {
+            var key = item.city;
+            var label = titleCase(key);
+            var icon = CityStyle[variantStyle + label.replace(/ /g, '')];
+
+            return (
+                <DecorateWithImageAndLabel key={key} imageStyle={icon} label={label} containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" >
+                    <input type="radio" name='city' value={key} onChange={onClick} checked={selectedCity === key} data-value={key} />
+                </DecorateWithImageAndLabel>
+            );
+        }
+    );
+
+    return <div style={{display: 'inline'}}>{radioItems}</div>;    
+}
+
+class OtherCities extends React.Component {
+    state = {
+        otherCitiesModalVisible: false
+    }
+
+    render() {
+        let allCitiesListItems = City.allCities.map(
+            (item) => (
+                <li key={item.city} onClick={this.props.onChange}><a href="" data-value={item.city}>{titleCase(item.city)}</a></li>
+            )
+        );
+
+        var selectedCity = this.props.selectedCity;
+        var icon = CityStyle[this.props.variantStyle + 'Other'];
+
+        return (
+            <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={icon} label="Other City">
+                <input type="text" value={selectedCity} placeholder="Enter your details" onClick={this.openOtherCitiesModal} onChange={this.props.onChange}/>
+
+                <Modal isOpen={this.state.otherCitiesModalVisible} className={ModalStyle.modal} overlayClassName={ModalStyle.overlay}  contentLabel="Other Cities Modal">
+                    <a href="javascript:void(0)" className={ModalStyle.close} onClick={this.closeOtherCitiesModal}>X</a>
+                    <input type="text" value={selectedCity} placeholder="Enter your details" />
+                    <div className={CityStyle.listContainer}>
+                        <ul className={CityStyle.list}>{allCitiesListItems}</ul>
+                    </div>            
+                </Modal>    
+            </DecorateWithImageAndLabel>
+        )       
+    }
+
+    openOtherCitiesModal = () => {
+        this.setState({otherCitiesModalVisible: true});
+    }
+
+    closeOtherCitiesModal = () => {
+        this.setState({otherCitiesModalVisible: false});
+    }
+}
+
