@@ -4,7 +4,8 @@
   "description": "The new React based framework to model and render Slides",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --content-base public/ --hot --inline",
+    "start": "webpack-dev-server --content-base src/main/webapp/ --hot --inline",
+    "build": "webpack --config webpack.config.js --progress",
     "test": "jest"
   },
   "author": "",

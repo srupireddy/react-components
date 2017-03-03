@@ -1,9 +1,9 @@
 const Path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var BUILD_DIR = Path.resolve(__dirname, 'public');
+var BUILD_DIR = Path.resolve(__dirname, 'src/main/webapp/scripts/eligibility/');
 var APP_DIR = Path.resolve(__dirname, 'src');
-var STYLE_DIR = Path.resolve(__dirname, 'src/styles');
+var STYLE_DIR = Path.resolve(APP_DIR, 'styles');
 
 var config = {
     entry: [
@@ -51,7 +51,7 @@ var config = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("bundle.css")
+        new ExtractTextPlugin("../../styles/eligibility/bundle.css")
     ]
 };
 

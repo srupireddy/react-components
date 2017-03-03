@@ -25,5 +25,5 @@ ReactDOM.render(
     <Provider store={globalStore}>
         <Slide />
     </Provider>,
-    document.getElementById('root')
+    document.getElementById('elig-slide-content')
 );
