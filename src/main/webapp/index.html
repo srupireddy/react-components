@@ -64,7 +64,7 @@
                     title: 'Total annual bonus (optional)',
                     component: 'Income',
                     properties: {
-                        max: 4 * 'grossMonthlyIncome',
+                        max: 4 * 'grossMonthlyIncome',  /* TODO: Need to find a way to look into other model */
                         tooltip: {
                             text: 'Enter your annual bonus, if any, excluding any cash component.'
                         }
@@ -82,9 +82,9 @@
             transitions: [
                     {from: "residentCity",   to: "gender"},
                     {from: "gender",         to: "employmentType"},
-                    {from: "employmentType", to: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
-                    {from: "employmentType", to: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
-                    {from: "employmentType", to: "dob", guard: function(model, from) {return model['employmentType'] == 'STUDENT' || model['employmentType'] == 'RETIRED' || model['employmentType'] == 'HOMEMAKER'}},
+                    {from: "employmentType", to: "joiningDate",   guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
+                    {from: "employmentType", to: "joiningDate",   guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
+                    {from: "employmentType", to: "dob",           guard: function(model, from) {return model['employmentType'] == 'STUDENT' || model['employmentType'] == 'RETIRED' || model['employmentType'] == 'HOMEMAKER'}},
             ]
         };
     </script>
