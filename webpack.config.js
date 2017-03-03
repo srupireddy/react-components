@@ -1,7 +1,7 @@
 const Path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var BUILD_DIR = Path.resolve(__dirname, 'src/main/webapp/scripts/eligibility/');
+var BUILD_DIR = Path.resolve(__dirname, 'src/main/webapp');
 var APP_DIR = Path.resolve(__dirname, 'src');
 var STYLE_DIR = Path.resolve(APP_DIR, 'styles');
 
@@ -11,7 +11,7 @@ var config = {
     ],
     output: {
         path: BUILD_DIR,
-        filename: 'bundle.js'
+        filename: 'scripts/eligibility/bundle.js'
     },
     module: {
         rules: [
@@ -51,7 +51,7 @@ var config = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("../../styles/eligibility/bundle.css")
+        new ExtractTextPlugin("styles/eligibility/bundle.css")
     ]
 };
 
