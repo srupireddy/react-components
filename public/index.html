@@ -9,7 +9,7 @@
     <script type="text/javascript">
         var slideTransitionRules = {
             initial: {
-                state: "Experience",
+                state: "City",
                 event: "init",
                 defer: "true"
             },
@@ -30,26 +30,26 @@
                     to: [
                         {
                             guard:function(model, from) {return model[from]=='SALARIED' || model[from]=='SALARIED_PROFESSIONAL';},
-                            target:"Experience"
+                            target:"WorkExperience"
                         },
                         {
                             guard:function(model, from) {return model[from]=='SELF_EMPLOYED_BUSINESS' || model[from]=='SELF_EMPLOYED_PROFESSIONAL';},
-                            target:"Salary"
+                            target:"Income"
                         },
                         {
                             guard:function(model, from) {return model[from]=='STUDENT' || model[from]=='RETIRED' || model[from] == 'HOMEMAKER';},
-                            target:"DOB"
+                            target:"Calendar"
                         }
                     ]
                 },
                 {
                     name: "next",
-                    from: "Experience",
+                    from: "WorkExperience",
                     to: "Employer"
                 },{
                     name: "next",
-                    from: "Experience",
-                    to: "Salary"
+                    from: "Employer",
+                    to: "Income"
                 }
             ]
         }

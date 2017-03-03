@@ -23,7 +23,7 @@ export default class City extends BaseComponent {
     }
 
     render() {
-        var variantStyle = this.props.variant == 'ResidentCity' ? 'iconResidence' : 'iconProperty';
+        var variantStyle = this.props.variant == 'Resident' ? 'iconResidence' : 'iconProperty';
         return (
             <div style={{...this.props.style}}>
                 <TopTierCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
@@ -144,7 +144,7 @@ export default class City extends BaseComponent {
     ]    
 }
 
-const TopTierCities = ({selectedCity, variantStyle, onClick}) => {
+const TopTierCities = ({selectedCity, variantStyle, onChange}) => {
     let radioItems = City.allCities.filter(function(city) {return city.group === 'FOCUS'}).map(
         (item) => {
             var key = item.city;
@@ -153,7 +153,7 @@ const TopTierCities = ({selectedCity, variantStyle, onClick}) => {
 
             return (
                 <DecorateWithImageAndLabel key={key} imageStyle={icon} label={label} containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" >
-                    <input type="radio" name='city' value={key} onChange={onClick} checked={selectedCity === key} data-value={key} />
+                    <input type="radio" name='city' value={key} onChange={onChange} checked={selectedCity === key} data-value={key} />
                 </DecorateWithImageAndLabel>
             );
         }

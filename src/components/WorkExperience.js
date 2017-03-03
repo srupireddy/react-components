@@ -14,7 +14,7 @@ export default class Experience extends BaseComponent {
     render() {
         return (
             <div >
-                <Calendar variant='DOB' titleSuffix="Joining"/>
+                <Calendar variant='Last5Years' titleSuffix="Joining"/>
                 <div className="font-xlg">Your total work experience</div>
                 <div className="slider-horizontal-ruler ruler-0-7">
                     <Slider value={this.state.totalWorkExperience} min={0} max={7} step={1} onChange={this.handleTotalExperienceValueChanged}/>
