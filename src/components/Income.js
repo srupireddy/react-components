@@ -2,20 +2,24 @@ import React from 'react';
 import BaseComponent from './BaseComponent';
 import Slider from 'react-rangeslider';
 
+import {DecorateInputFieldWithSymbol} from '../widgets/Decorator.js'
+import SpriteStyle from '../widgets/Sprite.scss'
+
 export default class Income extends BaseComponent{
     static propTypes = {
+        currencyCode: React.PropTypes.oneOf(['INR']).isRequired,
+        value: React.PropTypes.number.isRequired,
         min: React.PropTypes.number.isRequired,
         max: React.PropTypes.number.isRequired,
-        value: React.PropTypes.number.isRequired,
         step: React.PropTypes.number,
         allowGranularValue: React.PropTypes.bool
     };
 
     static defaultProps = {
         min: 0,
-        max: 100,
+        max: 120000,
         value: 0,
-        step: 1,
+        step: 1000,
         allowGranularValue: true
     };
 
@@ -28,7 +32,9 @@ export default class Income extends BaseComponent{
             <div>
                 {this.props.allowGranularValue &&
                     <div style={{...this.props.style, width: '300px', margin:'0 auto'}}>
-                        <input type="text" value={this.state.value} onChange={this.handleTextFieldValueChange}/>
+                        <DecorateInputFieldWithSymbol iconStyle={this.currencyIconToBeUsed()}>
+                            <input type="text" value={this.state.value} onChange={this.handleTextFieldValueChange}/>
+                        </DecorateInputFieldWithSymbol>
                     </div>
                 }
                 <div className={["slider-horizontal-ruler", this.rulerToBeUsed()].join(' ')}>
@@ -41,10 +47,15 @@ export default class Income extends BaseComponent{
     rulerToBeUsed() {
         //TODO: Programatically generate the background image to be rendered for the ruler.
         switch (this.props.max) {
-            case 7: return "ruler-0-7";
-            case 70: return "ruler-18-70";
             case 120000: return "ruler-0-120000";
             default: return "ruler-blank";
+        }
+    }
+
+    currencyIconToBeUsed() {
+        switch (this.props.currencyCode) {
+            case 'INR': return SpriteStyle.symbolRupee;
+            default: return SpriteStyle.symbolRupee;
         }
     }
 
