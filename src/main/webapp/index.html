@@ -81,10 +81,14 @@
             ],
             transitions: [
                     {from: "residentCity",   to: "gender"},
-                    {from: "gender",         to: "employmentType"},
-                    {from: "employmentType", to: "joiningDate",   guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
-                    {from: "employmentType", to: "joiningDate",   guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
-                    {from: "employmentType", to: "dob",           guard: function(model, from) {return model['employmentType'] == 'STUDENT' || model['employmentType'] == 'RETIRED' || model['employmentType'] == 'HOMEMAKER'}},
+                    {from: "gender",         to: "propertyCity"},
+                    {from: "propertyCity",   to: "employmentType"},
+                    {from: "employmentType", to: [
+                            {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
+                            {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
+                            {target: "dob",         guard: function(model, from) {return model['employmentType'] == 'STUDENT' || model['employmentType'] == 'RETIRED' || model['employmentType'] == 'HOMEMAKER'}}
+                        ]
+                    }
             ]
         };
     </script>
