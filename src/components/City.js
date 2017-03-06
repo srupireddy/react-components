@@ -19,16 +19,16 @@ export default class City extends BaseComponent {
         variant: 'Resident'
     }
 
-    state = {
-        selectedCity: this.props.value || '', 
+    selectedCity() {
+        return this.props.value || '';
     }
 
     render() {
         var variantStyle = this.props.variant == 'Resident' ? 'iconResidence' : 'iconProperty';
         return (
             <div style={{...this.props.style}}>
-                <TopTierCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
-                <OtherCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                <TopTierCities selectedCity={this.selectedCity()} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                <OtherCities selectedCity={this.selectedCity()} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
             </div>
         );
     }

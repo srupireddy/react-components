@@ -78,8 +78,5 @@ export default class Income extends BaseComponent{
     }
 
     handleSliderValueChangeCompleted = (event) => {
-        if (this.props.onChange) {
-            this.props.onChange(this.state.value);
-        }
     }
 }
