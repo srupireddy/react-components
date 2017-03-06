@@ -37,6 +37,11 @@
                     component: 'EmploymentType'
                 },
                 {
+                    modelKey: 'purpose',
+                    title: 'How would you like to use your home loan?',
+                    component: 'Purpose'
+                },
+                {
                     modelKey: 'employer',
                     title: 'Company I work for',
                     component: 'Employer'
@@ -82,7 +87,8 @@
             transitions: [
                     {from: "residentCity",   to: "gender"},
                     {from: "gender",         to: "propertyCity"},
-                    {from: "propertyCity",   to: "employmentType"},
+                    {from: "propertyCity",   to: "purpose"},
+                    {from: "purpose",        to: "employmentType"},
                     {from: "employmentType", to: [
                             {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
                             {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},

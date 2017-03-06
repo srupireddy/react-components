@@ -1,0 +1,24 @@
+.icon {
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-purpose.png);
+    background-position: 0 150px;
+    background-repeat: no-repeat;
+    height: 108px;
+    width: 108px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.iconpurpose1 {
+    composes: icon;
+    background-position: 0 0;
+}
+
+.iconpurpose2 {
+    composes: icon;
+    background-position: -108px 0;
+}
+
+.iconpurpose3 {
+    composes: icon;
+    background-position: -216px 0;
+}
