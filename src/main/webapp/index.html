@@ -42,6 +42,11 @@
                     component: 'Purpose'
                 },
                 {
+                    modelKey: 'propertyDetail',
+                    title: 'Tell us about your property',
+                    component: 'PropertyDetail'
+                },
+                {
                     modelKey: 'employer',
                     title: 'Company I work for',
                     component: 'Employer'
@@ -88,7 +93,8 @@
                     {from: "residentCity",   to: "gender"},
                     {from: "gender",         to: "propertyCity"},
                     {from: "propertyCity",   to: "purpose"},
-                    {from: "purpose",        to: "employmentType"},
+                    {from: "purpose",        to: "propertyDetail"},
+                    {from: "propertyDetail", to: "employmentType"},
                     {from: "employmentType", to: [
                             {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
                             {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},

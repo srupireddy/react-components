@@ -1,0 +1,33 @@
+.icon {
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-property.png);
+    background-position: 0 150px;
+    background-repeat: no-repeat;
+    height: 108px;
+    width: 108px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.iconpropertydetail1 {
+    composes: icon;
+    background-position: 0 0;
+}
+
+.iconpropertydetail2 {
+    composes: icon;
+    background-position: -108px 0;
+}
+
+.iconpropertydetail3 {
+    composes: icon;
+    background-position: -216px 0;
+}
+.iconpropertydetail4 {
+    composes: icon;
+    background-position: -324px 0;
+}
+
+.iconpropertydetail5 {
+    composes: icon;
+    background-position: -432px 0;
+}
