@@ -10,7 +10,7 @@ export default class Gender extends BaseComponent {
 
     handleGenderSelection = (event) => {
         let value = event.target.value;
-        this.notifyCompletion(value.toUpperCase());
+        this.notifyCompletion(value);
     }
 
     render() {
@@ -18,7 +18,7 @@ export default class Gender extends BaseComponent {
             (option) => (
                 <DecorateWithImageAndLabel key={option} imageStyle={GenderStyle['icon' + option]} label={option} containerStyle="col-md-5 col-xs-5 radio-col" >
                     <input type="radio" value={option}
-                        name='gender' onChange={this.handleGenderSelection} checked={this.props.data === option}/>
+                        name='gender' onChange={this.handleGenderSelection} checked={this.props.value === option}/>
                 </DecorateWithImageAndLabel>
             )
         );

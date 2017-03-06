@@ -4,7 +4,7 @@ import VendorDatePicker from 'react-datepicker';
 import moment from 'moment';
 import Slider from 'react-rangeslider';
 
-import GeneralUtils from '../utils/GeneralUtils';
+import CollectionUtils from '../utils/CollectionUtils';
 
 import CalendarStyle from './Calendar.scss';
 
@@ -28,9 +28,8 @@ export default class Calendar extends BaseComponent {
     }
 
     onDateSelected = (date) => {
-        console.log(date.format());
         this.setState({selectedDate: date});
-        //this.notifyCompletion(date);
+        this.notifyCompletion(date);
     }
 }
 
@@ -185,7 +184,7 @@ const TableCreator = ({tableWidth, title, availableOptions, numberOfColumns, sel
         <div className={CalendarStyle.tableHeading}>{title}</div>
         <table className={CalendarStyle.curvedTable}>
             <tbody>
-                {GeneralUtils.iterateArrayInGroupsOf(availableOptions, numberOfColumns).map(
+                {CollectionUtils.iterateArrayInGroupsOf(availableOptions, numberOfColumns).map(
                     (row, rowIndex) => (
                         <tr key={rowIndex}>
                             {row.map((cell, cellIndex) => (

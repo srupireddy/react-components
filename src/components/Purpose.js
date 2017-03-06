@@ -13,7 +13,7 @@ export default class Purpose extends BaseComponent {
         let radioItems = Purpose.options.map(
             (option) => (
                 <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-3 col-xs-3 col-sm-3 radio-col" imageStyle={option.imageStyle} label={option.label}>
-                    <input type="radio" value={option.label} name='purpose' onChange={this.handlePurposeSelection} checked={this.props.data === option.label}/>
+                    <input type="radio" value={option.label} name='purpose' onChange={this.handlePurposeSelection} checked={this.props.value === option.label}/>
                 </DecorateWithImageAndLabel>
             )
         );

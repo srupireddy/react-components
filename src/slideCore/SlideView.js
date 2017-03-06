@@ -21,7 +21,7 @@ export default class SlideView extends React.Component {
     }
 
     render() {
-        let data = this.props.prefillData[this.props.modelKey];
+        let value = this.props.prefillData[this.props.modelKey];
         return (
             <div className={SlideStyle.slideContainer}>
                 <div className="container">
@@ -29,11 +29,11 @@ export default class SlideView extends React.Component {
                         {this.props.title}
                     </div>
                     <this.props.component ref={(instance) => this.activeComponentInstance = instance}
+                            {...this.props.componentProps}
                             modelKey={this.props.modelKey}
                             handler={this.componentActionHandler}
-                            data={data}
+                            value={value}
                             style={{margin: '20px auto'}}
-                            {...this.props.componentProps}
                             />
                     <div className={SlideStyle.slideControlPrev}>
                         <button type="button" className={SlideStyle.icon} onClick={this.props.goBackToPreviousSlide} style={{display: this.props.canGoBack ? "" : "none" }}>

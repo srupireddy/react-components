@@ -7,6 +7,7 @@ import SpriteStyle from '../widgets/Sprite.scss'
 
 export default class Income extends BaseComponent{
     static propTypes = {
+        ...BaseComponent.propTypes,
         currencyCode: React.PropTypes.oneOf(['INR']).isRequired,
         value: React.PropTypes.number.isRequired,
         min: React.PropTypes.number.isRequired,

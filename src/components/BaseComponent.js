@@ -1,5 +1,6 @@
 import React from 'react';
 import ActionHandler from './ActionHandler.js';
+import CollectionUtils from '../utils/CollectionUtils';
 
 export default class BaseComponent extends React.Component {
     static propTypes = {
@@ -9,5 +10,10 @@ export default class BaseComponent extends React.Component {
 
     notifyCompletion = (value) => {
         this.props.handler.onCompletion(this.props.modelKey, value);
+    }
+
+    static configurableProperties() {
+        let baseUnwantedProperties = CollectionUtils.everythingExceptKey(BaseComponent.propTypes, 'modelKey');
+        return CollectionUtils.differenceBetween(this.propTypes, baseUnwantedProperties);
     }
 }
