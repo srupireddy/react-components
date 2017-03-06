@@ -6,6 +6,9 @@ import StateMachine from '../vendor/state-machine.js';
 import SlideView from './SlideView.js';
 import {nextSlideAction} from './SlideActions.js';
 
+const fsmEventName = 'next';
+const fsmPeekEventName = 'peek.' + fsmEventName;
+
 const slideManager = new class {
     constructor() {
         var config = slideManagerConfig;
@@ -20,7 +23,7 @@ const slideManager = new class {
 
     peekIntoNextSlide = (currentSlide, model) => {
         // Just peeks into the next possible state (slide) without affecting the State Machine (FSM).
-        var nextSlide = this.fsm['peek.next'](currentSlide || this.fsm.current, model);
+        var nextSlide = this.fsm[fsmPeekEventName](currentSlide || this.fsm.current, model);
         if(this.isLastSlide(nextSlide)) {
             this.handleFormSubmit(model);
         } else {
@@ -70,7 +73,7 @@ const slideManager = new class {
     }
 
     createStateMachine(firstSlide, transitions) {
-        let events = transitions.map((rule) => {rule['name'] = 'next'; return rule;});
+        let events = transitions.map((rule) => {rule['name'] = fsmEventName; return rule;});
         let fsmConfig = {initial: firstSlide, events: events};
         let fsm = StateMachine.create(fsmConfig);
         return fsm;
