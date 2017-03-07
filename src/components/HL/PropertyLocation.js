@@ -1,6 +1,8 @@
 import React from 'react';
-import BaseComponent from './BaseComponent';
-import {DecorateWithImageAndLabel} from '../widgets/Decorator';
+
+import BaseComponent from '../BaseComponent';
+import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
+
 import PropertyLocationStyle from './PropertyLocation.scss';
 
 export default class PropertyLocation extends BaseComponent {

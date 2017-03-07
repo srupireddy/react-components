@@ -1,11 +1,11 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-import BaseComponent from './BaseComponent';
-import {DecorateWithImageAndLabel} from '../widgets/Decorator';
+import BaseComponent from '../BaseComponent';
+import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 
 import CityStyle from './City.scss';
-import ModalStyle from '../widgets/Modal.scss';
+import ModalStyle from '../../widgets/Modal.scss';
 
 const titleCase = require('title-case');
 

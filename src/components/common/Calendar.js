@@ -1,10 +1,10 @@
 import React from 'react';
-import BaseComponent from './BaseComponent.js';
 import VendorDatePicker from 'react-datepicker';
 import moment from 'moment';
 import Slider from 'react-rangeslider';
 
-import CollectionUtils from '../utils/CollectionUtils';
+import BaseComponent from '../BaseComponent.js';
+import CollectionUtils from '../../utils/CollectionUtils';
 
 import CalendarStyle from './Calendar.scss';
 

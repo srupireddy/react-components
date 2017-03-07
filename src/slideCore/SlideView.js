@@ -28,7 +28,7 @@ export default class SlideView extends React.Component {
                     <div className={SlideStyle.slideHeader}>
                         {this.props.title}
                     </div>
-                    <this.props.component ref={(instance) => this.activeComponentInstance = instance}
+                    <this.props.componentClass ref={(instance) => this.activeComponentInstance = instance}
                             {...this.props.componentProps}
                             modelKey={this.props.modelKey}
                             handler={this.componentActionHandler}

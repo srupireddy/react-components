@@ -1,6 +1,8 @@
 import React from 'react';
-import BaseComponent from './BaseComponent';
-import {DecorateWithImageAndLabel} from '../widgets/Decorator';
+
+import BaseComponent from '../BaseComponent';
+import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
+
 import PurposeStyle from './Purpose.scss';
 
 export default class Purpose extends BaseComponent {

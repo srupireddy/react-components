@@ -1,8 +1,7 @@
 import React from 'react';
 import Slider from 'react-rangeslider';
 
-import BaseComponent from './BaseComponent';
-
+import BaseComponent from '../BaseComponent';
 import Calendar from './Calendar.js';
 
 export default class Experience extends BaseComponent {

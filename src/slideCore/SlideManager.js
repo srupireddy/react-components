@@ -11,7 +11,9 @@ const fsmPeekEventName = 'peek.' + fsmEventName;
 
 const slideManager = new class {
     constructor() {
-        var config = slideManagerConfig;
+        let config = slideManagerConfig;
+
+        this.productType = config.productType;
         this.firstSlide = config.firstSlide;
         this.slidesConfig = this.createSlidesConfigMap(config.slides);
         this.fsm = this.createStateMachine(this.firstSlide, config.transitions);
@@ -78,6 +80,10 @@ const slideManager = new class {
         let fsm = StateMachine.create(fsmConfig);
         return fsm;
     }
+
+    loadComponentClass(name) {
+        return eval("(Components." + name + ")");
+    }
 };
 
 const mapStateToProps = (state) => {
@@ -85,11 +91,11 @@ const mapStateToProps = (state) => {
     console.log("Going to render the Slide with ID = " + activeSlideId);
 
     let slideConfig = slideManager.configForSlide(activeSlideId);
-    let slideComponent = eval("(Components." + slideConfig.component + ")");
+    let componentClass = slideManager.loadComponentClass(slideConfig.component);
 
     return {
         title: slideConfig.title,
-        component: slideComponent,
+        componentClass: componentClass,
         componentProps:  slideConfig.properties,
         modelKey: activeSlideId,
         prefillData: state.slide.prefillData,

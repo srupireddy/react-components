@@ -1,6 +1,7 @@
 import React from 'react';
-import BaseComponent from './BaseComponent';
-import {DecorateWithImageAndLabel} from '../widgets/Decorator';
+
+import BaseComponent from '../BaseComponent';
+import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 import TransactionTypeStyle from './TransactionType.scss';
 
 export default class TransactionType extends BaseComponent {

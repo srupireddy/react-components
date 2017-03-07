@@ -1,6 +1,8 @@
 import React from 'react';
-import BaseComponent from './BaseComponent';
-import {DecorateWithImageAndLabel} from '../widgets/Decorator';
+
+import BaseComponent from '../BaseComponent';
+import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
+
 import SellerDetailStyle from './SellerDetail.scss';
 
 export default class SellerDetail extends BaseComponent {

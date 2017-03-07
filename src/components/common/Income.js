@@ -1,9 +1,9 @@
 import React from 'react';
-import BaseComponent from './BaseComponent';
 import Slider from 'react-rangeslider';
 
-import {DecorateInputFieldWithSymbol} from '../widgets/Decorator.js'
-import SpriteStyle from '../widgets/Sprite.scss'
+import BaseComponent from '../BaseComponent';
+import {DecorateInputFieldWithSymbol} from '../../widgets/Decorator.js'
+import SpriteStyle from '../../widgets/Sprite.scss'
 
 export default class Income extends BaseComponent{
     static propTypes = {

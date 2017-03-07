@@ -1,7 +1,7 @@
 import React from 'react';
-import BaseComponent from './BaseComponent.js';
 
-import {DecorateWithImageAndLabel} from '../widgets/Decorator';
+import BaseComponent from '../BaseComponent.js';
+import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 
 import GenderStyle from './Gender.scss';
 
