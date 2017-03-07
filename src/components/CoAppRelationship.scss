@@ -1,0 +1,29 @@
+.icon {
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-co-app.png);
+    background-position: 0 150px;
+    background-repeat: no-repeat;
+    height: 132px;
+    width: 132px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.iconcoapplicant1 {
+    composes: icon;
+    background-position: -5px -5px;
+}
+
+.iconcoapplicant2 {
+    composes: icon;
+    background-position: -147px -5px;
+}
+
+.iconcoapplicant3 {
+    composes: icon;
+    background-position: -431px -5px;
+}
+
+.iconcoapplicant4 {
+    composes: icon;
+    background-position: -289px -5px;
+}

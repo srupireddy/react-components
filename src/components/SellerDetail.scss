@@ -1,0 +1,23 @@
+.icon {
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-home-seller.png);
+    background-position: 0 150px;
+    background-repeat: no-repeat;
+    height: 132px;
+    width: 132px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.iconseller1 {
+    composes: icon;
+    background-position: -5px -5px;
+}
+
+.iconseller2 {
+    composes: icon;
+    background-position: -147px -5px;
+}
+.iconseller3 {
+    composes: icon;
+    background-position: -289px -5px;
+}

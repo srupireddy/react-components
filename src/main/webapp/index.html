@@ -42,6 +42,26 @@
                     component: 'Purpose'
                 },
                 {
+                    modelKey: 'coAppRelationship',
+                    title: 'Who is the co-applicant?',
+                    component: 'CoAppRelationship'
+                },
+                {
+                    modelKey: 'transactionType',
+                    title: 'Type of transaction',
+                    component: 'TransactionType'
+                },
+                {
+                    modelKey: 'sellerDetail',
+                    title: 'Who is the seller?',
+                    component: 'SellerDetail'
+                },
+                {
+                    modelKey: 'propertyLocation',
+                    title: 'Where is the land?',
+                    component: 'PropertyLocation'
+                },
+                {
                     modelKey: 'propertyDetail',
                     title: 'Tell us about your property',
                     component: 'PropertyDetail'
@@ -94,7 +114,11 @@
                     {from: "gender",         to: "propertyCity"},
                     {from: "propertyCity",   to: "purpose"},
                     {from: "purpose",        to: "propertyDetail"},
-                    {from: "propertyDetail", to: "employmentType"},
+                    {from: "propertyDetail", to: "propertyLocation"},
+                    {from: "propertyLocation", to: "sellerDetail"},
+                    {from: "sellerDetail", to: "transactionType"},
+                    {from: "transactionType", to: "coAppRelationship"},
+                    {from: "coAppRelationship",        to: "employmentType"},
                     {from: "employmentType", to: [
                             {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
                             {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
