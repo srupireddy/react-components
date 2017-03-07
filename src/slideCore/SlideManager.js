@@ -13,7 +13,6 @@ const slideManager = new class {
     constructor() {
         let config = slideManagerConfig;
 
-        this.productType = config.productType;
         this.firstSlide = config.firstSlide;
         this.slidesConfig = this.createSlidesConfigMap(config.slides);
         this.fsm = this.createStateMachine(this.firstSlide, config.transitions);

@@ -45,9 +45,17 @@
     float: none;
 }
 
+.errorContainer {
+    position: absolute;
+    background: #f1c40f;
+    padding: 5px;
+    border-radius: 6px;
+}
+
 .errorMessage {
     font-size: 15px;
     color: #fff;
     font-weight: bold;
-    position: absolute;
+    line-height: normal;
+    text-align: left;
 }
