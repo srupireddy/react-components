@@ -10,25 +10,21 @@ import CalendarStyle from './Calendar.scss';
 
 export default class Calendar extends BaseComponent {
     static propTypes = {
+        ...BaseComponent.propTypes,
         variant: React.PropTypes.oneOf(['Default', 'Last5Years', 'DOB']).isRequired,
         titleSuffix: React.PropTypes.string
     };
 
-    state = {
-        selectedDate: null
-    }
-
     render() {
         switch(this.props.variant) {
-            case "Last5Years": return <Last5YearsVariant onDateSelected={this.onDateSelected} titleSuffix={this.props.titleSuffix}/>
-            case "DOB": return <DOBVariant onDateSelected={this.onDateSelected}/>
+            case "Last5Years": return <Last5YearsVariant value={this.props.value} onDateSelected={this.onDateSelected} titleSuffix={this.props.titleSuffix}/>
+            case "DOB": return <DOBVariant value={this.props.value} onDateSelected={this.onDateSelected}/>
         }
 
         return null;
     }
 
     onDateSelected = (date) => {
-        this.setState({selectedDate: date});
         this.notifyCompletion(date);
     }
 }
@@ -39,6 +35,11 @@ class Last5YearsVariant extends React.Component {
         selectedYear: null,
         selectedMonth: null,
         monthPresenterVisible: false
+    }
+
+    constructor(props) {
+        super(props);
+        this.computeStateFromDate(this.props.value);
     }
     
     render() {
@@ -58,6 +59,7 @@ class Last5YearsVariant extends React.Component {
         this.setState({selectedYear, monthPresenterVisible});
         if (!monthPresenterVisible) {
             // We are done with collecting the data. Lets just assume the month and date to be 01-01.
+            this.setState({selectedMonth: null});
             this.props.onDateSelected(moment(selectedYear + "-01-01"));
         }
     }
@@ -67,20 +69,36 @@ class Last5YearsVariant extends React.Component {
         this.setState({selectedMonth});
         this.props.onDateSelected(moment(this.state.selectedYear + "-" + selectedMonth + "-01"));
     }
+
+    computeStateFromDate(date) {
+        if (!date) {
+            return;
+        }
+
+        let dateAsMoment = moment(date); 
+        let selectedYear = dateAsMoment.format('YYYY');
+        let selectedMonth = dateAsMoment.format('MM');
+        this.state = {selectedYear, selectedMonth, monthPresenterVisible: true};
+    }
 }
 
 class DOBVariant extends React.Component {
     state = {
-        age: 18,    //TODO: What should be this value and how we should default it from the DOB.
+        age: 18,
         selectedYear: null,
         selectedYearMonth: null,
         selectedDate: null,
         yearMonthPresenterVisible: false,
         datePresenterVisible: false
     }
+
+    constructor(props) {
+        super(props);
+        this.computeStateFromDOB(this.props.value);
+    }
     
     render() {
-        let yearMonthPickerTitle = ["what ", <span key="0" className={CalendarStyle.highlight}>month</span>, " and ", <span key="1" className={CalendarStyle.highlight}>year</span>, " were you born in?"];
+        let heading = ["what ", <span key="0" className={CalendarStyle.highlight}>month</span>, " and ", <span key="1" className={CalendarStyle.highlight}>year</span>, " were you born in?"];
         let startDateOfSelectedMonth = this.state.selectedYearMonth ? moment(this.state.selectedYearMonth + '-01') : moment();
         let birthdayText = this.state.selectedDate ? this.state.selectedDate.format('D MMM YYYY') : startDateOfSelectedMonth.format('MMM YYYY')
 
@@ -92,7 +110,7 @@ class DOBVariant extends React.Component {
                 <div className="row" style={{width: "700px", margin: "0 auto"}}>
                     <div className="col-md-6">
                         {this.state.yearMonthPresenterVisible &&
-                            <YearMonthPicker selectedYear={this.state.selectedYear} selectedYearMonth={this.state.selectedYearMonth} onClick={this.handleYearMonthSelection} title={yearMonthPickerTitle}/>
+                            <YearMonthPicker selectedYear={this.state.selectedYear} selectedYearMonth={this.state.selectedYearMonth} onClick={this.handleYearMonthSelection} title={heading}/>
                         }
                         {this.state.datePresenterVisible &&
                             <div className={CalendarStyle.tableHeading} style={{width: "250px", textAlign: "left", paddingLeft: "20px"}}>
@@ -108,6 +126,18 @@ class DOBVariant extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    computeStateFromDOB = (dob) => {
+        if (!dob) {
+            return;
+        }
+        
+        let dateAsMoment = moment(dob); 
+        let age = moment().diff(dateAsMoment, 'years');
+        let selectedYear = dateAsMoment.format('YYYY');
+        let selectedYearMonth = dateAsMoment.format('YYYY-MM');
+        this.state = {age, selectedYear, selectedYearMonth, selectedDate: dateAsMoment, yearMonthPresenterVisible: true, datePresenterVisible: true};
     }
 
     computeYearFromAge = (age) => {
