@@ -2,15 +2,15 @@ import React from 'react';
 
 import BaseComponent from '../BaseComponent';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
-import TransactionTypeStyle from './TransactionType.scss';
+import LandTransactionTypeStyle from './LandTransactionType.scss';
 
-export default class TransactionType extends BaseComponent {
+export default class LandTransactionType extends BaseComponent {
     static options = [
-        {label: 'Direct Allotment', imageStyle: TransactionTypeStyle.icontransactiontype1},
-        {label: 'Resale', imageStyle: TransactionTypeStyle.icontransactiontype2}
+        {label: 'Direct Allotment', imageStyle: LandTransactionTypeStyle.icontransactiontype1},
+        {label: 'Resale', imageStyle: LandTransactionTypeStyle.icontransactiontype2}
     ];
     render() {
-        let radioItems = TransactionType.options.map(
+        let radioItems = LandTransactionType.options.map(
             (option) => (
                 <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col" imageStyle={option.imageStyle} label={option.label}>
                     <input type="radio" value={option.label} name='transactionType' onChange={this.handleTransactionTypeSelection} checked={this.props.value === option.label}/>

@@ -3,15 +3,15 @@ import React from 'react';
 import BaseComponent from '../BaseComponent';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 
-import PropertyLocationStyle from './PropertyLocation.scss';
+import LandLocationStyle from './LandLocation.scss';
 
-export default class PropertyLocation extends BaseComponent {
+export default class LandLocation extends BaseComponent {
     static options = [
-        {label: 'Inside City Limits', imageStyle: PropertyLocationStyle.iconlimitinside},
-        {label: 'Outside City Limits', imageStyle: PropertyLocationStyle.iconlimitoutside}
+        {label: 'Inside City Limits', imageStyle: LandLocationStyle.iconlimitinside},
+        {label: 'Outside City Limits', imageStyle: LandLocationStyle.iconlimitoutside}
     ];
     render() {
-        let radioItems = PropertyLocation.options.map(
+        let radioItems = LandLocation.options.map(
             (option) => (
                 <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-3 col-xs-3 col-sm-3 radio-col" imageStyle={option.imageStyle} label={option.label}>
                     <input type="radio" value={option.label} name='transactionType' onChange={this.handlePropertyLocationSelection} checked={this.props.value === option.label}/>

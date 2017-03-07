@@ -3,13 +3,13 @@ import React from 'react';
 import BaseComponent from '../BaseComponent';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 
-import SellerDetailStyle from './SellerDetail.scss';
+import LandSellerStyle from './LandSeller.scss';
 
 export default class SellerDetail extends BaseComponent {
     static options = [
-        {label: 'Land Owner', imageStyle: SellerDetailStyle.iconseller1},
-        {label: 'Govt. Development Authority', imageStyle: SellerDetailStyle.iconseller3},
-        {label: 'Builder / Developer', imageStyle: SellerDetailStyle.iconseller3}
+        {label: 'Land Owner', imageStyle: LandSellerStyle.iconseller1},
+        {label: 'Govt. Development Authority', imageStyle: LandSellerStyle.iconseller3},
+        {label: 'Builder / Developer', imageStyle: LandSellerStyle.iconseller3}
     ];
     render() {
         let radioItems = SellerDetail.options.map(

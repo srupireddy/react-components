@@ -20,12 +20,12 @@ export {Gender, City, EmploymentType, Employer, WorkExperience, Calendar, Income
  *                                                                                                        *
  **********************************************************************************************************/
 
-import Purpose from './HL/Purpose.js';
+import HomeLoanPurpose from './HL/Purpose.js';
 import CoAppRelationship from './HL/CoAppRelationship.js';
-import PropertyDetail from './HL/PropertyDetail.js';
-import PropertyLocation from './HL/PropertyLocation.js';
-import TransactionType from './HL/TransactionType.js';
-import SellerDetail from './HL/SellerDetail.js';
+import PropertyConstructionType from './HL/PropertyConstructionType.js';
+import LandLocation from './HL/LandLocation.js';
+import LandTransactionType from './HL/LandTransactionType.js';
+import LandSeller from './HL/LandSeller.js';
 
-export {Purpose, CoAppRelationship, PropertyDetail, PropertyLocation, TransactionType, SellerDetail};
+export {HomeLoanPurpose, CoAppRelationship, PropertyConstructionType, LandLocation, LandTransactionType, LandSeller};
 
