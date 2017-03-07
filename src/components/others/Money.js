@@ -5,7 +5,7 @@ import BaseComponent from '../BaseComponent';
 import {DecorateInputFieldWithSymbol} from '../../widgets/Decorator.js'
 import SpriteStyle from '../../widgets/Sprite.scss'
 
-export default class Income extends BaseComponent{
+export default class Money extends BaseComponent{
     static propTypes = {
         ...BaseComponent.propTypes,
         currencyCode: React.PropTypes.oneOf(['INR']).isRequired,

@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import BaseComponent from '../BaseComponent';
 import ActionHandler from '../ActionHandler.js';
-import Calendar from './Calendar.js';
+import Calendar from '../others/Calendar.js';
 
 export default class Experience extends BaseComponent {
     state = {

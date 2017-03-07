@@ -80,7 +80,7 @@
                 {
                     modelKey: 'grossMonthlyIncome',
                     title: 'Gross fixed monthly income',
-                    component: 'Income',
+                    component: 'Money',
                     properties: {
                         min: 3000,
                         max: 9999999,
@@ -93,7 +93,7 @@
                 {
                     modelKey: 'annualBonus',
                     title: 'Total annual bonus (optional)',
-                    component: 'Income',
+                    component: 'Money',
                     properties: {
                         max: 4 * 'grossMonthlyIncome',  /* TODO: Need to find a way to look into other model */
                         tooltip: {
