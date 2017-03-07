@@ -5,6 +5,7 @@ import CollectionUtils from '../utils/CollectionUtils';
 export default class BaseComponent extends React.Component {
     static propTypes = {
         modelKey: React.PropTypes.string.isRequired,
+        value: React.PropTypes.any,
         handler: React.PropTypes.instanceOf(ActionHandler).isRequired
     }
 
