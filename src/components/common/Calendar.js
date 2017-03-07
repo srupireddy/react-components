@@ -25,7 +25,7 @@ export default class Calendar extends BaseComponent {
     }
 
     onDateSelected = (date) => {
-        this.notifyCompletion(date);
+        this.notifyCompletion(date.format('YYYY-MM-DD'));
     }
 }
 

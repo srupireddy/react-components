@@ -5,6 +5,10 @@ import Sprite from '../widgets/Sprite.scss';
 import ActionHandler from '../components/ActionHandler';
 
 export default class SlideView extends React.Component {
+    state = {
+        errorMessage: null
+    }
+
     constructor(props) {
         super(props);
 
@@ -17,6 +21,11 @@ export default class SlideView extends React.Component {
             onCompletion = (modelKey, payload) => {
                 this.props.componentDataCollected(modelKey, payload);
             }
+
+            onError = (message) => {
+                console.log(message);
+                this.setState({errorMessage: message});
+            }
         }(props);
     }
 
@@ -27,6 +36,12 @@ export default class SlideView extends React.Component {
                 <div className="container">
                     <div className={SlideStyle.slideHeader}>
                         {this.props.title}
+                        {this.state.errorMessage &&
+                        <span className={SlideStyle.errorMessage}>
+                            <img src="https://www.bankbazaar.com/images/icon-error.png"/>
+                            {this.state.errorMessage}                                
+                        </span>
+                        }
                     </div>
                     <this.props.componentClass ref={(instance) => this.activeComponentInstance = instance}
                             {...this.props.componentProps}
