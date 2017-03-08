@@ -48,7 +48,7 @@ const slideManager = new class {
     addFormElements(formName, model) {
         for(var key in model) {
             if(model.hasOwnProperty(key)) {
-                var elementName = slideConfigs[key].mapping;
+                var elementName = configForSlide(key).mapping;
                 var elementValue = model[key];
                 var inputElement = this.addElementToForm(elementName, elementValue);
 
