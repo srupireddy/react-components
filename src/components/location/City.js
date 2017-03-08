@@ -2,10 +2,11 @@ import React from 'react';
 import Modal from 'react-modal';
 
 import BaseComponent from '../BaseComponent';
-import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
+import {DecorateWithImageAndLabel, DecorateInputFieldWithSymbol} from '../../widgets/Decorator';
 
 import CityStyle from './City.scss';
 import ModalStyle from '../../widgets/Modal.scss';
+import SpriteStyle from '../../widgets/Sprite.scss'
 
 const titleCase = require('title-case');
 
@@ -19,16 +20,16 @@ export default class City extends BaseComponent {
         variant: 'Resident'
     }
 
-    selectedCity() {
-        return this.props.value || '';
+    state = {
+        selectedCity: this.props.value || ''
     }
 
     render() {
         var variantStyle = this.props.variant == 'Resident' ? 'iconResidence' : 'iconProperty';
         return (
             <div style={{...this.props.style}}>
-                <TopTierCities selectedCity={this.selectedCity()} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
-                <OtherCities selectedCity={this.selectedCity()} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                <TopTierCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                <OtherCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
             </div>
         );
     }
@@ -60,29 +61,43 @@ const TopTierCities = ({selectedCity, variantStyle, onChange}) => {
 }
 
 class OtherCities extends React.Component {
+    static maxNumberOfColumns = 6;
+    static preferredNumberOfRows = 5;
+
     state = {
-        otherCitiesModalVisible: false
+        otherCitiesModalVisible: false,
+        value: this.props.selectedCity || '',
+        selectedCity: this.props.selectedCity || '',
+        availableCities: AllCities
     }
 
     render() {
-        let allCitiesListItems = AllCities.map(
-            (item) => (
-                <li key={item.city} onClick={this.props.onChange}><a href="" data-value={item.city}>{titleCase(item.city)}</a></li>
-            )
-        );
+        let onChange = this.props.onChange;
+        let listItems = [];
+        var prevState = null;
+        this.state.availableCities.forEach(function(item, index) {
+            if (!prevState || item.state != prevState) {
+                prevState = item.state;
+                listItems.push(<li key={'State-' + item.state} className={CityStyle.listSectionHeading}>{titleCase(item.state)}</li>)
+            }
+            listItems.push(<li key={item.city} onClick={onChange}><a href="" data-value={item.city}>{titleCase(item.city)}</a></li>);
+        })
 
         var selectedCity = this.props.selectedCity;
         var icon = CityStyle[this.props.variantStyle + 'Other'];
+        var columnCount = Math.min(OtherCities.maxNumberOfColumns, parseInt(listItems.length/OtherCities.preferredNumberOfRows));
 
         return (
             <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={icon} label="Other City">
-                <input type="text" value={selectedCity} placeholder="Enter your details" onClick={this.openOtherCitiesModal} onChange={this.props.onChange}/>
+                <input type="text" value={this.state.selectedCity} placeholder="Your city here" onClick={this.openOtherCitiesModal} onChange={onChange}/>
 
                 <Modal isOpen={this.state.otherCitiesModalVisible} className={ModalStyle.modal} overlayClassName={ModalStyle.overlay}  contentLabel="Other Cities Modal">
                     <a href="javascript:void(0)" className={ModalStyle.close} onClick={this.closeOtherCitiesModal}>X</a>
-                    <input type="text" value={selectedCity} placeholder="Enter your details" />
+                    <DecorateInputFieldWithSymbol iconStyle={SpriteStyle.symbolBuilding}>
+                        <input type="text" value={this.state.value} placeholder="ENTER CITY NAME" onChange={this.filterAvailableCities} style={{textTransform: 'uppercase'}}/>
+                    </DecorateInputFieldWithSymbol>
                     <div className={CityStyle.listContainer}>
-                        <ul className={CityStyle.list}>{allCitiesListItems}</ul>
+                        <ul className={CityStyle.list} style={{columnCount}}>{listItems}</ul>
                     </div>            
                 </Modal>    
             </DecorateWithImageAndLabel>
@@ -95,6 +110,17 @@ class OtherCities extends React.Component {
 
     closeOtherCitiesModal = () => {
         this.setState({otherCitiesModalVisible: false});
+    }
+
+    filterAvailableCities = (event) => {
+        let value = event.target.value.toUpperCase();
+        let availableCities = AllCities.filter((item) => item.city.indexOf(value) > -1);
+        
+        if (availableCities.length == 0) {
+            // TODO: Fire a AJAX call to get other cities
+        }
+
+        this.setState({value, availableCities: availableCities})
     }
 }
 

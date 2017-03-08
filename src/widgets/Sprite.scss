@@ -19,19 +19,20 @@
 
 
 .symbol {
-  background-image: url(https://www.bankbazaar.com/images/sprite/sprite-landingpage.png);
-  background-position: 0 150px;
-  width: 108px;
-  height: 108px;
-  background-repeat: no-repeat;
-  display: inline-block!important;
-  vertical-align: middle;
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-landingpage-v2.png);
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    display: inline-block !important;
+    vertical-align: middle;
 }
 
 .symbolRupee {
-  composes: symbol;
-  background-position: -140px -84px;
-  width: 17px;
-  height: 19px;
-  vertical-align: middle;
+    composes: symbol;
+    background-position: -140px -84px;
+}
+
+.symbolBuilding {
+    composes: symbol;
+    background-position: -92px -49px;
 }

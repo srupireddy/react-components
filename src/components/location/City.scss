@@ -83,20 +83,33 @@
     margin: 0 5px;
     height: auto;
     padding: 0;
-    columns: 6;
-}
 
-.list li a {
-    display: block;
-    color: #646464;
-    font-size: 14px;
-    padding-left: 7px;
-    line-height: 20px;
-    text-align: left;
-    cursor: pointer;
+    li {
+        font-size: 12px;
+        line-height: 22px;
+        text-align: left;
 
-    &:hover {
-        background: #3fe0d0;
-        color: #fff;
+        &.listSectionHeading {
+            color: black;
+            background: #ececec;
+            padding: 2px 7px;
+            text-transform: uppercase;
+        }
+        
+        a {
+            display: block;
+            color: #646464;
+            font-size: 14px;
+            padding-left: 7px;
+            line-height: 20px;
+            text-align: left;
+            cursor: pointer;
+
+            &:hover {
+                background: #3fe0d0;
+                color: #fff;
+            }
+        }
     }
 }
+
