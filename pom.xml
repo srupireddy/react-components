@@ -10,7 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
 
+    <properties>
+        <minify.args>--optimize-minimize</minify.args>
+    </properties>
+
     <artifactId>website-react-slides</artifactId>
+    <version>website-refactoring</version>
     <packaging>war</packaging>
 
     <build>
@@ -62,14 +67,14 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>npm build</id>
+                        <id>webpack build</id>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>webpack</goal>
                         </goals>
                         <configuration>
                             <workingDirectory></workingDirectory>
                             <installDirectory>target</installDirectory>
-                            <arguments>run build</arguments>
+                            <arguments>--config webpack.config.js --progress ${minify.args}</arguments>
                         </configuration>
                     </execution>
                 </executions>
