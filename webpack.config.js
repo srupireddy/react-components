@@ -4,6 +4,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var BUILD_DIR = Path.resolve(__dirname, 'src/main/webapp');
 var APP_DIR = Path.resolve(__dirname, 'src');
 var STYLE_DIR = Path.resolve(APP_DIR, 'styles');
+var cssModulesScopedName = '[name]_[local]_[hash:base64:5]';
 
 var config = {
     entry: [
@@ -22,12 +23,7 @@ var config = {
                 query: {
                     plugins: [
                         'transform-react-jsx',
-                        [
-                            'react-css-modules',
-                            {
-                                APP_DIR
-                            }
-                        ]
+                        ['react-css-modules', { generateScopedName: cssModulesScopedName }]
                     ]
                 }
             },
@@ -37,7 +33,7 @@ var config = {
                 exclude: STYLE_DIR,
                 loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: 'css-loader?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]!sass-loader'
+                    use: 'css-loader?modules&importLoaders=1&localIdentName=' + cssModulesScopedName + '!sass-loader'
                 })
             },
             {
