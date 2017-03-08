@@ -145,7 +145,7 @@
     <dependencies>
         <dependency>
             <groupId>com.bankbazaar.appflowservice</groupId>
-            <artifactId>client</artifactId>
+            <artifactId>appflowservice-client</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
