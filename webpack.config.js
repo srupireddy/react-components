@@ -3,11 +3,12 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var BUILD_DIR = Path.resolve(__dirname, 'src/main/webapp');
 var APP_DIR = Path.resolve(__dirname, 'src');
-var STYLE_DIR = Path.resolve(APP_DIR, 'styles');
+var GLOBAL_STYLES_DIR = Path.resolve(APP_DIR, 'styles');
 var cssModulesScopedName = '[name]_[local]_[hash:base64:5]';
 
 var config = {
     entry: [
+        'whatwg-fetch',
         APP_DIR + '/client.js'
     ],
     output: {
@@ -30,7 +31,7 @@ var config = {
             {
                 test: /\.s?css$/,
                 include: APP_DIR,
-                exclude: STYLE_DIR,
+                exclude: GLOBAL_STYLES_DIR,
                 loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: 'css-loader?modules&importLoaders=1&localIdentName=' + cssModulesScopedName + '!sass-loader'
@@ -38,7 +39,7 @@ var config = {
             },
             {
                 test: /\.s?css$/,
-                include: STYLE_DIR,
+                include: GLOBAL_STYLES_DIR,
                 loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: 'css-loader!sass-loader'

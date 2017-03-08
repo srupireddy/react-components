@@ -14,6 +14,7 @@ import './styles/bbglobal.css';
 import './styles/react-tooltip.css';
 import './styles/react-rangeslider.scss';
 import './styles/react-datepicker.css';
+import './styles/react-autosuggest.css';
 
 let rootReducer = combineReducers({slide: SlideStateReducer});
 let preloadedState = {}
