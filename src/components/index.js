@@ -1,8 +1,8 @@
 import Gender from './others/Gender.js';
 import Calendar from './others/Calendar.js';
 import Money from './others/Money.js'
-import CoAppRelationship from './others/CoAppRelationship.js';
-export {Gender, Calendar, Money, CoAppRelationship};
+import CoApplicantRelationship from './others/CoApplicantRelationship.js';
+export {Gender, Calendar, Money, CoApplicantRelationship};
 
 
 import City from './location/City.js';

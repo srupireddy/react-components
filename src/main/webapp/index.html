@@ -42,9 +42,9 @@
                     component: 'HomeLoanPurpose'
                 },
                 {
-                    modelKey: 'coAppRelationship',
+                    modelKey: 'coApplicantRelationship',
                     title: 'Who is the co-applicant?',
-                    component: 'CoAppRelationship'
+                    component: 'CoApplicantRelationship'
                 },
                 {
                     modelKey: 'transactionType',
@@ -117,8 +117,8 @@
                     {from: "propertyDetail", to: "propertyLocation"},
                     {from: "propertyLocation", to: "sellerDetail"},
                     {from: "sellerDetail", to: "transactionType"},
-                    {from: "transactionType", to: "coAppRelationship"},
-                    {from: "coAppRelationship",        to: "employmentType"},
+                    {from: "transactionType", to: "coApplicantRelationship"},
+                    {from: "coApplicantRelationship",        to: "employmentType"},
                     {from: "employmentType", to: [
                             {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
                             {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
