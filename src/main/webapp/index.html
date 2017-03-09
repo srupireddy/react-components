@@ -117,8 +117,8 @@
                     {name: 'next', from: "propertyDetail",    to: "propertyLocation"},
                     {name: 'next', from: "propertyLocation",  to: "sellerDetail"},
                     {name: 'next', from: "sellerDetail",      to: "transactionType"},
-                    {name: 'next', from: "transactionType",   to: "coAppRelationship"},
-                    {name: 'next', from: "coAppRelationship", to: "employmentType"},
+                    {name: 'next', from: "transactionType",   to: "coApplicantRelationship"},
+                    {name: 'next', from: "coApplicantRelationship", to: "employmentType"},
                     {name: 'next', from: "employmentType", 
                         to: [
                             {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
