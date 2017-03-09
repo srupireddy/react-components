@@ -1,4 +1,5 @@
 import React from 'react';
+import titleCase from 'title-case';
 
 import BaseComponent from '../BaseComponent';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
@@ -6,17 +7,23 @@ import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 import LandLocationStyle from './LandLocation.scss';
 
 export default class LandLocation extends BaseComponent {
-    static options = [
-        {label: 'Inside City Limits', imageStyle: LandLocationStyle.iconlimitinside},
-        {label: 'Outside City Limits', imageStyle: LandLocationStyle.iconlimitoutside}
-    ];
+    static options = ['INSIDE_CITY_LIMITS', 'OUTSIDE_CITY_LIMITS'];
+
+    state = {
+        selectedValue: this.props.value
+    }
+
     render() {
         let radioItems = LandLocation.options.map(
-            (option) => (
-                <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-3 col-xs-3 col-sm-3 radio-col" imageStyle={option.imageStyle} label={option.label}>
-                    <input type="radio" value={option.label} name='transactionType' onChange={this.handlePropertyLocationSelection} checked={this.props.value === option.label}/>
-                </DecorateWithImageAndLabel>
-            )
+            (option) => {
+                let label = titleCase(option);
+                let icon = LandLocationStyle['icon' + label.replace(/ /g, '')];
+                return (
+                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} containerStyle="col-md-3 col-xs-3 col-sm-3 radio-col">
+                        <input type="radio" value={option} name='transactionType' onChange={this.handlePropertyLocationSelection} checked={this.state.selectedValue === option}/>
+                    </DecorateWithImageAndLabel>
+                );
+            }
         );
 
         return (
@@ -28,6 +35,15 @@ export default class LandLocation extends BaseComponent {
 
     handlePropertyLocationSelection = (event) => {
         let value = event.target.value;
-        this.notifyCompletion(value);
+        this.setState({selectedValue: value}, () => {this.notifyCompletion()})
     }
+
+    getData() {
+        return this.state.selectedValue;
+    }
+
+    isStateValid() {
+        return this.state.selectedValue ? true : false;
+    }
+
 }

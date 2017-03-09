@@ -21,25 +21,12 @@ const slideManager = new class {
         this.fsm = this.createStateMachine(this.firstSlideKey, config.transitions);
     }
 
-    configForSlideWithKey = (key, model) => {
-        let config = Map(this.slidesConfig[key]).toJS();
-        config.componentClass = eval("(Components." + config.componentName + ")");
-        Object.keys(config.properties || []).forEach(function(prop, index) {
-            if (typeof(config.properties[prop]) == 'function') {
-                config.properties[prop] = config.properties[propkey](model);
-            }
-        });
-
-        return config;
-    }
-
     peekIntoNextSlide = (currentSlide, model) => {
-        // Just peeks into the next possible state (slide) without affecting the State Machine (FSM).
-        var nextSlide = this.fsm[fsmPeekEventName](currentSlide || this.fsm.current, model);
-        if(this.isLastSlide(nextSlide)) {
+        var nextSlideKey = this.fsm[fsmPeekEventName](currentSlide || this.fsm.current, model);
+        if(this.isLastSlide(nextSlideKey)) {
             FormUtils.submitFormAfterAppendingModel(document.getElementById('slideForm'), model);
         } else {
-            return nextSlide;
+            return nextSlideKey;
         }
     }
 
@@ -60,6 +47,18 @@ const slideManager = new class {
 
     createStateMachine(firstSlideKey, transitions) {
         return StateMachine.create({initial: firstSlideKey, events: transitions});
+    }
+
+    configForSlideWithKey = (key, model) => {
+        let config = Map(this.slidesConfig[key]).toJS();
+        config.componentClass = eval("(Components." + config.componentName + ")");
+        Object.keys(config.properties || []).forEach(function(prop, index) {
+            if (typeof(config.properties[prop]) == 'function') {
+                config.properties[prop] = config.properties[propkey](model);
+            }
+        });
+
+        return config;
     }
 };
 

@@ -9,8 +9,20 @@ export default class BaseComponent extends React.Component {
         handler: React.PropTypes.instanceOf(ActionHandler).isRequired
     }
 
-    notifyCompletion = (value) => {
-        this.props.handler.onCompletion(this.props.modelKey, value);
+    isStateValid() {
+        // Since Javascript doesnt have Abstract Methods, returning FALSE always so that concrete Component
+        // developers do forcefully extend this.
+        return false;
+    }
+
+    getData() {
+        // Since Javascript doesnt have Abstract Methods, returning {} always so that concrete Component
+        // developers do forcefully extend this.
+        return {};
+    }
+
+    notifyCompletion = () => {
+        this.props.handler.onCompletion(this.props.modelKey, this.getData());
     }
 
     static configurableProperties() {

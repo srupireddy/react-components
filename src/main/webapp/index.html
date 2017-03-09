@@ -94,7 +94,7 @@
                     title: 'Total annual bonus (optional)',
                     componentName: 'Money',
                     properties: {
-                        max: 4 * 'grossMonthlyIncome',  /* TODO: Need to find a way to look into other model */
+                        max: function(model) {return 4 * model['grossMonthlyIncome']},
                         tooltip: {
                             text: 'Enter your annual bonus, if any, excluding any cash component.'
                         }

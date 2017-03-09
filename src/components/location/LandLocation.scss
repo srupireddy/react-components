@@ -8,12 +8,12 @@
     vertical-align: middle;
 }
 
-.iconlimitinside {
+.iconInsideCityLimits {
     composes: icon;
     background-position: -5px -5px;
 }
 
-.iconlimitoutside {
+.iconOutsideCityLimits {
     composes: icon;
     background-position: -147px -5px;
 }

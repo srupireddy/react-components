@@ -15,18 +15,31 @@ export default class Calendar extends BaseComponent {
         titleSuffix: React.PropTypes.string
     };
 
+    state = {
+        selectedDate: this.props.value
+    }
+
     render() {
         switch(this.props.variant) {
-            case "Last5Years": return <Last5YearsVariant value={this.props.value} onDateSelected={this.onDateSelected} titleSuffix={this.props.titleSuffix}/>
-            case "DOB": return <DOBVariant value={this.props.value} onDateSelected={this.onDateSelected}/>
+            case "Last5Years": return <Last5YearsVariant value={this.state.selectedDate} onDateSelected={this.onDateSelected} titleSuffix={this.props.titleSuffix}/>
+            case "DOB": return <DOBVariant value={this.state.selectedDate} onDateSelected={this.onDateSelected}/>
         }
 
         return null;
     }
 
     onDateSelected = (date) => {
-        this.notifyCompletion(date.format('YYYY-MM-DD'));
+        this.setState({selectedDate: date.format('YYYY-MM-DD')}, () => {this.notifyCompletion()});
     }
+
+    getData() {
+        return this.state.selectedDate;
+    }
+
+    isStateValid() {
+        return this.state.selectedDate ? true : false;
+    }
+    
 }
 
 class Last5YearsVariant extends React.Component {

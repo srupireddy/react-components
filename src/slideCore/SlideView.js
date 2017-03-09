@@ -56,16 +56,25 @@ export default class SlideView extends React.Component {
                         </button>
                     </div>
                     <div className={SlideStyle.slideControlNext}>
-                        <button type="button" className={SlideStyle.icon} onClick={this.props.gotoNextSlideIfAllowed} disabled={!this.props.canGoForward}>
+                        <button type="button" className={SlideStyle.icon} onClick={this.gotoNextSlideIfAllowed} disabled={!this.props.canGoForward}>
                             <span className={Sprite.iconRight}/>
                         </button>
                     </div>
-                    <button type="button" className="btn" onClick={this.props.gotoNextSlideIfAllowed} disabled={!this.props.canGoForward}>
+                    <button type="button" className="btn" onClick={this.gotoNextSlideIfAllowed} disabled={!this.props.canGoForward}>
                         Continue
                     </button>
                 </div>
             </div>
         )
+    }
+
+    gotoNextSlideIfAllowed = () => {
+        if (this.activeComponentInstance.isStateValid()) {
+            this.activeComponentInstance.notifyCompletion();
+        } else {
+            // Show the error message
+            console.log("Oops... The current slide is not completed.");
+        }
     }
 }
 

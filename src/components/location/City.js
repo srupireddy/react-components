@@ -37,8 +37,15 @@ export default class City extends BaseComponent {
     handleCitySelection = (event) => {
         event.preventDefault();
         let value = event.target.dataset.value;
-        this.setState({selectedCity: value});
-        this.notifyCompletion(value);
+        this.setState({selectedCity: value}, () => {this.notifyCompletion()});
+    }
+
+    getData() {
+        return this.state.selectedCity;
+    }
+
+    isStateValid() {
+        return this.state.selectedCity ? true : false;
     }
 }
 

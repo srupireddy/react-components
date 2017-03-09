@@ -7,7 +7,7 @@ import BaseComponent from '../BaseComponent';
 
 export default class Employer extends BaseComponent {
     state = {
-        value: '',
+        value: this.props.value || '',
         suggestions: []
     }
 
@@ -24,7 +24,7 @@ export default class Employer extends BaseComponent {
                         onSuggestionsClearRequested={() => this.setState({suggestions: []})}
                         getSuggestionValue={suggestion => suggestion}
                         renderSuggestion={(suggestion) => (<div>{suggestion}</div>)}
-                        inputProps={{value, onChange: this.onInputValueProvided}}
+                        inputProps={{value, onChange: this.onUserTypingValue}}
                     />
                 </Tooltip>
             </div>
@@ -32,11 +32,10 @@ export default class Employer extends BaseComponent {
     }
 
     employerSelected = (event, {suggestion, suggestionValue}) => {
-        this.setState({value: suggestionValue});
-        this.notifyCompletion(suggestionValue);
+        this.setState({value: suggestionValue}, () => {this.notifyCompletion()});
     }
 
-    onInputValueProvided = (event, { newValue }) => {
+    onUserTypingValue = (event, { newValue }) => {
         this.setState({value: newValue});
     };
 
@@ -57,4 +56,13 @@ export default class Employer extends BaseComponent {
                 console.log('Fetching/Parsing the data for the list of available Employers failed', ex)
             });
     };
+
+
+    getData() {
+        return this.state.value;
+    }
+
+    isStateValid() {
+        return this.state.value ? true : false;
+    }    
 }

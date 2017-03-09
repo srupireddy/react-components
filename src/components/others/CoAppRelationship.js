@@ -1,4 +1,5 @@
 import React from 'react';
+import titleCase from 'title-case';
 
 import BaseComponent from '../BaseComponent';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
@@ -6,19 +7,23 @@ import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 import CoAppRelationshipStyle from './CoAppRelationship.scss';
 
 export default class CoAppRelationship extends BaseComponent {
-    static options = [
-        {label: 'Father', imageStyle: CoAppRelationshipStyle.iconcoapplicant1},
-        {label: 'Mother', imageStyle: CoAppRelationshipStyle.iconcoapplicant2},
-        {label: 'Spouse', imageStyle: CoAppRelationshipStyle.iconcoapplicant3},
-        {label: 'Children', imageStyle: CoAppRelationshipStyle.iconcoapplicant4}
-    ];
+    static options = ['FATHER', 'MOTHER', 'SPOUSE', 'CHILDREN'];
+
+    state = {
+        selectedRelationship: this.props.value
+    }
+
     render() {
         let radioItems = CoAppRelationship.options.map(
-            (option) => (
-                <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-3 col-xs-3 col-sm-3 radio-col" imageStyle={option.imageStyle} label={option.label}>
-                    <input type="radio" value={option.label} name='coAppRelationship' onChange={this.handleCoAppRelationshipSelection} checked={this.props.value === option.label}/>
-                </DecorateWithImageAndLabel>
-            )
+            (option) => {
+                let label = titleCase(option);
+                let icon = CoAppRelationshipStyle['icon' + label];
+                return (
+                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} containerStyle="col-md-3 col-xs-3 col-sm-3 radio-col">
+                        <input type="radio" value={option} name='coAppRelationship' onChange={this.handleCoAppRelationshipSelection} checked={this.state.selectedRelationship === option}/>
+                    </DecorateWithImageAndLabel>
+                );
+            }
         );
 
         return (
@@ -30,6 +35,14 @@ export default class CoAppRelationship extends BaseComponent {
 
     handleCoAppRelationshipSelection = (event) => {
         let value = event.target.value;
-        this.notifyCompletion(value);
+        this.setState({selectedRelationship: value}, () => {this.notifyCompletion()});
     }
+
+    getData() {
+        return this.state.selectedRelationship;
+    }
+
+    isStateValid() {
+        return this.state.selectedRelationship ? true : false;
+    }    
 }

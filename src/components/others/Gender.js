@@ -1,4 +1,5 @@
 import React from 'react';
+import titleCase from 'title-case';
 
 import BaseComponent from '../BaseComponent.js';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
@@ -6,27 +7,43 @@ import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 import GenderStyle from './Gender.scss';
 
 export default class Gender extends BaseComponent {
-    static options = ['Male', 'Female'];
+    static options = ['MALE', 'FEMALE'];
 
-    handleGenderSelection = (event) => {
-        let value = event.target.value;
-        this.notifyCompletion(value);
+    state = {
+        selectedGender: this.props.value
     }
 
     render() {
         let radioItems = Gender.options.map(
-            (option) => (
-                <DecorateWithImageAndLabel key={option} imageStyle={GenderStyle['icon' + option]} label={option} containerStyle="col-md-5 col-xs-5 radio-col" >
-                    <input type="radio" value={option}
-                        name='gender' onChange={this.handleGenderSelection} checked={this.props.value === option}/>
-                </DecorateWithImageAndLabel>
-            )
+            (option) => {
+                let label = titleCase(option);
+                let icon = GenderStyle['icon' + label];
+                return (
+                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} containerStyle="col-md-5 col-xs-5 radio-col" >
+                        <input type="radio" value={option}
+                            name='gender' onChange={this.handleGenderSelection} checked={this.state.selectedGender === option}/>
+                    </DecorateWithImageAndLabel>
+                );
+            }
         );
 
         return (
             <div style={{...this.props.style, width: '600px'}}>
                 {radioItems}
-            </div>            
-        )
+            </div>
+        );
+    }
+
+    handleGenderSelection = (event) => {
+        let value = event.target.value;
+        this.setState({selectedGender: value}, () => {this.notifyCompletion()});
+    }
+
+    getData() {
+        return this.state.selectedGender;
+    }
+
+    isStateValid() {
+        return this.state.selectedGender ? true : false;
     }
 }

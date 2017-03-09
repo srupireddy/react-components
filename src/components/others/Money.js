@@ -68,9 +68,6 @@ export default class Money extends BaseComponent{
         value = Math.max(value, this.props.min);
         value = Math.min(value, this.props.max);
         this.setState({value: parseInt(value)});
-        if (this.props.onChange) {
-            this.props.onChange(value);
-        }
     }
 
     handleSliderValueChange = (value) => {
@@ -78,5 +75,14 @@ export default class Money extends BaseComponent{
     }
 
     handleSliderValueChangeCompleted = (event) => {
+        console.log(event);
     }
+
+    getData() {
+        return this.state.value;
+    }
+
+    isStateValid() {
+        return this.state.value ? true : false;
+    }    
 }

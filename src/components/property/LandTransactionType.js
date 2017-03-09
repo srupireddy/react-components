@@ -1,21 +1,28 @@
 import React from 'react';
+import titleCase from 'title-case';
 
 import BaseComponent from '../BaseComponent';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 import LandTransactionTypeStyle from './LandTransactionType.scss';
 
 export default class LandTransactionType extends BaseComponent {
-    static options = [
-        {label: 'Direct Allotment', imageStyle: LandTransactionTypeStyle.icontransactiontype1},
-        {label: 'Resale', imageStyle: LandTransactionTypeStyle.icontransactiontype2}
-    ];
+    static options = ['DIRECT_ALLOTMENT', 'RESALE'];
+
+    state = {
+        selectedType: this.props.value
+    }
+
     render() {
         let radioItems = LandTransactionType.options.map(
-            (option) => (
-                <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col" imageStyle={option.imageStyle} label={option.label}>
-                    <input type="radio" value={option.label} name='transactionType' onChange={this.handleTransactionTypeSelection} checked={this.props.value === option.label}/>
-                </DecorateWithImageAndLabel>
-            )
+            (option) => {
+                let label = titleCase(option);
+                let icon = LandTransactionTypeStyle['icon' + label.replace(/ /g, '')];
+                return (
+                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col">
+                        <input type="radio" value={option} name='transactionType' onChange={this.handleTransactionTypeSelection} checked={this.state.selectedType === option}/>
+                    </DecorateWithImageAndLabel>
+                );
+            }
         );
 
         return (
@@ -27,6 +34,14 @@ export default class LandTransactionType extends BaseComponent {
 
     handleTransactionTypeSelection = (event) => {
         let value = event.target.value;
-        this.notifyCompletion(value);
+        this.setState({selectedType: value}, () => {this.notifyCompletion();});
+    }
+
+    getData() {
+        return this.state.selectedType;
+    }
+
+    isStateValid() {
+        return this.state.selectedType ? true : false;
     }
 }
