@@ -84,10 +84,7 @@ const slideManager = new class {
     }
 
     createStateMachine(firstSlideKey, transitions) {
-        let events = transitions.map((rule) => {rule['name'] = fsmEventName; return rule;});
-        let fsmConfig = {initial: firstSlideKey, events: events};
-        let fsm = StateMachine.create(fsmConfig);
-        return fsm;
+        return StateMachine.create({initial: firstSlideKey, events: transitions});
     }
 };
 
