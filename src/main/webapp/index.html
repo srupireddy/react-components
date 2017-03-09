@@ -13,7 +13,7 @@
                 {
                     modelKey: 'residentCity',
                     title: 'Where do you live currently?',
-                    component: 'City',
+                    componentName: 'City',
                     properties: {
                         variant: 'Resident' 
                     }
@@ -21,12 +21,12 @@
                 {
                     modelKey: 'gender',
                     title: 'My gender',
-                    component: 'Gender'
+                    componentName: 'Gender'
                 },
                 {
                     modelKey: 'propertyCity',
                     title: 'City in which property is based',
-                    component: 'City',
+                    componentName: 'City',
                     properties: {
                         variant: 'Property' 
                     }
@@ -34,52 +34,52 @@
                 {
                     modelKey: 'employmentType',
                     title: 'Type of employment',
-                    component: 'EmploymentType'
+                    componentName: 'EmploymentType'
                 },
                 {
                     modelKey: 'purpose',
                     title: 'How would you like to use your home loan?',
-                    component: 'HomeLoanPurpose'
+                    componentName: 'HomeLoanPurpose'
                 },
                 {
                     modelKey: 'coAppRelationship',
                     title: 'Who is the co-applicant?',
-                    component: 'CoAppRelationship'
+                    componentName: 'CoAppRelationship'
                 },
                 {
                     modelKey: 'transactionType',
                     title: 'Type of transaction',
-                    component: 'LandTransactionType'
+                    componentName: 'LandTransactionType'
                 },
                 {
                     modelKey: 'sellerDetail',
                     title: 'Who is the seller?',
-                    component: 'LandSeller'
+                    componentName: 'LandSeller'
                 },
                 {
                     modelKey: 'propertyLocation',
                     title: 'Where is the land?',
-                    component: 'LandLocation'
+                    componentName: 'LandLocation'
                 },
                 {
                     modelKey: 'propertyDetail',
                     title: 'Tell us about your property',
-                    component: 'PropertyConstructionType'
+                    componentName: 'PropertyConstructionType'
                 },
                 {
                     modelKey: 'employer',
                     title: 'Company I work for',
-                    component: 'Employer'
+                    componentName: 'Employer'
                 },
                 {
                     modelKey: 'joiningDate',
                     title: 'Joining date with your current organisation',
-                    component: 'WorkExperience'
+                    componentName: 'WorkExperience'
                 },
                 {
                     modelKey: 'grossMonthlyIncome',
                     title: 'Gross fixed monthly income',
-                    component: 'Money',
+                    componentName: 'Money',
                     properties: {
                         min: 3000,
                         max: 9999999,
@@ -92,7 +92,7 @@
                 {
                     modelKey: 'annualBonus',
                     title: 'Total annual bonus (optional)',
-                    component: 'Money',
+                    componentName: 'Money',
                     properties: {
                         max: 4 * 'grossMonthlyIncome',  /* TODO: Need to find a way to look into other model */
                         tooltip: {
@@ -103,7 +103,7 @@
                 {
                     modelKey: "dob",
                     title: "What's your age (years completed)?",
-                    component: 'Calendar',
+                    componentName: 'Calendar',
                     properties: {
                         variant: 'DOB'
                     }

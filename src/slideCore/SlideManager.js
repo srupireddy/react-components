@@ -1,25 +1,35 @@
 import { connect } from 'react-redux';
 import { ActionCreators as UndoActionCreators } from 'redux-undo'
+import {Map} from 'immutable';
 
 import * as Components from '../components/';
 import StateMachine from '../vendor/state-machine.js';
 import SlideView from './SlideView.js';
 import {nextSlideAction} from './SlideActions.js';
+import CollectionUtils from '../utils/CollectionUtils';
 
 const fsmEventName = 'next';
 const fsmPeekEventName = 'peek.' + fsmEventName;
 
 const slideManager = new class {
     constructor() {
-        let config = slideManagerConfig;
+        let config = slideManagerConfig;    // A Global Variable defined elsewhere
 
-        this.firstSlide = config.firstSlide;
+        this.firstSlideKey = config.firstSlide
         this.slidesConfig = this.createSlidesConfigMap(config.slides);
-        this.fsm = this.createStateMachine(this.firstSlide, config.transitions);
+        this.fsm = this.createStateMachine(this.firstSlideKey, config.transitions);
     }
 
-    configForSlide = (key) => {
-        return this.slidesConfig[key];
+    configForSlideWithKey = (key, model) => {
+        let config = Map(this.slidesConfig[key]).toJS();
+        config.componentClass = eval("(Components." + config.componentName + ")");
+        Object.keys(config.properties || []).forEach(function(prop, index) {
+            if (typeof(config.properties[prop]) == 'function') {
+                config.properties[prop] = config.properties[propkey](model);
+            }
+        });
+
+        return config;
     }
 
     peekIntoNextSlide = (currentSlide, model) => {
@@ -73,30 +83,26 @@ const slideManager = new class {
         return config;
     }
 
-    createStateMachine(firstSlide, transitions) {
+    createStateMachine(firstSlideKey, transitions) {
         let events = transitions.map((rule) => {rule['name'] = fsmEventName; return rule;});
-        let fsmConfig = {initial: firstSlide, events: events};
+        let fsmConfig = {initial: firstSlideKey, events: events};
         let fsm = StateMachine.create(fsmConfig);
         return fsm;
-    }
-
-    loadComponentClass(name) {
-        return eval("(Components." + name + ")");
     }
 };
 
 const mapStateToProps = (state) => {
-    let activeSlideId = state.slide.main.present.activeSlide || slideManager.firstSlide;
-    console.log("Going to render the Slide with ID = " + activeSlideId);
+    let activeSlideKey = state.slide.main.present.activeSlide || slideManager.firstSlideKey;
+    console.log("Going to render the Slide with ID = " + activeSlideKey);
 
-    let slideConfig = slideManager.configForSlide(activeSlideId);
-    let componentClass = slideManager.loadComponentClass(slideConfig.component);
+    let activeModel = state.slide.main.present;
+    let slideConfig = slideManager.configForSlideWithKey(activeSlideKey, activeModel);
 
     return {
         title: slideConfig.title,
-        componentClass: componentClass,
+        componentClass: slideConfig.componentClass,
         componentProps:  slideConfig.properties,
-        modelKey: activeSlideId,
+        modelKey: activeSlideKey,
         prefillData: state.slide.prefillData,
         canGoBack: state.slide.main.past.length > 0,
         canGoForward: true
