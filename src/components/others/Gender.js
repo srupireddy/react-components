@@ -10,7 +10,7 @@ export default class Gender extends BaseComponent {
 
     handleGenderSelection = (event) => {
         let value = event.target.value;
-        this.notifyCompletion(value);
+        this.notifyCompletion(value.toUpperCase());
     }
 
     render() {
