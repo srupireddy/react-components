@@ -7,7 +7,6 @@ import StateMachine from '../vendor/state-machine.js';
 import SlideView from './SlideView.js';
 import {nextSlideAction} from './SlideActions.js';
 import CollectionUtils from '../utils/CollectionUtils';
-import FormUtils from '../utils/FormUtils';
 
 const fsmEventName = 'next';
 const fsmPeekEventName = 'peek.' + fsmEventName;
@@ -24,7 +23,7 @@ const slideManager = new class {
     peekIntoNextSlide = (currentSlide, model) => {
         var nextSlideKey = this.fsm[fsmPeekEventName](currentSlide || this.fsm.current, model);
         if(this.isLastSlide(nextSlideKey)) {
-            FormUtils.submitFormAfterAppendingModel(document.getElementById('slideForm'), model);
+            this.handleFormSubmit(model);
         } else {
             return nextSlideKey;
         }
@@ -37,6 +36,32 @@ const slideManager = new class {
         return false;
     }
 
+    handleFormSubmit(model) {
+        var formName = 'slideForm';
+        this.addFormElements(formName, model);
+        document.getElementById(formName).submit();
+    }
+
+    addFormElements(formName, model) {
+        for(var key in model) {
+            if(model.hasOwnProperty(key)) {
+                var elementName = this.configForSlideWithKey(key).mapping;
+                var elementValue = model[key];
+                var inputElement = this.addElementToForm(elementName, elementValue);
+
+                document.getElementById(formName).appendChild(inputElement);
+            }
+        }
+    }
+
+    addElementToForm(modelPath, value) {
+        var inputElement = document.createElement("input");
+        inputElement.setAttribute("name", modelPath);
+        inputElement.setAttribute("value", value);
+        inputElement.setAttribute("type", "hidden");
+        return inputElement;
+    }
+    
     createSlidesConfigMap(slides) {
         var config = {};
         slides.forEach(function(slide, index){
