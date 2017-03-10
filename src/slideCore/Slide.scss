@@ -45,6 +45,10 @@
     float: none;
 }
 
+.slideContainerInner {
+    min-height: 380px;
+}
+
 /*Error msg style | Begin*/
 @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {

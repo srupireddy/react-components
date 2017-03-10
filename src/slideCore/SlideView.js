@@ -37,7 +37,7 @@ export default class SlideView extends React.Component {
         let value = this.props.prefillData[this.props.modelKey];
         return (
             <div className={SlideStyle.slideContainer}>
-                <div className="container">
+                <div className={["container", SlideStyle.employerBg].join(' ')}>
                     <div className={SlideStyle.slideHeader}>
                         {this.props.title}
                         {this.state.errorMessage &&
@@ -49,6 +49,7 @@ export default class SlideView extends React.Component {
                             </span>
                         }
                     </div>
+                    <div className={["clearfix", SlideStyle.slideContainerInner].join(' ')}>
                     <this.props.componentClass ref={(instance) => this.activeComponentInstance = instance}
                             {...this.props.componentProps}
                             modelKey={this.props.modelKey}
@@ -56,6 +57,7 @@ export default class SlideView extends React.Component {
                             value={value}
                             style={{margin: '20px auto'}}
                             />
+                    </div>
                     <div className={SlideStyle.slideControlPrev}>
                         <button type="button" className={SlideStyle.icon} onClick={this.props.goBackToPreviousSlide} style={{display: this.props.canGoBack ? "" : "none" }}>
                             <span className={Sprite.iconLeft}/>

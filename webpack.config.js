@@ -30,19 +30,19 @@ var config = {
             },
             {
                 test: /\.s?css$/,
+                include: GLOBAL_STYLES_DIR,
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader!sass-loader'
+                })
+            },
+            {
+                test: /\.s?css$/,
                 include: APP_DIR,
                 exclude: GLOBAL_STYLES_DIR,
                 loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: 'css-loader?modules&importLoaders=1&localIdentName=' + cssModulesScopedName + '!sass-loader'
-                })
-            },
-            {
-                test: /\.s?css$/,
-                include: GLOBAL_STYLES_DIR,
-                loader: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader!sass-loader'
                 })
             }
         ]

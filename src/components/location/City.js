@@ -27,7 +27,7 @@ export default class City extends BaseComponent {
     render() {
         var variantStyle = this.props.variant == 'Resident' ? 'iconResidence' : 'iconProperty';
         return (
-            <div style={{...this.props.style}}>
+            <div className={CityStyle.cityCompContainer}>
                 <TopTierCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
                 <OtherCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
             </div>
