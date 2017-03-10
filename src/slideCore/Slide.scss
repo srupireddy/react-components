@@ -4,6 +4,7 @@
     position: relative;
     text-align: center;
     padding: 20px 0;
+    overflow: hidden;
 }
 
 .slideHeader {
@@ -47,24 +48,27 @@
 
 .slideContainerInner {
     min-height: 380px;
+    overflow: hidden;
 }
 
 :global .slide-enter {
-    opacity: 0.01;
+    transform: translate(100%);
 }
 
 :global .slide-enter.slide-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in;
+    transform: translate(0%);
+    transition: transform 1000ms ease-in-out;
 }
 
 :global .slide-leave {
-    opacity: 1;
+    transform: translate(0%);
 }
 
 :global .slide-leave.slide-leave-active {
-    opacity: 0.01;
-    transition: opacity 300ms ease-in;
+    transform: translate(-100%);
+    transition: transform 1000ms ease-in-out;
+    opacity: 0;
+    height: 0;
 }
 
 /*Error msg style | Begin*/

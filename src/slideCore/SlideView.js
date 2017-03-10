@@ -52,11 +52,9 @@ export default class SlideView extends React.Component {
                     </div>
                     <ReactCSSTransitionGroup
                             transitionName="slide"
-                            transitionEnterTimeout={500}
-                            transitionAppear={true}
+                            transitionEnterTimeout={1000}
                             component="div"
-                            transitionAppearTimeout={500}
-                            transitionLeaveTimeout={300}>
+                            transitionLeaveTimeout={1}>
                         <div className={["clearfix", SlideStyle.slideContainerInner].join(' ')} key={this.props.modelKey} >
                             <this.props.componentClass 
                                     ref={(instance) => this.activeComponentInstance = instance}
