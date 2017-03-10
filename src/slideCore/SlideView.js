@@ -42,8 +42,10 @@ export default class SlideView extends React.Component {
                         {this.props.title}
                         {this.state.errorMessage &&
                             <span className={SlideStyle.errorContainer}>
-                                <img src="https://www.bankbazaar.com/images/icon-error.png"/>
+                                <span className={SlideStyle.errorContainerInner}>
+                                <span className={SlideStyle.errorImage}><img src="https://www.bankbazaar.com/images/icon-error.png"/></span>
                                 <span className={SlideStyle.errorMessage}>{this.state.errorMessage}</span>
+                                </span>
                             </span>
                         }
                     </div>
