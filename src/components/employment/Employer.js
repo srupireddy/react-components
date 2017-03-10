@@ -7,7 +7,7 @@ import BaseComponent from '../BaseComponent';
 
 export default class Employer extends BaseComponent {
     state = {
-        selectedEmployer: this.props.selectedEmployer || '',
+        selectedEmployer: this.props.value || '',
         suggestions: []
     }
 
@@ -19,12 +19,12 @@ export default class Employer extends BaseComponent {
                     <Autosuggest
                         suggestions={suggestions}
                         onSuggestionSelected={this.handleEmployerSelection}
-                        shouldRenderSuggestions={(selectedEmployer) => selectedEmployer.trim().length > 2}
+                        shouldRenderSuggestions={(value) => value.trim().length > 2}
                         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                         onSuggestionsClearRequested={() => this.setState({suggestions: []})}
                         getSuggestionValue={suggestion => suggestion}
                         renderSuggestion={(suggestion) => (<div>{suggestion}</div>)}
-                        inputProps={{selectedEmployer, onChange: this.onUserTypingValue}}
+                        inputProps={{value: selectedEmployer, onChange: this.onUserTypingValue}}
                     />
                 </Tooltip>
             </div>
