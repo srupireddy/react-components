@@ -45,6 +45,24 @@
     float: none;
 }
 
+:global .slide-enter {
+  opacity: 0.01;
+}
+
+:global .slide-enter.slide-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+:global .slide-leave {
+  opacity: 1;
+}
+
+:global .slide-leave.slide-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
 /*Error msg style | Begin*/
 @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {

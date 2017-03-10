@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import SlideStyle from './Slide.scss';
 import Sprite from '../widgets/Sprite.scss';
@@ -49,13 +50,23 @@ export default class SlideView extends React.Component {
                             </span>
                         }
                     </div>
-                    <this.props.componentClass ref={(instance) => this.activeComponentInstance = instance}
-                            {...this.props.componentProps}
-                            modelKey={this.props.modelKey}
-                            handler={this.componentActionHandler}
-                            value={value}
-                            style={{margin: '20px auto'}}
-                            />
+                    <ReactCSSTransitionGroup
+                            transitionName="slide"
+                            transitionEnterTimeout={500}
+                            transitionAppear={true}
+                            component="div"
+                            transitionAppearTimeout={500}
+                            transitionLeaveTimeout={300}>
+                        <this.props.componentClass 
+                                ref={(instance) => this.activeComponentInstance = instance}
+                                {...this.props.componentProps}
+                                modelKey={this.props.modelKey}
+                                handler={this.componentActionHandler}
+                                value={value}
+                                style={{margin: '20px auto'}}
+                                key={this.props.modelKey} 
+                                />
+                    </ReactCSSTransitionGroup>
                     <div className={SlideStyle.slideControlPrev}>
                         <button type="button" className={SlideStyle.icon} onClick={this.props.goBackToPreviousSlide} style={{display: this.props.canGoBack ? "" : "none" }}>
                             <span className={Sprite.iconLeft}/>
