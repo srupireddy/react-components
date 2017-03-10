@@ -9,7 +9,6 @@ import Calendar from '../others/Calendar.js';
 export default class Experience extends BaseComponent {
     state = {
         dateOfJoiningCurrentOrg: this.props.joiningDate,
-        numberOfYearsInCurrentOrg: moment().diff(this.props.joiningDate, 'years'),
         totalWorkExperience: this.props.totalWorkExperience
     }
 
@@ -31,27 +30,58 @@ export default class Experience extends BaseComponent {
     render() {
         return (
             <div >
-                <Calendar value={this.state.dateOfJoiningCurrentOrg} handler={this.calendarHandler} modelKey='IAmNotUsed' variant='Last5Years' titleSuffix="Joining"/>
+                <Calendar value={this.state.dateOfJoiningCurrentOrg} handler={this.calendarHandler} modelKey='@@IAmNotUsed@@' variant='Last5Years' titleSuffix="Joining"/>
                 <div className="font-xlg">Your total work experience</div>
                 <div className="slider-horizontal-ruler ruler-0-7">
-                    <Slider value={this.state.totalWorkExperience} min={0} max={7} step={1} onChange={this.handleTotalExperienceValueChanged} onChangeComplete={this.validate}/>
+                    <Slider value={this.state.totalWorkExperience} 
+                            min={0} max={7} step={1} 
+                            onChange={this.handleTotalExperienceValueChanged} onChangeComplete={this.validateTotalExperienceAgainstJoiningDate}
+                    />
                 </div>
             </div>
         )
     }
 
     handleJoiningDateChanged = (value) => {
-        this.setState({dateOfJoiningCurrentOrg: value, numberOfYearsInCurrentOrg: moment().diff(value, 'years')});
-        console.log(this.state);
+        this.setState({dateOfJoiningCurrentOrg: value});
     }
 
     handleTotalExperienceValueChanged = (value) => {
         this.setState({totalWorkExperience: value});
     }
 
-    validate = () => {
-        if (this.state.numberOfYearsInCurrentOrg > this.state.totalWorkExperience) {
-            this.props.handler.onError("Hi! Your total work experience should be more than time with your current company");
-        }        
+    validateTotalExperienceAgainstJoiningDate = (event) => {
+        if (this.validate()) {
+            this.notifyCompletion();
+        }
+    }
+
+    getData() {
+        return this.state;
+    }
+
+    validate() {
+        let status = true;
+        let errorMessages = [];
+        let numberOfYearsInCurrentOrg = this.state.dateOfJoiningCurrentOrg ? moment().diff(this.state.dateOfJoiningCurrentOrg, 'years') : 0;
+
+        if (!this.state.dateOfJoiningCurrentOrg) {
+            status = false;
+            errorMessages.push("Hi! Please select an input to proceed");
+        } else if (!this.state.totalWorkExperience) {
+            status = false;
+            errorMessages.push("And your total years of experience please!!");
+        } else if (numberOfYearsInCurrentOrg > this.state.totalWorkExperience) {
+            status = false;
+            errorMessages.push("Hi! Your total work experience should be more than time with your current company");
+        }
+
+        if (status) {
+            this.props.handler.clearError();
+            return true;
+        } else {
+            this.props.handler.showError(errorMessages.join('\n'));
+            return false;
+        }
     }
 }

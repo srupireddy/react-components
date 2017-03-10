@@ -7,40 +7,40 @@ import BaseComponent from '../BaseComponent';
 
 export default class Employer extends BaseComponent {
     state = {
-        value: this.props.value || '',
+        selectedEmployer: this.props.selectedEmployer || '',
         suggestions: []
     }
 
     render() {
-        const { value, suggestions } = this.state;
+        const { selectedEmployer, suggestions } = this.state;
         return (
             <div style={{ ...this.props.style, width: '300px' }}>
                 <Tooltip placement="right" trigger='focus' defaultVisible={true} overlay={<span>Psst! Don't worry if you don't find your company name on our list! Simply type in the name & proceed! We've got your back!</span>}>
                     <Autosuggest
                         suggestions={suggestions}
-                        onSuggestionSelected={this.employerSelected}
-                        shouldRenderSuggestions={(value) => value.trim().length > 2}
+                        onSuggestionSelected={this.handleEmployerSelection}
+                        shouldRenderSuggestions={(selectedEmployer) => selectedEmployer.trim().length > 2}
                         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                         onSuggestionsClearRequested={() => this.setState({suggestions: []})}
                         getSuggestionValue={suggestion => suggestion}
                         renderSuggestion={(suggestion) => (<div>{suggestion}</div>)}
-                        inputProps={{value, onChange: this.onUserTypingValue}}
+                        inputProps={{selectedEmployer, onChange: this.onUserTypingValue}}
                     />
                 </Tooltip>
             </div>
         );
     }
 
-    employerSelected = (event, {suggestion, suggestionValue}) => {
-        this.setState({value: suggestionValue}, () => {this.notifyCompletion()});
+    handleEmployerSelection = (event, {suggestion, suggestionValue}) => {
+        this.setState({selectedEmployer: suggestionValue}, () => {this.notifyCompletion()});
     }
 
     onUserTypingValue = (event, { newValue }) => {
-        this.setState({value: newValue});
+        this.setState({selectedEmployer: newValue});
     };
 
-    onSuggestionsFetchRequested = ({ value }) => {
-        const inputValue = value.trim().toLowerCase();
+    onSuggestionsFetchRequested = ({ selectedEmployer }) => {
+        const inputValue = selectedEmployer.trim().toLowerCase();
 
         //TODO: Hack to get the data to work in standalone mode. When integrating with Struts this should be made as /autoComplete.html
         let url = 'https://www.bankbazaar.com/autoComplete.html?ajax=true&type=COMPANY&jsonp_callback=bbCallback&query=' + inputValue;
@@ -59,10 +59,15 @@ export default class Employer extends BaseComponent {
 
 
     getData() {
-        return this.state.value;
+        return this.state.selectedEmployer;
     }
 
-    isStateValid() {
-        return this.state.value ? true : false;
+    validate() {
+        if (this.state.selectedEmployer) {
+            return true;            
+        } else {
+            this.props.handler.showError("Uh-oh! Please pick an employer");
+            return false;
+        }
     }    
 }

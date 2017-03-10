@@ -44,8 +44,13 @@ export default class City extends BaseComponent {
         return this.state.selectedCity;
     }
 
-    isStateValid() {
-        return this.state.selectedCity ? true : false;
+    validate() {
+        if (this.state.selectedCity) {
+            return true;            
+        } else {
+            this.props.handler.showError("Uh-oh! Please select a city! We’ve got tons!");
+            return false;
+        }
     }
 }
 

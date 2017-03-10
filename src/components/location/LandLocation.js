@@ -42,8 +42,13 @@ export default class LandLocation extends BaseComponent {
         return this.state.selectedValue;
     }
 
-    isStateValid() {
-        return this.state.selectedValue ? true : false;
+    validate() {
+        if (this.state.selectedValue) {
+            return true;            
+        } else {
+            this.props.handler.showError("Uh-oh! Please pick any one option to proceed");
+            return false;
+        }
     }
 
 }

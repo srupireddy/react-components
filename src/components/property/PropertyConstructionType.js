@@ -43,7 +43,12 @@ export default class PropertyConstructionType extends BaseComponent {
         return this.state.selectedType;
     }
 
-    isStateValid() {
-        return this.state.selectedType ? true : false;
+    validate() {
+        if (this.state.selectedType) {
+            return true;            
+        } else {
+            this.props.handler.showError("Uh-oh! Please pick any one option to proceed");
+            return false;
+        }
     }
 }

@@ -43,7 +43,12 @@ export default class Gender extends BaseComponent {
         return this.state.selectedGender;
     }
 
-    isStateValid() {
-        return this.state.selectedGender ? true : false;
+    validate() {
+        if (this.state.selectedGender) {
+            return true;            
+        } else {
+            this.props.handler.showError("Aww! C’mon! It’s easy! Pick one!");
+            return false;
+        }
     }
 }

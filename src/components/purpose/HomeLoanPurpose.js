@@ -41,7 +41,12 @@ export default class HomeLoanPurpose extends BaseComponent {
         return this.state.selectedPurpose;
     }
 
-    isStateValid() {
-        return this.state.selectedPurpose ? true : false;
+    validate() {
+        if (this.state.selectedPurpose) {
+            return true;            
+        } else {
+            this.props.handler.showError("Uh-oh! Please pick any one option to proceed");
+            return false;
+        }
     }
 }

@@ -9,7 +9,7 @@ export default class BaseComponent extends React.Component {
         handler: React.PropTypes.instanceOf(ActionHandler).isRequired
     }
 
-    isStateValid() {
+    validate() {
         // Since Javascript doesnt have Abstract Methods, returning FALSE always so that concrete Component
         // developers do forcefully extend this.
         return false;

@@ -42,7 +42,12 @@ export default class CoApplicantRelationship extends BaseComponent {
         return this.state.selectedRelationship;
     }
 
-    isStateValid() {
-        return this.state.selectedRelationship ? true : false;
+    validate() {
+        if (this.state.selectedRelationship) {
+            return true;            
+        } else {
+            this.props.handler.showError("Uh-oh! Please pick any one option to proceed");
+            return false;
+        }
     }    
 }

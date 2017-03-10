@@ -110,22 +110,22 @@
                 }
             ],
             transitions: [
-                    {name: 'next', from: "residentCity",      to: "gender"},
-                    {name: 'next', from: "gender",            to: "propertyCity"},
-                    {name: 'next', from: "propertyCity",      to: "purpose"},
-                    {name: 'next', from: "purpose",           to: "propertyDetail"},
-                    {name: 'next', from: "propertyDetail",    to: "propertyLocation"},
-                    {name: 'next', from: "propertyLocation",  to: "sellerDetail"},
-                    {name: 'next', from: "sellerDetail",      to: "transactionType"},
-                    {name: 'next', from: "transactionType",   to: "coApplicantRelationship"},
-                    {name: 'next', from: "coApplicantRelationship", to: "employmentType"},
-                    {name: 'next', from: "employmentType", 
-                        to: [
-                            {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
-                            {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
-                            {target: "dob",         guard: function(model, from) {return model['employmentType'] == 'STUDENT' || model['employmentType'] == 'RETIRED' || model['employmentType'] == 'HOMEMAKER'}}
-                        ]
-                    }
+                {name: 'next', from: "residentCity",      to: "gender"},
+                {name: 'next', from: "gender",            to: "propertyCity"},
+                {name: 'next', from: "propertyCity",      to: "purpose"},
+                {name: 'next', from: "purpose",           to: "propertyDetail"},
+                {name: 'next', from: "propertyDetail",    to: "propertyLocation"},
+                {name: 'next', from: "propertyLocation",  to: "sellerDetail"},
+                {name: 'next', from: "sellerDetail",      to: "transactionType"},
+                {name: 'next', from: "transactionType",   to: "coApplicantRelationship"},
+                {name: 'next', from: "coApplicantRelationship", to: "employmentType"},
+                {name: 'next', from: "employmentType", 
+                    to: [
+                        {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
+                        {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
+                        {target: "dob",         guard: function(model, from) {return model['employmentType'] == 'STUDENT' || model['employmentType'] == 'RETIRED' || model['employmentType'] == 'HOMEMAKER'}}
+                    ]
+                }
             ]
         };
     </script>

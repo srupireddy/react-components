@@ -36,7 +36,7 @@ export default class Calendar extends BaseComponent {
         return this.state.selectedDate;
     }
 
-    isStateValid() {
+    validate() {
         return this.state.selectedDate ? true : false;
     }
     

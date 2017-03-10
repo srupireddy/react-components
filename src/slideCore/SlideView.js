@@ -19,12 +19,16 @@ export default class SlideView extends React.Component {
             }
 
             onCompletion = (modelKey, payload) => {
+                this.componentActionHandler.clearError();
                 this.props.componentDataCollected(modelKey, payload);
             }
 
-            onError = (message) => {
-                console.log(message);
+            showError = (message) => {
                 this.setState({errorMessage: message});
+            }
+
+            clearError = () => {
+                this.setState({errorMessage: null});
             }
         }(props);
     }
@@ -37,10 +41,10 @@ export default class SlideView extends React.Component {
                     <div className={SlideStyle.slideHeader}>
                         {this.props.title}
                         {this.state.errorMessage &&
-                        <span className={SlideStyle.errorContainer}>
-                            <img src="https://www.bankbazaar.com/images/icon-error.png"/>
-                            <span className={SlideStyle.errorMessage}>{this.state.errorMessage}</span>
-                        </span>
+                            <span className={SlideStyle.errorContainer}>
+                                <img src="https://www.bankbazaar.com/images/icon-error.png"/>
+                                <span className={SlideStyle.errorMessage}>{this.state.errorMessage}</span>
+                            </span>
                         }
                     </div>
                     <this.props.componentClass ref={(instance) => this.activeComponentInstance = instance}
@@ -69,7 +73,7 @@ export default class SlideView extends React.Component {
     }
 
     gotoNextSlideIfAllowed = () => {
-        if (this.activeComponentInstance.isStateValid()) {
+        if (this.activeComponentInstance.validate()) {
             this.activeComponentInstance.notifyCompletion();
         } else {
             // Show the error message

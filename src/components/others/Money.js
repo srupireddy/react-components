@@ -82,7 +82,7 @@ export default class Money extends BaseComponent{
         return this.state.value;
     }
 
-    isStateValid() {
+    validate() {
         return this.state.value ? true : false;
     }    
 }
