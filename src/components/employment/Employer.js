@@ -39,8 +39,8 @@ export default class Employer extends BaseComponent {
         this.setState({selectedEmployer: newValue});
     };
 
-    onSuggestionsFetchRequested = ({ selectedEmployer }) => {
-        const inputValue = selectedEmployer.trim().toLowerCase();
+    onSuggestionsFetchRequested = ({ value }) => {
+        const inputValue = value.trim().toLowerCase();
 
         //TODO: Hack to get the data to work in standalone mode. When integrating with Struts this should be made as /autoComplete.html
         let url = 'https://www.bankbazaar.com/autoComplete.html?ajax=true&type=COMPANY&jsonp_callback=bbCallback&query=' + inputValue;
