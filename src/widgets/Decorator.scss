@@ -13,10 +13,8 @@
 }
 
 .label {
-    font-size: 15px;
     display: block;
-    margin: 5px 0;
-    font-weight: bold;
+    margin: 10px 0 5px;
     line-height: normal;
 }
 
@@ -24,8 +22,11 @@
   display: table;
   width: 100%;
   position: relative;
+  input{
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
 }
-
 .inputGroupIcon {
   background-color: #34495e;
   border: 0 none;

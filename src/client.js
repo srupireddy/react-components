@@ -1,11 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {combineReducers, createStore} from 'redux';
-import {Provider} from 'react-redux';
-
-import Slide from './slideCore/SlideManager.js';
-import SlideStateReducer from './slideCore/SlideStateReducer';
-
 /*BB Global Style*/
 import './styles/bootstrap.css';
 import './styles/bbglobal.css';
@@ -15,6 +7,14 @@ import './styles/react-tooltip.css';
 import './styles/react-rangeslider.scss';
 import './styles/react-datepicker.css';
 import './styles/react-autosuggest.css';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {combineReducers, createStore} from 'redux';
+import {Provider} from 'react-redux';
+
+import Slide from './slideCore/SlideManager.js';
+import SlideStateReducer from './slideCore/SlideStateReducer';
 
 let rootReducer = combineReducers({slide: SlideStateReducer});
 let preloadedState = {}

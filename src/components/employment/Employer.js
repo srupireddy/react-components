@@ -5,6 +5,8 @@ import 'whatwg-fetch';
 
 import BaseComponent from '../BaseComponent';
 
+import EmployerStyle from './Employer.scss';
+
 export default class Employer extends BaseComponent {
     state = {
         selectedEmployer: this.props.value || '',
@@ -14,7 +16,8 @@ export default class Employer extends BaseComponent {
     render() {
         const { selectedEmployer, suggestions } = this.state;
         return (
-            <div style={{ ...this.props.style, width: '300px' }}>
+            <div className={EmployerStyle.employerContainer}>
+                <div className={EmployerStyle.employerContainerInner}>
                 <Tooltip placement="right" trigger='focus' defaultVisible={true} overlay={<span>Psst! Don't worry if you don't find your company name on our list! Simply type in the name & proceed! We've got your back!</span>}>
                     <Autosuggest
                         suggestions={suggestions}
@@ -27,6 +30,7 @@ export default class Employer extends BaseComponent {
                         inputProps={{value: selectedEmployer, onChange: this.onUserTypingValue}}
                     />
                 </Tooltip>
+                </div>
             </div>
         );
     }

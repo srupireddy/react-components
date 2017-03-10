@@ -38,7 +38,7 @@ export default class SlideView extends React.Component {
         let value = this.props.prefillData[this.props.modelKey];
         return (
             <div className={SlideStyle.slideContainer}>
-                <div className="container">
+                <div className={["container", SlideStyle.employerBg].join(' ')}>
                     <div className={SlideStyle.slideHeader}>
                         {this.props.title}
                         {this.state.errorMessage &&
@@ -57,15 +57,16 @@ export default class SlideView extends React.Component {
                             component="div"
                             transitionAppearTimeout={500}
                             transitionLeaveTimeout={300}>
-                        <this.props.componentClass 
-                                ref={(instance) => this.activeComponentInstance = instance}
-                                {...this.props.componentProps}
-                                modelKey={this.props.modelKey}
-                                handler={this.componentActionHandler}
-                                value={value}
-                                style={{margin: '20px auto'}}
-                                key={this.props.modelKey} 
+                        <div className={["clearfix", SlideStyle.slideContainerInner].join(' ')} key={this.props.modelKey} >
+                            <this.props.componentClass 
+                                    ref={(instance) => this.activeComponentInstance = instance}
+                                    {...this.props.componentProps}
+                                    modelKey={this.props.modelKey}
+                                    handler={this.componentActionHandler}
+                                    value={value}
+                                    style={{margin: '20px auto'}}
                                 />
+                        </div>
                     </ReactCSSTransitionGroup>
                     <div className={SlideStyle.slideControlPrev}>
                         <button type="button" className={SlideStyle.icon} onClick={this.props.goBackToPreviousSlide} style={{display: this.props.canGoBack ? "" : "none" }}>

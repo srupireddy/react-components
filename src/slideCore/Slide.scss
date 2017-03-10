@@ -45,22 +45,26 @@
     float: none;
 }
 
+.slideContainerInner {
+    min-height: 380px;
+}
+
 :global .slide-enter {
-  opacity: 0.01;
+    opacity: 0.01;
 }
 
 :global .slide-enter.slide-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
+    opacity: 1;
+    transition: opacity 500ms ease-in;
 }
 
 :global .slide-leave {
-  opacity: 1;
+    opacity: 1;
 }
 
 :global .slide-leave.slide-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
 }
 
 /*Error msg style | Begin*/
