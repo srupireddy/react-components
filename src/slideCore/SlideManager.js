@@ -79,7 +79,7 @@ const slideManager = new class {
         config.componentClass = eval("(Components." + config.componentName + ")");
         Object.keys(config.properties || []).forEach(function(prop, index) {
             if (typeof(config.properties[prop]) == 'function') {
-                config.properties[prop] = config.properties[propkey](model);
+                config.properties[prop] = config.properties[prop](model);
             }
         });
 
@@ -91,7 +91,7 @@ const mapStateToProps = (state) => {
     let activeSlideKey = state.slide.main.present.activeSlide || slideManager.firstSlideKey;
     console.log("Going to render the Slide with ID = " + activeSlideKey);
 
-    let activeModel = state.slide.main.present;
+    let activeModel = state.slide.main.present.model;
     let slideConfig = slideManager.configForSlideWithKey(activeSlideKey, activeModel);
 
     return {

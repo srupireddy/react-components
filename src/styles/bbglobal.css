@@ -236,7 +236,7 @@ img {
 }
 /* Button styles | End*/
 /* From styles | Begin*/
-input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select {
+input[type="text"], input[type="email"], input[type="tel"], input[type="password"], input[type="number"], select {
     display: block;
     width: 100%;
     height: 34px;
@@ -253,6 +253,11 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
     -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 /* form styles | End*/
 /* Modal Style | Begin*/

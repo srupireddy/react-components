@@ -187,8 +187,8 @@
                     // Loop through the possible transitions available from the current state for the event and pick the first winner.
                     for (var i=0; i<rulesForFromState.length; i++) {
                         var transitionRule=rulesForFromState[i];
-                        if (!transitionRule.guard || transitionRule.guard(args, from)) {
-                            return transitionRule.target;
+                        if (!transitionRule.if || transitionRule.if(args, from)) {
+                            return transitionRule.to;
                         }
                     }
                     // No condition evaluated to TRUE. Just return the FROM state.

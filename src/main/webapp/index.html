@@ -81,9 +81,13 @@
                     title: 'Gross fixed monthly income',
                     componentName: 'Money',
                     properties: {
+                        currencyCode: 'INR',
                         min: 3000,
                         max: 9999999,
-                        step: 1000,
+                        sliderMin: 0,
+                        sliderMax: 120000,
+                        sliderStep: 1000,
+                        purpose: 'gross monthly income',
                         tooltip: {
                             text: 'Enter your gross monthly salary as per his/her your monthly payslip before deductions. Include only direct deposit or cheque payments. Exclude payments in hard cash and in-kind components.'
                         }
@@ -94,7 +98,11 @@
                     title: 'Total annual bonus (optional)',
                     componentName: 'Money',
                     properties: {
-                        max: function(model) {return 4 * model['grossMonthlyIncome']},
+                        currencyCode: 'INR',
+                        min: 0,
+                        max: 9999999,
+                        sliderMax: function(model) {return 4 * model['grossMonthlyIncome']},
+                        purpose: 'annual bonus',
                         tooltip: {
                             text: 'Enter your annual bonus, if any, excluding any cash component.'
                         }
@@ -110,22 +118,25 @@
                 }
             ],
             transitions: [
-                {name: 'next', from: "residentCity",      to: "gender"},
-                {name: 'next', from: "gender",            to: "propertyCity"},
-                {name: 'next', from: "propertyCity",      to: "purpose"},
-                {name: 'next', from: "purpose",           to: "propertyDetail"},
-                {name: 'next', from: "propertyDetail",    to: "propertyLocation"},
-                {name: 'next', from: "propertyLocation",  to: "sellerDetail"},
-                {name: 'next', from: "sellerDetail",      to: "transactionType"},
-                {name: 'next', from: "transactionType",   to: "coApplicantRelationship"},
+                {name: 'next', from: "residentCity",            to: "gender"},
+                {name: 'next', from: "gender",                  to: "propertyCity"},
+                {name: 'next', from: "propertyCity",            to: "purpose"},
+                {name: 'next', from: "purpose",                 to: "propertyDetail"},
+                {name: 'next', from: "propertyDetail",          to: "propertyLocation"},
+                {name: 'next', from: "propertyLocation",        to: "sellerDetail"},
+                {name: 'next', from: "sellerDetail",            to: "transactionType"},
+                {name: 'next', from: "transactionType",         to: "coApplicantRelationship"},
                 {name: 'next', from: "coApplicantRelationship", to: "employmentType"},
                 {name: 'next', from: "employmentType", 
                     to: [
-                        {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
-                        {target: "joiningDate", guard: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
-                        {target: "dob",         guard: function(model, from) {return model['employmentType'] == 'STUDENT' || model['employmentType'] == 'RETIRED' || model['employmentType'] == 'HOMEMAKER'}}
+                        {to: "joiningDate", if: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
+                        {to: "joiningDate", if: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
+                        {to: "dob",         if: function(model, from) {return model['employmentType'] == 'STUDENT' || model['employmentType'] == 'RETIRED' || model['employmentType'] == 'HOMEMAKER'}}
                     ]
-                }
+                },
+                {name:  'next', from: 'joiningDate',            to: 'grossMonthlyIncome'},
+                {name:  'next', from: 'grossMonthlyIncome',     to: 'annualBonus'},
+                {name:  'next', from: 'annualBonus',            to: 'dob'}
             ]
         };
     </script>
