@@ -85,10 +85,6 @@ export default class SlideView extends React.Component {
         )
     }
 
-    componentDidUpdate() {
-        console.log(this.activeComponentInstance);
-    }
-
     gotoNextSlideIfAllowed = () => {
         if (this.activeComponentInstance.validate()) {
             this.activeComponentInstance.notifyCompletion();
