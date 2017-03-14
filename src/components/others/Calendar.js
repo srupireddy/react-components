@@ -16,28 +16,28 @@ export default class Calendar extends BaseComponent {
     };
 
     state = {
-        selectedDate: this.props.value
+        selectedDateISO: this.props.value
     }
 
     render() {
         switch(this.props.variant) {
-            case "Last5Years": return <Last5YearsVariant value={this.state.selectedDate} onDateSelected={this.onDateSelected} titleSuffix={this.props.titleSuffix}/>
-            case "DOB": return <DOBVariant value={this.state.selectedDate} onDateSelected={this.onDateSelected}/>
+            case "Last5Years": return <Last5YearsVariant value={this.state.selectedDateISO} onDateSelected={this.onDateSelected} titleSuffix={this.props.titleSuffix}/>
+            case "DOB": return <DOBVariant value={this.state.selectedDateISO} onDateSelected={this.onDateSelected}/>
         }
 
         return null;
     }
 
     onDateSelected = (date) => {
-        this.setState({selectedDate: date.format('YYYY-MM-DD')}, () => {this.notifyCompletion()});
+        this.setState({selectedDateISO: date.format('YYYY-MM-DD')}, () => {this.notifyCompletion()});
     }
 
     getData() {
-        return this.state.selectedDate;
+        return this.state.selectedDateISO;
     }
 
     validate() {
-        return this.state.selectedDate ? true : false;
+        return this.state.selectedDateISO ? true : false;
     }
     
 }
@@ -83,12 +83,12 @@ class Last5YearsVariant extends React.Component {
         this.props.onDateSelected(moment(this.state.selectedYear + "-" + selectedMonth + "-01"));
     }
 
-    computeStateFromDate(date) {
-        if (!date) {
+    computeStateFromDate(dateISO) {
+        if (!dateISO) {
             return;
         }
 
-        let dateAsMoment = moment(date); 
+        let dateAsMoment = moment(dateISO); 
         let selectedYear = dateAsMoment.format('YYYY');
         let selectedMonth = dateAsMoment.format('MM');
         this.state = {selectedYear, selectedMonth, monthPresenterVisible: true};
@@ -164,6 +164,7 @@ class DOBVariant extends React.Component {
 
     handleDateSelection = (moment) => {
         this.setState({selectedDate: moment});
+        this.props.onDateSelected(moment);
     }
 }
 
