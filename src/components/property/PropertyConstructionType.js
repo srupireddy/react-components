@@ -28,7 +28,7 @@ export default class PropertyConstructionType extends BaseComponent {
         );
 
         return (
-            <div style={{...this.props.style}}>
+            <div className= {PropertyConstructionTypeStyle.propConstContainer}>
                 {radioItems}
             </div>            
         )

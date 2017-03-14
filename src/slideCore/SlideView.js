@@ -50,11 +50,12 @@ export default class SlideView extends React.Component {
                             </span>
                         }
                     </div>
-                    {/*<ReactCSSTransitionGroup
+                    <ReactCSSTransitionGroup
                             transitionName="slide"
                             transitionEnterTimeout={1000}
                             component="div"
-                            transitionLeaveTimeout={1}>*/}
+                            className="carousel__slide"
+                            transitionLeaveTimeout={100}>
                         <div className={["clearfix", SlideStyle.slideContainerInner].join(' ')} key={this.props.modelKey} >
                             <this.props.componentClass 
                                     ref={(instance) => this.activeComponentInstance = instance}
@@ -65,7 +66,7 @@ export default class SlideView extends React.Component {
                                     style={{margin: '20px auto'}}
                                 />
                         </div>
-                    {/*</ReactCSSTransitionGroup>*/}
+                    </ReactCSSTransitionGroup>
                     <div className={SlideStyle.slideControlPrev}>
                         <button type="button" className={SlideStyle.icon} onClick={this.props.goBackToPreviousSlide} style={{display: this.props.canGoBack ? "" : "none" }}>
                             <span className={Sprite.iconLeft}/>

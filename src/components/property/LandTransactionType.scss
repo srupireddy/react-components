@@ -1,19 +1,24 @@
+.landTransactionContainer {
+    margin-top: 70px;
+}
 .icon {
     background-image: url(https://www.bankbazaar.com/images/sprite/sprite-limit-transaction.png);
     background-position: 0 150px;
     background-repeat: no-repeat;
-    height: 148px;
-    width: 148px;
+    height: 132px;
+    width: 132px;
     display: inline-block;
     vertical-align: middle;
 }
 
 .iconDirectAllotment {
     composes: icon;
-    background-position: -5px -5px;
+    background-position: -4px -4px;
+    background-size: 280px;
 }
 
 .iconResale {
     composes: icon;
-    background-position: -163px -5px;
+    background-position: -144px -4px;
+    background-size: 280px;
 }

@@ -1,30 +1,40 @@
 $backgroundImage: url(https://www.bankbazaar.com/images/sprite/elig-slider-v1.png);
-
-
 .slider-horizontal-ruler {
   background-image: $backgroundImage;
   height: 80px;
   position: relative;
-  margin: 60px auto;
+  margin: 30px auto 60px;
 
   &.ruler-0-7 {
-    background-position: -136px -405px;
-    width: 533px;
+    background-position: -134px -405px;
+    width: 540px;
+    .rangeslider-horizontal {
+      width: 473px;
+    }
   }
 
   &.ruler-18-70 {
-    background-position: -131px -537px;
-    width: 531px;
+    background-position: -125px -537px;
+    width: 540px;
+    .rangeslider-horizontal {
+      width:515px;
+    }
   }
 
   &.ruler-0-120000 {
     background-position: 0 -140px;
     width: 810px;
+    .rangeslider-horizontal {
+      width: 715px;
+    }
   }
 
   &.ruler-blank {
     background-position: -63px -947px;
     width: 675px;
+   .rangeslider-horizontal {
+      width: 617px;
+    }
   }
 }
 
@@ -48,7 +58,6 @@ $backgroundImage: url(https://www.bankbazaar.com/images/sprite/elig-slider-v1.pn
 }
 
 .rangeslider-horizontal {
-  width: 91.5%;
   height: 70px;
   margin: 0 auto;
   display: inline-block;

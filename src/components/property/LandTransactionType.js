@@ -26,7 +26,7 @@ export default class LandTransactionType extends BaseComponent {
         );
 
         return (
-            <div style={{...this.props.style}}>
+            <div className= {LandTransactionTypeStyle.landTransactionContainer}>
                 {radioItems}
             </div>            
         )

@@ -26,7 +26,7 @@ export default class SellerDetail extends BaseComponent {
         );
 
         return (
-            <div style={{...this.props.style}}>
+            <div className= {LandSellerStyle.landSellerContainer}>
                 {radioItems}
             </div>            
         )

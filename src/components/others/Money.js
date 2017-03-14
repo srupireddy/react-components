@@ -32,8 +32,8 @@ export default class Money extends BaseComponent{
     render() {
         let sliderValue = this.state.value ? parseInt(this.state.value) : 0;
         return (
-            <div>
-                <div style={{...this.props.style, width: '300px', margin:'0 auto'}}>
+            <div className="clearfix">
+                <div className="slideInputLabel clearfix">
                         {this.props.tooltip ?
                         (<Tooltip placement="right" trigger='focus' defaultVisible={true} overlay={<span>{this.props.tooltip.text}</span>}>
                         {this.currencyBasedInputField()}
@@ -42,7 +42,7 @@ export default class Money extends BaseComponent{
                         this.currencyBasedInputField()
                         }
                 </div>
-                <div className={["slider-horizontal-ruler", this.rulerToBeUsed()].join(' ')}>
+                <div className={["slider-horizontal-ruler", this.rulerToBeUsed(), "clearfix"].join(' ')}>
                     <Slider value={sliderValue} min={this.state.sliderMin} max={this.state.sliderMax} step={this.props.sliderStep} onChange={this.handleSliderValueChange} onChangeComplete={this.handleSliderValueChangeCompleted}/>
                 </div>
             </div>
