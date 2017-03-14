@@ -35,7 +35,7 @@ export default class Money extends BaseComponent{
             <div className="clearfix">
                 <div className="slideInputLabel clearfix">
                         {this.props.tooltip ?
-                        (<Tooltip placement="right" trigger='focus' defaultVisible={true} overlay={<span>{this.props.tooltip.text}</span>}>
+                        (<Tooltip placement="rightTop" trigger='focus' defaultVisible={true} overlay={<span>{this.props.tooltip.text}</span>}>
                         {this.currencyBasedInputField()}
                         </Tooltip>)
                         :
