@@ -34,9 +34,7 @@ export default class City extends BaseComponent {
         );
     }
 
-    handleCitySelection = (event) => {
-        event.preventDefault();
-        let value = event.target.dataset.value;
+    handleCitySelection = (value) => {
         this.setState({selectedCity: value}, () => {this.notifyCompletion()});
     }
 
@@ -63,7 +61,7 @@ const TopTierCities = ({selectedCity, variantStyle, onChange}) => {
 
             return (
                 <DecorateWithImageAndLabel key={key} imageStyle={icon} label={label} containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" >
-                    <input type="radio" name='city' value={key} onChange={onChange} checked={selectedCity === key} data-value={key} />
+                    <input type="radio" name='city' value={key} onChange={(e) => {e.preventDefault(); onChange(key)}} checked={selectedCity === key} data-value={key} />
                 </DecorateWithImageAndLabel>
             );
         }
@@ -92,7 +90,7 @@ class OtherCities extends React.Component {
                 prevState = item.state;
                 listItems.push(<li key={'State-' + item.state} className={CityStyle.listSectionHeading}>{titleCase(item.state)}</li>)
             }
-            listItems.push(<li key={item.city} onClick={onChange}><a href="" data-value={item.city}>{titleCase(item.city)}</a></li>);
+            listItems.push(<li key={item.city} onClick={(e) => {e.preventDefault(); onChange(item.city)}}><a href="">{titleCase(item.city)}</a></li>);
         })
 
         var selectedCity = this.props.selectedCity;
