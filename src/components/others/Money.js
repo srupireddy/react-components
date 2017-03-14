@@ -52,7 +52,7 @@ export default class Money extends BaseComponent{
     currencyBasedInputField() {
         return (
             <DecorateInputFieldWithSymbol iconStyle={this.currencyIconToBeUsed()}>
-                <input type="number" value={this.state.value} min={this.props.min} max={this.props.max} onChange={this.handleTextFieldValueChange}/>
+                <input type="number" value={this.state.value} min={this.props.min} max={this.props.max} placeholder="Rs." onChange={this.handleTextFieldValueChange}/>
             </DecorateInputFieldWithSymbol>
         );
     }
@@ -61,6 +61,7 @@ export default class Money extends BaseComponent{
         //TODO: Programatically generate the background image to be rendered for the ruler.
         switch (this.state.sliderMax) {
             case 120000: return "ruler-0-120000";
+            //case 3000000: return "ruler-0-3000000";
             default: return "ruler-blank";
         }
     }

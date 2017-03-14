@@ -28,7 +28,7 @@ export default class Gender extends BaseComponent {
         );
 
         return (
-            <div style={{...this.props.style, width: '600px'}}>
+            <div className= {GenderStyle.genderContainer}>
                 {radioItems}
             </div>
         );
