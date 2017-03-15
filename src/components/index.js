@@ -3,7 +3,8 @@ import Calendar from './others/Calendar.js';
 import Money from './others/Money.js';
 import ApplyingWithCoApplicant from './others/ApplyingWithCoApplicant.js';
 import CoApplicantRelationship from './others/CoApplicantRelationship.js';
-export {Gender, Calendar, Money, CoApplicantRelationship, ApplyingWithCoApplicant};
+import CoAppOwner from './others/CoAppOwner.js';
+export {Gender, Calendar, Money, CoApplicantRelationship, ApplyingWithCoApplicant,CoAppOwner};
 
 
 import City from './location/City.js';

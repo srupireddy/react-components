@@ -83,8 +83,13 @@
                 },
                 {
                     modelKey: 'applyingWithCoApplicant',
-                    title: 'Would you like to add a co-applicant?',
+                    title: 'How will the ownership be divided?',
                     componentName: 'ApplyingWithCoApplicant'
+                },
+                {
+                    modelKey: 'coAppOwner',
+                    title: 'Would you like to add a co-applicant?',
+                    componentName: 'CoAppOwner'
                 },
                 {
                     modelKey: 'grossMonthlyIncome',
@@ -265,7 +270,15 @@
                 {name: 'next', from: "transactionType",         to: "sellerDetail"},
                 {name: 'next', from: "sellerDetail",            to: "costOfLand"},
                 {name: 'next', from: "costOfLand",              to: "costOfConstruction"},
-                {name: 'next', from: "costOfConstruction",      to: "applyingWithCoApplicant"}
+                {name: 'next', from: "costOfConstruction",      to: "applyingWithCoApplicant"},
+                {name: 'next', from: "applyingWithCoApplicant",
+                    to: [
+                        {to: "coApplicantRelationship", if: function(model, from) {return model['applyingWithCoApplicant'] == 'true'}}
+                        // {to: "contactme", if: function(model, from) {return model['applyingWithCoApplicant'] == 'false'}}
+                    ]
+                },
+                {name: 'next', from: "coApplicantRelationship", to: "applyingWithCoApplicant"},
+                {name: 'next', from: "applyingWithCoApplicant", to: "coAppOwner"}
             ]
         };
     </script>

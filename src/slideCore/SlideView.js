@@ -38,7 +38,8 @@ export default class SlideView extends React.Component {
         let value = this.props.prefillData[this.props.modelKey];
         return (
             <div className={SlideStyle.slideContainer}>
-                <div className={["container", SlideStyle.employerBg].join(' ')}>
+                <div className={SlideStyle.slideLongHeader}><h2>Compare Home Loan Offers from Top Lenders. Apply Online and Get e-Approved Instantly.</h2></div>
+                <div className="container">
                     <div className={SlideStyle.slideHeader}>
                         {this.props.title}
                         {this.state.errorMessage &&

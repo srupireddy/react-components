@@ -3,12 +3,12 @@ import React from 'react';
 import BaseComponent from '../BaseComponent';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 
-import ApplyingWithCoApplicantStyle from './ApplyingWithCoApplicant.scss';
+import CoAppOwnerStyle from './CoAppOwner.scss';
 
-export default class ApplyingWithCoApplicant extends BaseComponent {
+export default class CoAppOwner extends BaseComponent {
     static options = [
-        {value:'true', label: 'Yes, I am applying with a co-applicant', imageStyle: ApplyingWithCoApplicantStyle.genderBoth},
-        {value:'false', label: 'No, I am applying alone', imageStyle: ApplyingWithCoApplicantStyle.genderFemale}
+        {value:'true', label: 'Co-applicant will own it with me', imageStyle: CoAppOwnerStyle.coApplicantOwner},
+        {value:'false', label: 'I will be 100% owner', imageStyle: CoAppOwnerStyle.coApplicantOwnerMale}
     ];
 
     state = {
@@ -16,22 +16,22 @@ export default class ApplyingWithCoApplicant extends BaseComponent {
     }
     
     render() {
-        let radioItems = ApplyingWithCoApplicant.options.map(
+        let radioItems = CoAppOwner.options.map(
             (option) => (
                 <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-5 col-xs-5 radio-col" imageStyle={option.imageStyle} label={option.label}>
-                    <input type="radio" value={option.value} name='applyingWithCoApplicant' onChange={this.handleApplyingWithCoApplicantSelection} checked={this.state.selectedValue === option.value}/>
+                    <input type="radio" value={option.value} name='coAppOwner' onChange={this.handleCoAppOwnerSelection} checked={this.state.selectedValue === option.value}/>
                 </DecorateWithImageAndLabel>
             )
         );
 
         return (
-            <div className= {ApplyingWithCoApplicantStyle.withCoApplicantContainer}>
+            <div className= {CoAppOwnerStyle.coAppOwnerContainer}>
                 {radioItems}
             </div>            
         )
     }
 
-    handleApplyingWithCoApplicantSelection = (event) => {
+    handleCoAppOwnerSelection = (event) => {
         let value = event.target.value;
         this.setState({selectedValue: value}, () => {this.notifyCompletion()});
     }
