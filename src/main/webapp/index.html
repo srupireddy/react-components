@@ -77,9 +77,19 @@
                     componentName: 'WorkExperience'
                 },
                 {
+                    modelKey: 'existingloanYear',
+                    title: 'When did you begin your existing loan?',
+                    componentName: 'ExistingloanYear'
+                },
+                {
                     modelKey: 'builder',
                     title: 'Name of builder & project (optional)',
                     componentName: 'Builder'
+                },
+                {
+                    modelKey: 'existingloan',
+                    title: 'Which bank is your existing home loan with?',
+                    componentName: 'Existingloan'
                 },
                 {
                     modelKey: 'applyingWithCoApplicant',
@@ -265,20 +275,31 @@
                     ]
                 },
                 {name: 'next', from: "builder",                 to: "costOfProperty"},
-                {name: 'next', from: "costOfProperty",          to: "applyingWithCoApplicant"},
+                {name: 'next', from: "costOfProperty",
+                    to: [
+                        {to: "existingloan", if: function(model, from) {return model['purpose'] == 'TRANSFER_EXISTING_HOME_LOAN'}},
+                        {to: "applyingWithCoApplicant", if: function(model, from) {return model['purpose'] != 'TRANSFER_EXISTING_HOME_LOAN'}}
+                    ]
+                },
                 {name: 'next', from: "propertyLocation",        to: "transactionType"},
                 {name: 'next', from: "transactionType",         to: "sellerDetail"},
                 {name: 'next', from: "sellerDetail",            to: "costOfLand"},
-                {name: 'next', from: "costOfLand",              to: "costOfConstruction"},
+                {name: 'next', from: "costOfLand",
+                    to: [
+                        {to: "costOfConstruction", if: function(model, from) {return model['propertyDetail'] != 'PURCHASE_LAND'}},
+                        {to: "applyingWithCoApplicant", if: function(model, from) {return model['propertyDetail'] == 'PURCHASE_LAND'}}
+                    ]
+                },
                 {name: 'next', from: "costOfConstruction",      to: "applyingWithCoApplicant"},
+                {name: 'next', from: "existingloan",            to: "existingloanYear"},
+                {name: 'next', from: "existingloanYear",        to: "applyingWithCoApplicant"},
                 {name: 'next', from: "applyingWithCoApplicant",
                     to: [
                         {to: "coApplicantRelationship", if: function(model, from) {return model['applyingWithCoApplicant'] == 'true'}}
                         // {to: "contactme", if: function(model, from) {return model['applyingWithCoApplicant'] == 'false'}}
                     ]
                 },
-                {name: 'next', from: "coApplicantRelationship", to: "applyingWithCoApplicant"},
-                {name: 'next', from: "applyingWithCoApplicant", to: "coAppOwner"}
+                {name: 'next', from: "coApplicantRelationship", to: "coAppOwner"}
             ]
         };
     </script>

@@ -17,7 +17,6 @@
 }
 
 
-
 .symbol {
     background-image: url(https://www.bankbazaar.com/images/sprite/sprite-landingpage-v2.png);
     background-repeat: no-repeat;
@@ -26,7 +25,6 @@
     display: inline-block !important;
     vertical-align: middle;
 }
-
 .symbolRupee {
     composes: symbol;
     background-position: -140px -84px;
@@ -35,4 +33,21 @@
 .symbolBuilding {
     composes: symbol;
     background-position: -92px -49px;
+}
+
+.slideSprite {
+    background-image: url(https://www.bankbazaar.com//images/sprite/sprite-input-prepand-v3.png);
+    vertical-align: middle;
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+}
+
+.symbolBuilder {
+    composes: slideSprite;
+    background-position:-3px -502px
+}
+.symbolBank {
+    composes: slideSprite;
+    background-position: -3px -56px;
 }

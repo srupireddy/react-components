@@ -31,9 +31,9 @@ export default class Experience extends BaseComponent {
         return (
             <div >
                 <Calendar value={this.state.dateOfJoiningCurrentOrg} handler={this.calendarHandler} modelKey='@@IAmNotUsed@@' variant='Last5Years' titleSuffix="Joining"/>
-                <div className="rangeSliderHeader">Your total work experience</div>
+                <div className="slideSecondHeader">Your total work experience</div>
                 <div className="slider-horizontal-ruler ruler-0-7">
-                    <Slider value={this.state.totalWorkExperience} 
+                    <Slider value={this.state.totalWorkExperience}
                             min={0} max={7} step={1} 
                             onChange={this.handleTotalExperienceValueChanged} onChangeComplete={this.validateTotalExperienceAgainstJoiningDate}
                     />

@@ -4,8 +4,9 @@ import Autosuggest from 'react-autosuggest';
 import 'whatwg-fetch';
 
 import BaseComponent from '../BaseComponent';
-
+import {DecorateInputFieldWithSymbol} from '../../widgets/Decorator.js';
 import EmployerStyle from './Employer.scss';
+import SpriteStyle from '../../widgets/Sprite.scss'
 
 export default class Employer extends BaseComponent {
     state = {
@@ -18,7 +19,8 @@ export default class Employer extends BaseComponent {
         return (
             <div className={EmployerStyle.employerContainer}>
                 <div className={EmployerStyle.employerContainerInner}>
-                <Tooltip placement="right" trigger='focus' defaultVisible={true} overlay={<span>Psst! Don't worry if you don't find your company name on our list! Simply type in the name & proceed! We've got your back!</span>}>
+                <Tooltip placement="rightTop" trigger='focus' defaultVisible={true} overlay={<span>Psst! Don't worry if you don't find your company name on our list! Simply type in the name & proceed! We've got your back!</span>}>
+                    <DecorateInputFieldWithSymbol iconStyle={SpriteStyle.symbolBank}>
                     <Autosuggest
                         suggestions={suggestions}
                         onSuggestionSelected={this.handleEmployerSelection}
@@ -27,8 +29,9 @@ export default class Employer extends BaseComponent {
                         onSuggestionsClearRequested={() => this.setState({suggestions: []})}
                         getSuggestionValue={suggestion => suggestion}
                         renderSuggestion={(suggestion) => (<div>{suggestion}</div>)}
-                        inputProps={{value: selectedEmployer, onChange: this.onUserTypingValue}}
+                        inputProps={{value: selectedEmployer, placeholder:'Type your company name..', onChange: this.onUserTypingValue}}
                     />
+                    </DecorateInputFieldWithSymbol>
                 </Tooltip>
                 </div>
             </div>

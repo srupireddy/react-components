@@ -19,7 +19,9 @@
     position: relative;
     margin-top: 10px;
 }
-
+:global .slideSecondHeader {
+    font-size: 26px;
+}
 .slideControlPrev {
     position: absolute;
     left: 15px;
@@ -82,9 +84,6 @@
 :global .slide-leave.slide-leave-active {
     transform: translate(-100%);
     transition: transform 1000ms ease-in-out;
-}
-:global .rangeSliderHeader {
-    font-size: 26px;
 }
 :global .btn {
     font-size: 20px;

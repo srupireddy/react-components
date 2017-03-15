@@ -4,8 +4,9 @@ import Autosuggest from 'react-autosuggest';
 import 'whatwg-fetch';
 
 import BaseComponent from '../BaseComponent';
-
+import {DecorateInputFieldWithSymbol} from '../../widgets/Decorator.js';
 import BuilderStyle from './Builder.scss';
+import SpriteStyle from '../../widgets/Sprite.scss'
 
 export default class Builder extends BaseComponent {
     state = {
@@ -18,17 +19,19 @@ export default class Builder extends BaseComponent {
         return (
             <div className={BuilderStyle.builderContainer}>
                 <div className={BuilderStyle.builderContainerInner}>
-                <Tooltip placement="right" trigger='focus' defaultVisible={true} overlay={<span>Enter the builder and project name Example: DLF BUILDING INDIA - COMMANDERS COURT</span>}>
-                    <Autosuggest
-                        suggestions={suggestions}
-                        onSuggestionSelected={this.handleBuilderSelection}
-                        shouldRenderSuggestions={(value) => value.trim().length > 2}
-                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={() => this.setState({suggestions: []})}
-                        getSuggestionValue={suggestion => suggestion}
-                        renderSuggestion={(suggestion) => (<div>{suggestion}</div>)}
-                        inputProps={{value: selectedBuilder, onChange: this.onUserTypingValue}}
-                    />
+                <Tooltip placement="rightTop" trigger='focus' defaultVisible={true} overlay={<span>Enter the builder and project name Example: DLF BUILDING INDIA - COMMANDERS COURT</span>}>
+                    <DecorateInputFieldWithSymbol iconStyle={SpriteStyle.symbolBuilder}>
+                        <Autosuggest
+                            suggestions={suggestions}
+                            onSuggestionSelected={this.handleBuilderSelection}
+                            shouldRenderSuggestions={(value) => value.trim().length > 2}
+                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={() => this.setState({suggestions: []})}
+                            getSuggestionValue={suggestion => suggestion}
+                            renderSuggestion={(suggestion) => (<div>{suggestion}</div>)}
+                            inputProps={{value: selectedBuilder, placeholder:'Start typing here..', onChange: this.onUserTypingValue}}
+                        />
+                    </DecorateInputFieldWithSymbol>
                 </Tooltip>
                 </div>
             </div>
