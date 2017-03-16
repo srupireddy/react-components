@@ -52,7 +52,10 @@ export default class Money extends BaseComponent{
     currencyBasedInputField() {
         return (
             <DecorateInputFieldWithSymbol iconStyle={this.currencyIconToBeUsed()}>
-                <input type="number" value={this.state.value} min={this.props.min} max={this.props.max} placeholder="Rs." onChange={this.handleTextFieldValueChange}/>
+                <input type="number" 
+                        value={this.state.value} min={this.props.min} max={this.props.max} 
+                        placeholder={this.placeHolderTextToBeUsed()} 
+                        onChange={this.handleTextFieldValueChange}/>
             </DecorateInputFieldWithSymbol>
         );
     }
@@ -70,6 +73,13 @@ export default class Money extends BaseComponent{
         switch (this.props.currencyCode) {
             case 'INR': return SpriteStyle.symbolRupee;
             default: return SpriteStyle.symbolRupee;
+        }
+    }
+
+    placeHolderTextToBeUsed() {
+        switch (this.props.currencyCode) {
+            case 'INR': return 'Rs.'
+            default: return '';
         }
     }
 

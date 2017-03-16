@@ -3,12 +3,12 @@ import React from 'react';
 import BaseComponent from '../BaseComponent';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 
-import ApplyingWithCoApplicantStyle from './ApplyingWithCoApplicant.scss';
+import GenderStyle from './Gender.scss';
 
 export default class ApplyingWithCoApplicant extends BaseComponent {
     static options = [
-        {value:'true', label: 'Yes, I am applying with a co-applicant', imageStyle: ApplyingWithCoApplicantStyle.genderBoth},
-        {value:'false', label: 'No, I am applying alone', imageStyle: ApplyingWithCoApplicantStyle.genderFemale}
+        {value: true, label: 'Yes, I am applying with a co-applicant', imageStyle: GenderStyle.iconBoth},
+        {value: false, label: 'No, I am applying alone', imageStyle: GenderStyle.iconFemale}
     ];
 
     state = {
@@ -25,7 +25,7 @@ export default class ApplyingWithCoApplicant extends BaseComponent {
         );
 
         return (
-            <div className= {ApplyingWithCoApplicantStyle.withCoApplicantContainer}>
+            <div className= {GenderStyle.container}>
                 {radioItems}
             </div>            
         )

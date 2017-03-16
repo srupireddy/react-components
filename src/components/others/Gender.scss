@@ -1,7 +1,8 @@
-.genderContainer {
+.container {
     width: 600px;
     margin: 20px auto 0;
 }
+
 .icon {
     background-image: url(https://www.bankbazaar.com/images/sprite/sprite-gender.png);
     background-position: 0 200px;
@@ -20,4 +21,12 @@
 .iconFemale {
     composes: icon;
     background-position: -5px -5px;
+}
+
+.iconBoth {
+    composes: icon;
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-co-applicant.png);
+    background-position: -479px -5px;
+    width: 141px;
+    height: 251px
 }

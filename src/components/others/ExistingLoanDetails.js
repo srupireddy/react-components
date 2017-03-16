@@ -5,7 +5,7 @@ import 'whatwg-fetch';
 
 import BaseComponent from '../BaseComponent';
 import {DecorateInputFieldWithSymbol} from '../../widgets/Decorator.js';
-import ExistingloanStyle from './Existingloan.scss';
+import ExistingLoanDetailsStyle from './ExistingLoanDetails.scss';
 import SpriteStyle from '../../widgets/Sprite.scss'
 
 export default class Existingloan extends BaseComponent {
@@ -17,29 +17,31 @@ export default class Existingloan extends BaseComponent {
     render() {
         const { selectedExistingloan, suggestions } = this.state;
         return (
-            <div className={ExistingloanStyle.existingloanContainer}>
-                <div className={ExistingloanStyle.existingloanContainerInner}>
-                <Tooltip placement="rightTop" trigger='focus' defaultVisible={true} overlay={<span>The name of your current home-loan provider</span>}>
-                    <DecorateInputFieldWithSymbol iconStyle={SpriteStyle.symbolBank}>
-                        <Autosuggest
-                            suggestions={suggestions}
-                            onSuggestionSelected={this.handleExistingloanSelection}
-                            shouldRenderSuggestions={(value) => value.trim().length > 2}
-                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                            onSuggestionsClearRequested={() => this.setState({suggestions: []})}
-                            getSuggestionValue={suggestion => suggestion}
-                            renderSuggestion={(suggestion) => (<div>{suggestion}</div>)}
-                            inputProps={{value: selectedExistingloan, placeholder:'Start typing here..', onChange: this.onUserTypingValue}}
-                        />
-                    </DecorateInputFieldWithSymbol>
-                </Tooltip>
+            <div className={ExistingLoanDetailsStyle.outerContainer}>
+                <div className={ExistingLoanDetailsStyle.innerContainer}>
+                    <Tooltip placement="rightTop" trigger='focus' defaultVisible={true} overlay={<span>The name of your current home-loan provider</span>}>
+                        <DecorateInputFieldWithSymbol iconStyle={SpriteStyle.symbolBank}>
+                            <Autosuggest
+                                suggestions={suggestions}
+                                onSuggestionSelected={this.handleExistingloanSelection}
+                                shouldRenderSuggestions={(value) => value.trim().length > 2}
+                                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                                onSuggestionsClearRequested={() => this.setState({suggestions: []})}
+                                getSuggestionValue={suggestion => suggestion}
+                                renderSuggestion={(suggestion) => (<div>{suggestion}</div>)}
+                                inputProps={{value: selectedExistingloan, placeholder:'Start typing here..', onChange: this.onUserTypingValue}}
+                            />
+                        </DecorateInputFieldWithSymbol>
+                    </Tooltip>
                 </div>
-                <div className="slideSecondHeader" style={{margin: "45px auto"}}>Outstanding balance on existing home loan</div>
-                <div className={ExistingloanStyle.existingloanContainerInner}>
+                <div className="slideSecondHeader" style={{margin: "45px auto"}}>
+                    Outstanding balance on existing home loan
+                </div>
+                <div className={ExistingLoanDetailsStyle.innerContainer}>
                     <Tooltip placement="rightTop" trigger='focus' defaultVisible={true} overlay={<span>Current outstanding balance on the home loan you wish to transfer.</span>}>
-                    <DecorateInputFieldWithSymbol iconStyle={SpriteStyle.symbolRupee}>
-                           <input type="number" value={this.state.value} placeholder="Rs." onChange={this.handleTextFieldValueChange}/>
-                    </DecorateInputFieldWithSymbol>
+                        <DecorateInputFieldWithSymbol iconStyle={SpriteStyle.symbolRupee}>
+                            <input type="number" value={this.state.value} placeholder="Rs." onChange={this.handleTextFieldValueChange}/>
+                        </DecorateInputFieldWithSymbol>
                     </Tooltip>
                 </div>
             </div>

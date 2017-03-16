@@ -3,15 +3,17 @@ import Calendar from './others/Calendar.js';
 import Money from './others/Money.js';
 import ApplyingWithCoApplicant from './others/ApplyingWithCoApplicant.js';
 import CoApplicantRelationship from './others/CoApplicantRelationship.js';
-import Existingloan from './others/Existingloan.js';
-import ExistingloanYear from './others/ExistingloanYear.js';
-import CoAppOwner from './others/CoAppOwner.js';
-export {Gender, Calendar, Money, CoApplicantRelationship, ApplyingWithCoApplicant, Existingloan, CoAppOwner, ExistingloanYear};
+import ExistingLoanDetails from './others/ExistingLoanDetails.js';
+import CoApplicantOwnershipSplit from './others/CoApplicantOwnershipSplit.js';
+import ContactMe from './others/ContactMe.js';
+
+export {Gender, Calendar, Money, ExistingLoanDetails, CoApplicantRelationship, ApplyingWithCoApplicant, CoApplicantOwnershipSplit, ContactMe};
 
 
 import City from './location/City.js';
 import LandLocation from './location/LandLocation.js';
-export {City, LandLocation};
+import ResidencyStatus from './location/ResidencyStatus.js';
+export {City, LandLocation, ResidencyStatus};
 
 
 import EmploymentType from './employment/EmploymentType.js';

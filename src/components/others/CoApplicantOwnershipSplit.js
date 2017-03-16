@@ -3,12 +3,12 @@ import React from 'react';
 import BaseComponent from '../BaseComponent';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 
-import CoAppOwnerStyle from './CoAppOwner.scss';
+import CoApplicantOwnershipSplitStyle from './CoApplicantOwnershipSplit.scss';
 
 export default class CoAppOwner extends BaseComponent {
     static options = [
-        {value:'true', label: 'Co-applicant will own it with me', imageStyle: CoAppOwnerStyle.coApplicantOwner},
-        {value:'false', label: 'I will be 100% owner', imageStyle: CoAppOwnerStyle.coApplicantOwnerMale}
+        {value: true, label: 'Co-applicant will own it with me', imageStyle: CoApplicantOwnershipSplitStyle.iconEqualSplit},
+        {value: false, label: 'I will be 100% owner', imageStyle: CoApplicantOwnershipSplitStyle.iconCompleteOwnerFemale}
     ];
 
     state = {
@@ -25,7 +25,7 @@ export default class CoAppOwner extends BaseComponent {
         );
 
         return (
-            <div className= {CoAppOwnerStyle.coAppOwnerContainer}>
+            <div className= {CoApplicantOwnershipSplitStyle.container}>
                 {radioItems}
             </div>            
         )

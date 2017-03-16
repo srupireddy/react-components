@@ -1,7 +1,8 @@
-.coAppOwnerContainer {
+.container {
     width: 600px;
     margin: 45px auto 0;
 }
+
 .icon {
     background-image: url(https://www.bankbazaar.com/images/sprite/sprite-co-applicant.png);
     background-position: 0 200px;
@@ -12,16 +13,17 @@
     vertical-align: middle;
 }
 
-.coApplicantOwner {
+.iconEqualSplit {
     composes: icon;
     background-position: -5px -5px;
 }
 
-.coApplicantOwnerMale {
+.iconCompleteOwnerFemale {
     composes: icon;
     background-position: -321px -5px;
 }
-.coApplicantOwnerMale {
+
+.iconCompleteOwnerMale {
     composes: icon;
     background-position: -163px -5px;
 }

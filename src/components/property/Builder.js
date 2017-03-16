@@ -17,8 +17,7 @@ export default class Builder extends BaseComponent {
     render() {
         const { selectedBuilder, suggestions } = this.state;
         return (
-            <div className={BuilderStyle.builderContainer}>
-                <div className={BuilderStyle.builderContainerInner}>
+            <div className={BuilderStyle.container}>
                 <Tooltip placement="rightTop" trigger='focus' defaultVisible={true} overlay={<span>Enter the builder and project name Example: DLF BUILDING INDIA - COMMANDERS COURT</span>}>
                     <DecorateInputFieldWithSymbol iconStyle={SpriteStyle.symbolBuilder}>
                         <Autosuggest
@@ -33,7 +32,6 @@ export default class Builder extends BaseComponent {
                         />
                     </DecorateInputFieldWithSymbol>
                 </Tooltip>
-                </div>
             </div>
         );
     }
