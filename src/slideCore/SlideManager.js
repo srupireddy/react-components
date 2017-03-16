@@ -71,7 +71,8 @@ const slideManager = new class {
     }
 
     createStateMachine(firstSlideKey, transitions) {
-        return StateMachine.create({initial: firstSlideKey, events: transitions});
+        let events = transitions.map((e) => Object.assign({}, e, {name: e['trigger']}));
+        return StateMachine.create({initial: firstSlideKey, events: events});
     }
 
     configForSlideWithKey = (key, model) => {
