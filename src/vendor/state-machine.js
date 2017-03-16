@@ -183,16 +183,16 @@
         computeTargetState: function(eventName, rulesForEvent) {
             return function(from, args)  {
                 var rulesForFromState = rulesForEvent[from];
-                if (rulesForFromState instanceof Array) {
-                    // Loop through the possible transitions available from the current state for the event and pick the first winner.
-                    for (var i=0; i<rulesForFromState.length; i++) {
-                        var transitionRule=rulesForFromState[i];
-                        if (!transitionRule.if || transitionRule.if(args, from)) {
+                if (rulesForFromState instanceof Object) {
+                    var allowedChoices = rulesForFromState['choices'] || [];
+                    // Loop through the possible choices and pick the first one that is allowed as per the guard. Otherwise use the *default*
+                    for (var i=0; i<allowedChoices.length; i++) {
+                        var transitionRule=allowedChoices[i];
+                        if (!transitionRule.guard || transitionRule.guard(args, from)) {
                             return transitionRule.to;
                         }
                     }
-                    // No condition evaluated to TRUE. Just return the FROM state.
-                    return from;
+                    return rulesForFromState.default;
                 }
 
                 return rulesForFromState || (rulesForEvent[StateMachine.WILDCARD] != StateMachine.WILDCARD ? rulesForEvent[StateMachine.WILDCARD] : from) || from;
