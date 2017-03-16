@@ -5,7 +5,7 @@ import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 
 import CoApplicantOwnershipSplitStyle from './CoApplicantOwnershipSplit.scss';
 
-export default class CoAppOwner extends BaseComponent {
+export default class CoApplicantOwnershipSplit extends BaseComponent {
     static options = [
         {value: true, label: 'Co-applicant will own it with me', imageStyle: CoApplicantOwnershipSplitStyle.iconEqualSplit},
         {value: false, label: 'I will be 100% owner', imageStyle: CoApplicantOwnershipSplitStyle.iconCompleteOwnerFemale}
@@ -16,7 +16,7 @@ export default class CoAppOwner extends BaseComponent {
     }
     
     render() {
-        let radioItems = CoAppOwner.options.map(
+        let radioItems = CoApplicantOwnershipSplit.options.map(
             (option) => (
                 <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-5 col-xs-5 radio-col" imageStyle={option.imageStyle} label={option.label}>
                     <input type="radio" value={option.value} name='coAppOwner' onChange={this.handleCoAppOwnerSelection} checked={this.state.selectedValue === option.value}/>
@@ -33,7 +33,7 @@ export default class CoAppOwner extends BaseComponent {
 
     handleCoAppOwnerSelection = (event) => {
         let value = event.target.value;
-        this.setState({selectedValue: value}, () => {this.notifyCompletion()});
+        this.setState({selectedValue: Boolean(value)}, () => {this.notifyCompletion()});
     }
 
     getData() {

@@ -54,14 +54,14 @@ var slideManagerConfig = {
             componentName: 'LandSeller'
         },
         {
-            modelKey: 'propertyLocation',
+            modelKey: 'landLocation',
             title: 'Where is the land?',
             componentName: 'LandLocation'
         },
         {
-            modelKey: 'propertyDetail',
+            modelKey: 'propertyType',
             title: 'Tell us about your property',
-            componentName: 'PropertyConstructionType'
+            componentName: 'PropertyType'
         },
         {
             modelKey: 'employer',
@@ -127,6 +127,7 @@ var slideManagerConfig = {
                 min: 0,
                 max: 9999999,
                 sliderMax: function(model) {return 4 * model['grossMonthlyIncome']},
+                sliderStep: 1000,
                 purpose: 'Annual Bonus',
                 tooltip: {
                     text: 'Enter your annual bonus, if any, excluding any cash component.'
@@ -142,6 +143,7 @@ var slideManagerConfig = {
                 min: 0,
                 max: 9999999,
                 sliderMax: function(model) {return 2 * model['grossMonthlyIncome']},
+                sliderStep: 1000,
                 purpose: 'Average Monthly Incentives',
                 tooltip: {
                     text: 'Enter the approximate sum of all monthly incentives earned by you, if any. Include only direct deposit or cheque payments. Exclude payments in hard cash and in-kind components.'
@@ -174,8 +176,8 @@ var slideManagerConfig = {
                 min: 0,
                 max: 9999999,
                 sliderMin: 0,
-                sliderMax:  function(model) {return 1.8 * model['latestProfitAfterTax']},
-                sliderStep: 5000,
+                sliderMax:  function(model) {return Math.max(1/6 * model['latestProfitAfterTax'] || 0, 2 * model['grossMonthlyIncome'] || 0)},
+                sliderStep: 100,
                 purpose: 'EMI',
                 tooltip: {
                     text: 'Enter the sum of all monthly payments by you on your currently ongoing loans.'
@@ -188,10 +190,9 @@ var slideManagerConfig = {
             componentName: 'Money',
             properties: {
                 currencyCode: 'INR',
-                min: 0,
-                max: 9999999,
-                sliderMin: 400000,
-                sliderMax: 14400000,
+                min: 400000,
+                max: 20000000,
+                sliderMax:  function(model) {return Math.max(200 * model['latestProfitAfterTax'] || 0, 200 * model['grossMonthlyIncome'] || 0)},
                 sliderStep: 10000,
                 purpose: 'Cost of land',
                 tooltip: {
@@ -205,10 +206,9 @@ var slideManagerConfig = {
             componentName: 'Money',
             properties: {
                 currencyCode: 'INR',
-                min: 0,
-                max: 9999999,
-                sliderMin: 400000,
-                sliderMax: 14400000,
+                min: 400000,
+                max: 20000000,
+                sliderMax: function(model) {return Math.max(200 * model['latestProfitAfterTax'] || 0, 200 * model['grossMonthlyIncome'] || 0)},
                 sliderStep: 10000,
                 purpose: 'Cost Of Property',
                 tooltip: {
@@ -222,10 +222,9 @@ var slideManagerConfig = {
             componentName: 'Money',
             properties: {
                 currencyCode: 'INR',
-                min: 0,
-                max: 9999999,
-                sliderMin: 400000,
-                sliderMax: 14400000,
+                min: 400000,
+                max: 20000000,
+                sliderMax: function(model) {return Math.max(200 * model['latestProfitAfterTax'] || 0, 200 * model['grossMonthlyIncome'] || 0)},
                 sliderStep: 10000,
                 purpose: 'Cost of construction',
                 tooltip: {
@@ -241,6 +240,124 @@ var slideManagerConfig = {
                 variant: 'DOB'
             }
         },
+
+        {
+            modelKey: 'coApplicantResidentCity',
+            title: 'Which city does co-applicant live in?',
+            componentName: 'City',
+            properties: {
+                variant: 'Resident' 
+            }
+        },
+        {
+            modelKey: "coApplicantResidencyStatus",
+            title: "Co-applicant\'s residency status",
+            componentName: 'ResidencyStatus'
+        },
+        {
+            modelKey: 'coApplicantEmploymentType',
+            title: 'Co-applicant\'s type of employment',
+            componentName: 'EmploymentType'
+        },
+        {
+            modelKey: 'coApplicantEmployer',
+            title: 'Co-applicant\'s employer',
+            componentName: 'Employer'
+        },
+        {
+            modelKey: 'coApplicantJoiningDate',
+            title: 'Joining date of co-applicant with current organisation',
+            componentName: 'WorkExperience'
+        },
+        {
+            modelKey: 'coApplicantGrossMonthlyIncome',
+            title: 'Co-applicant\'s gross fixed monthly income',
+            componentName: 'Money',
+            properties: {
+                currencyCode: 'INR',
+                min: 3000,
+                max: 9999999,
+                sliderMin: 0,
+                sliderMax: 120000,
+                sliderStep: 1000,
+                purpose: 'Gross Monthly Income',
+                tooltip: {
+                    text: 'Enter your gross monthly salary as per his/her your monthly payslip before deductions. Include only direct deposit or cheque payments. Exclude payments in hard cash and in-kind components.'
+                }
+            }
+        },
+        {
+            modelKey: 'coApplicantAnnualBonus',
+            title: 'Co-applicant\'s total annual bonus (optional)',
+            componentName: 'Money',
+            properties: {
+                currencyCode: 'INR',
+                min: 0,
+                max: 9999999,
+                sliderMax: function(model) {return 4 * model['coApplicantGrossMonthlyIncome']},
+                purpose: 'Annual Bonus',
+                tooltip: {
+                    text: 'Enter your annual bonus, if any, excluding any cash component.'
+                }
+            }
+        },
+        {
+            modelKey: 'coApplicantMonthlyIncentives',
+            title: 'Co-applicant\'s average monthly incentives (optional)',
+            componentName: 'Money',
+            properties: {
+                currencyCode: 'INR',
+                min: 0,
+                max: 9999999,
+                sliderMax: function(model) {return 2 * model['coApplicantGrossMonthlyIncome']},
+                purpose: 'Average Monthly Incentives',
+                tooltip: {
+                    text: 'Enter the approximate sum of all monthly incentives earned by you, if any. Include only direct deposit or cheque payments. Exclude payments in hard cash and in-kind components.'
+                }
+            }
+        },
+        {
+            modelKey: 'coApplicantLatestProfitAfterTax',
+            title: 'Latest year\'s profit after tax for co-applicant',
+            componentName: 'Money',
+            properties: {
+                currencyCode: 'INR',
+                min: 0,
+                max: 9999999,
+                sliderMin: 0,
+                sliderMax: 3000000,
+                sliderStep: 5000,
+                purpose: 'Profit After Tax',
+                tooltip: {
+                    text: 'Enter profit after tax as per your latest year\'s ITR.'
+                }
+            }
+        },
+        {
+            modelKey: 'coApplicantTotalEMI',
+            title: 'Total EMIs paid by co-applicant per month currently (if any)',
+            componentName: 'Money',
+            properties: {
+                currencyCode: 'INR',
+                min: 0,
+                max: 9999999,
+                sliderMin: 0,
+                sliderMax:  function(model) {return Math.max(1/6 * model['coApplicantLatestProfitAfterTax'] || 0, 2 * model['coApplicantGrossMonthlyIncome'] || 0)},
+                sliderStep: 5000,
+                purpose: 'EMI',
+                tooltip: {
+                    text: 'Enter the sum of all monthly payments by you on your currently ongoing loans.'
+                }
+            }
+        },
+        {
+            modelKey: "coApplicantDob",
+            title: "Co-applicant's date of birth",
+            componentName: 'Calendar',
+            properties: {
+                variant: 'DOB'
+            }
+        },
         {
             modelKey: "contactMe",
             title: "Need to talk? Leave your number, if you'd like to hear from us.",
@@ -248,62 +365,161 @@ var slideManagerConfig = {
         }
     ],
     transitions: [
-        {name: 'next', from: "residentCity",            to: "gender"},
-        {name: 'next', from: "gender",                  to: "propertyCity"},
-        {name: 'next', from: "propertyCity",            to: "employmentType"},
-        {name: 'next', from: "employmentType",
-            to: [
-                {to: "employer", if: function(model, from) {return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'}},
-                {to: "latestProfitAfterTax", if: function(model, from) {return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'}},
-                {to: "dob", if: function(model, from) {return model['employmentType'] == 'STUDENT' || model['employmentType'] == 'RETIRED' || model['employmentType'] == 'HOMEMAKER'}}
-            ]
+        {trigger: 'next', from: "residentCity",            to: "gender"},
+        {trigger: 'next', from: "gender",                  to: "propertyCity"},
+        {trigger: 'next', from: "propertyCity",            to: "employmentType"},
+        {trigger: 'next', from: "employmentType",
+            to: {
+                choices: [
+                    {
+                        to: "employer",
+                        guard: function(model, from) {
+                            return model['employmentType'] == 'SALARIED' || model['employmentType'] == 'SALARIED_PROFESSIONAL'
+                        }
+                    },
+                    {
+                        to: "latestProfitAfterTax",
+                        guard: function(model, from) {
+                            return model['employmentType'] == 'SELF_EMPLOYED_BUSINESS' || model['employmentType'] == 'SELF_EMPLOYED_PROFESSIONAL'
+                        }
+                    }
+                ],
+                default: "dob"
+            }
         },
-        {name: 'next', from: "employer",                to: "joiningDate"},
-        {name: 'next', from: 'joiningDate',             to: 'grossMonthlyIncome'},
-        {name: 'next', from: 'grossMonthlyIncome',      to: 'annualBonus'},
-        {name: 'next', from: 'annualBonus',             to: 'monthlyIncentives'},
-        {name: 'next', from: 'monthlyIncentives',       to: 'totalEMI'},
-        {name: 'next', from: "latestProfitAfterTax",    to: "totalEMI"},
-        {name: 'next', from: "totalEMI",                to: "dob"},
-        {name: 'next', from: 'dob',                     to: 'purposeOfLoan'},
-        {name: 'next', from: "purposeOfLoan",
-            to: [
-                {to: "propertyDetail", if: function(model, from) {return model['purposeOfLoan'] == 'PURCHASE_IDENTIFIED_PROPERTY' || model['purposeOfLoan'] == 'TRANSFER_EXISTING_HOME_LOAN'}},
-                {to: "applyingWithCoApplicant", if: function(model, from) {return model['purposeOfLoan'] == 'PURCHASE_NOT_YET_IDENTIFIED_PROPERTY'}}
-            ]
+        {trigger: 'next', from: "employer",                to: "joiningDate"},
+        {trigger: 'next', from: 'joiningDate',             to: 'grossMonthlyIncome'},
+        {trigger: 'next', from: 'grossMonthlyIncome',      to: 'annualBonus'},
+        {trigger: 'next', from: 'annualBonus',             to: 'monthlyIncentives'},
+        {trigger: 'next', from: 'monthlyIncentives',       to: 'totalEMI'},
+        {trigger: 'next', from: "latestProfitAfterTax",    to: "totalEMI"},
+        {trigger: 'next', from: "totalEMI",                to: "dob"},
+        {trigger: 'next', from: 'dob',                     to: 'purposeOfLoan'},
+        {trigger: 'next', from: "purposeOfLoan",
+            to: {
+                choices: [
+                    {
+                        to: "propertyType",
+                        guard: function(model, from) {
+                            return model['purposeOfLoan'] == 'PURCHASE_IDENTIFIED_PROPERTY' || model['purposeOfLoan'] == 'TRANSFER_EXISTING_HOME_LOAN'
+                        }
+                    }
+                ],
+                default: "applyingWithCoApplicant"
+            }
         },
-        {name: 'next', from: "propertyDetail",
-            to: [
-                {to: "builder", if: function(model, from) {return model['propertyDetail'] == 'CONSTRUCTED' || model['propertyDetail'] == 'UNDER_CONSTRUCTION'}},
-                {to: "propertyLocation", if: function(model, from) {return model['propertyDetail'] == 'PURCHASE_LAND' ||  model['propertyDetail'] == 'PURCHASE_LAND_AND_CONSTRUCT'}},
-                {to: "costOfLand", if: function(model, from) {return model['propertyDetail'] == 'CONSTRUCT_ON_OWN_LAND'}}
-            ]
+        {trigger: 'next', from: "propertyType",
+            to: {
+                choices: [
+                    {
+                        to: "costOfLand",
+                        guard: function(model, from) {
+                            return model['propertyType'] == 'CONSTRUCT_ON_OWN_LAND'
+                        }
+                    },
+                    {
+                        to: "landLocation",
+                        guard: function(model, from) {
+                            return model['propertyType'] == 'PURCHASE_LAND_ONLY' || model['propertyType'] == 'PURCHASE_LAND_AND_CONSTRUCT'
+                        }
+                    }                    
+                ],
+                default: "builder"
+            }
         },
-        {name: 'next', from: "builder",                 to: "costOfProperty"},
-        {name: 'next', from: "costOfProperty",
-            to: [
-                {to: "existingLoanDetails", if: function(model, from) {return model['purposeOfLoan'] == 'TRANSFER_EXISTING_HOME_LOAN'}},
-                {to: "applyingWithCoApplicant", if: function(model, from) {return model['purposeOfLoan'] != 'TRANSFER_EXISTING_HOME_LOAN'}}
-            ]
+        {trigger: 'next', from: "builder",                 to: "costOfProperty"},
+        {trigger: 'next', from: "costOfProperty",
+            to: {
+                choices: [
+                    {
+                        to: "existingLoanDetails",
+                        guard: function(model, from) {
+                            return model['purposeOfLoan'] == 'TRANSFER_EXISTING_HOME_LOAN'
+                        }
+                    }
+                ],
+                default: "applyingWithCoApplicant"
+            }
         },
-        {name: 'next', from: "propertyLocation",        to: "landTransactionType"},
-        {name: 'next', from: "landTransactionType",     to: "landSellerDetail"},
-        {name: 'next', from: "landSellerDetail",        to: "costOfLand"},
-        {name: 'next', from: "costOfLand",
-            to: [
-                {to: "costOfConstruction", if: function(model, from) {return model['propertyDetail'] != 'PURCHASE_LAND'}},
-                {to: "applyingWithCoApplicant", if: function(model, from) {return model['propertyDetail'] == 'PURCHASE_LAND'}}
-            ]
+        {trigger: 'next', from: "landLocation",            to: "landTransactionType"},
+        {trigger: 'next', from: "landTransactionType",     to: "landSellerDetail"},
+        {trigger: 'next', from: "landSellerDetail",        to: "costOfLand"},
+        {trigger: 'next', from: "costOfLand",
+            to: {
+                choices: [
+                    {
+                        to: "costOfConstruction",
+                        guard: function(model, from) {
+                            return model['propertyType'] == 'CONSTRUCT_ON_OWN_LAND' || model['propertyType'] == 'PURCHASE_LAND_AND_CONSTRUCT'
+                        }
+                    },
+                    {
+                        to: 'existingLoanDetails',
+                        guard: function(model, from) {
+                            return model['propertyType'] == 'PURCHASE_LAND_ONLY' && model['purposeOfLoan'] == 'TRANSFER_EXISTING_HOME_LOAN'
+                        }
+                    }
+                ],
+                default: "applyingWithCoApplicant"
+            }
         },
-        {name: 'next', from: "costOfConstruction",      to: "applyingWithCoApplicant"},
-        {name: 'next', from: "existingLoanDetails",     to: "existingLoanStartDate"},
-        {name: 'next', from: "existingLoanStartDate",   to: "applyingWithCoApplicant"},
-        {name: 'next', from: "applyingWithCoApplicant",
-            to: [
-                {to: "coApplicantRelationship", if: function(model, from) {return model['applyingWithCoApplicant'] == true}},
-                {to: "contactMe", if: function(model, from) {return model['applyingWithCoApplicant'] == 'false'}}
-            ]
+        {trigger: 'next', from: "costOfConstruction",
+            to: {
+                choices: [
+                    {
+                        to: "existingLoanDetails",
+                        guard: function(model, from) {
+                            return model['purposeOfLoan'] == 'TRANSFER_EXISTING_HOME_LOAN'
+                        }
+                    }
+                ],
+                default: "applyingWithCoApplicant"
+            }
         },
-        {name: 'next', from: "coApplicantRelationship", to: "coApplicantOwnershipSplit"}
+        {trigger: 'next', from: "existingLoanDetails",     to: "existingLoanStartDate"},
+        {trigger: 'next', from: "existingLoanStartDate",   to: "applyingWithCoApplicant"},
+        {trigger: 'next', from: "applyingWithCoApplicant",
+            to: {
+                choices: [
+                    {
+                        to: "coApplicantRelationship",
+                        guard: function(model, from) {
+                            return model['applyingWithCoApplicant'] === true
+                        }
+                    }
+                ],
+                default: "contactMe"
+            }
+        },
+        {trigger: 'next', from: "coApplicantRelationship",            to: "coApplicantOwnershipSplit"},
+        {trigger: 'next', from: "coApplicantOwnershipSplit",          to: "coApplicantResidentCity"},
+        {trigger: 'next', from: "coApplicantResidentCity",            to: "coApplicantEmploymentType"},
+        {trigger: 'next', from: "coApplicantEmploymentType",
+            to: {
+                choices: [
+                    {
+                        to: "coApplicantEmployer",
+                        guard: function(model, from) {
+                            return model['coApplicantEmploymentType'] == 'SALARIED' || model['coApplicantEmploymentType'] == 'SALARIED_PROFESSIONAL'
+                        }
+                    },
+                    {
+                        to: "coApplicantLatestProfitAfterTax",
+                        guard: function(model, from) {
+                            return model['coApplicantEmploymentType'] == 'SELF_EMPLOYED_BUSINESS' || model['coApplicantEmploymentType'] == 'SELF_EMPLOYED_PROFESSIONAL'
+                        }
+                    }
+                ],
+                default: "dob"
+            }
+        },
+        {trigger: 'next', from: "coApplicantEmployer",                to: "coApplicantJoiningDate"},
+        {trigger: 'next', from: 'coApplicantJoiningDate',             to: 'coApplicantGrossMonthlyIncome'},
+        {trigger: 'next', from: 'coApplicantGrossMonthlyIncome',      to: 'coApplicantAnnualBonus'},
+        {trigger: 'next', from: 'coApplicantAnnualBonus',             to: 'coApplicantMonthlyIncentives'},
+        {trigger: 'next', from: 'coApplicantMonthlyIncentives',       to: 'coApplicantTotalEMI'},
+        {trigger: 'next', from: "coApplicantLatestProfitAfterTax",    to: "coApplicantTotalEMI"},
+        {trigger: 'next', from: "coApplicantTotalEMI",                to: "coApplicantDob"},
+        {trigger: 'next', from: "coApplicantDob",                     to: 'contactMe'}
     ]
 };

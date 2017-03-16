@@ -26,9 +26,9 @@ import HomeLoanPurpose from './purpose/HomeLoanPurpose.js';
 export {HomeLoanPurpose};
 
 
-import PropertyConstructionType from './property/PropertyConstructionType.js';
+import PropertyType from './property/PropertyType.js';
 import LandTransactionType from './property/LandTransactionType.js';
 import LandSeller from './property/LandSeller.js';
 import Builder from './property/Builder.js';
-export {PropertyConstructionType, LandTransactionType, LandSeller, Builder};
+export {PropertyType, LandTransactionType, LandSeller, Builder};
 
