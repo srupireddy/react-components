@@ -83,9 +83,14 @@ class SlidePresenter extends React.Component {
                             <span className={Sprite.iconRight}/>
                         </button>
                     </div>
-                    <button type="button" className="btn" onClick={this.gotoNextSlideIfAllowed} disabled={!this.props.canGoForward}>
-                        Continue
-                    </button>
+                    <div>
+                        <button type="button" className="btn" onClick={this.gotoNextSlideIfAllowed} disabled={!this.props.canGoForward}>
+                            Continue
+                        </button>
+                        {this.props.forceNextButtonClick &&
+                            <img src="https://www.bankbazaar.com/images/landing/pointing-arrow.gif" style={{position: 'absolute', marginTop: '-12px', overflow: 'hidden', display: 'inline'}}/>
+                        }
+                    </div>
                 </div>
             </div>
         )
