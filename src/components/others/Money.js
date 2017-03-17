@@ -31,33 +31,45 @@ export default class Money extends BaseComponent{
 
     render() {
         let sliderValue = this.state.value ? parseInt(this.state.value) : 0;
+
         return (
             <div className="clearfix">
                 <div className="slideInputLabel clearfix">
-                        {this.props.tooltip ?
-                        (<Tooltip placement="rightTop" trigger='focus' defaultVisible={true} overlay={<span>{this.props.tooltip.text}</span>}>
-                        {this.currencyBasedInputField()}
-                        </Tooltip>)
-                        :
-                        this.currencyBasedInputField()
-                        }
+                    {this.currencyBasedInputField()}
                 </div>
                 <div className={["slider-horizontal-ruler", this.rulerToBeUsed(), "clearfix"].join(' ')}>
-                    <Slider value={sliderValue} min={this.state.sliderMin} max={this.state.sliderMax} step={this.props.sliderStep} onChange={this.handleSliderValueChange} onChangeComplete={this.handleSliderValueChangeCompleted}/>
+                    <Slider 
+                            value={sliderValue} 
+                            min={this.state.sliderMin} 
+                            max={this.state.sliderMax} 
+                            step={this.props.sliderStep} 
+                            format={this.sliderTooltipFormatter}
+                            onChange={this.handleSliderValueChange} onChangeComplete={this.handleSliderValueChangeCompleted}
+                        />
                 </div>
             </div>
         )
     }
 
     currencyBasedInputField() {
-        return (
-            <DecorateInputFieldWithSymbol iconStyle={this.currencyIconToBeUsed()}>
-                <input type="number" 
-                        value={this.state.value} min={this.props.min} max={this.props.max} 
-                        placeholder={this.placeHolderTextToBeUsed()} 
-                        onChange={this.handleTextFieldValueChange}/>
-            </DecorateInputFieldWithSymbol>
+        let field = (
+                <DecorateInputFieldWithSymbol iconStyle={this.currencyIconToBeUsed()}>
+                    <input type="number" 
+                            value={this.state.value} min={this.props.min} max={this.props.max} 
+                            placeholder={this.placeHolderTextToBeUsed()} 
+                            onChange={this.handleTextFieldValueChange}/>
+                </DecorateInputFieldWithSymbol>
         );
+        
+        if (this.props.tooltip) {
+            return (
+                <Tooltip placement="rightTop" trigger='focus' defaultVisible={true} overlay={<span>{this.props.tooltip.text}</span>}>
+                    {field}
+                </Tooltip>
+            )
+        } else {
+            return field
+        }
     }
 
     rulerToBeUsed() {
@@ -83,11 +95,21 @@ export default class Money extends BaseComponent{
         }
     }
 
+    sliderTooltipFormatter = (value) => {
+        if (value >= this.state.sliderMax) {
+            return "> " + this.state.sliderMax;
+        }
+
+        return value;
+    }
+
     handleTextFieldValueChange = (event) => {
         let value = event.target.value;
         let sliderValue = 0;
         if (value) {
             value = Math.abs(parseInt(value));
+            value = Math.max(value, this.props.min);
+            value = Math.min(value, this.props.max);
         }
         
         this.setState({value});
