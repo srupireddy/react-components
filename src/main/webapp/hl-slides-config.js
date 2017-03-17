@@ -6,7 +6,7 @@ var slideManagerConfig = {
             modelKey: "residentCity",
             title: "Where do you live currently?",
             componentName: "City",
-            properties: {
+            componentProps: {
                 variant: "Resident" 
             }
         },
@@ -24,7 +24,7 @@ var slideManagerConfig = {
             modelKey: "propertyCity",
             title: "City in which property is based",
             componentName: "City",
-            properties: {
+            componentProps: {
                 variant: "Property" 
             }
         },
@@ -77,7 +77,7 @@ var slideManagerConfig = {
             modelKey: "existingLoanStartDate",
             title: "When did you begin your existing loan?",
             componentName: "Calendar",
-            properties: {
+            componentProps: {
                 variant: "Last5Years"
             }
         },
@@ -105,24 +105,24 @@ var slideManagerConfig = {
             modelKey: "grossMonthlyIncome",
             title: "Gross fixed monthly income",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 3000,
                 max: 9999999,
-                sliderMin: 0,
                 sliderMax: 120000,
                 sliderStep: 1000,
                 purpose: "Gross Monthly Income",
                 tooltip: {
                     text: "Enter your gross monthly salary as per his/her your monthly payslip before deductions. Include only direct deposit or cheque payments. Exclude payments in hard cash and in-kind components."
                 }
-            }
+            },
+            autoNext: false,
         },
         {
             modelKey: "annualBonus",
             title: "Total annual bonus (optional)",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 0,
                 max: 9999999,
@@ -132,13 +132,15 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Enter your annual bonus, if any, excluding any cash component."
                 }
-            }
+            },
+            autoNext: false,
+            skippable: true
         },
         {
             modelKey: "monthlyIncentives",
             title: "Average monthly incentives (optional)",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 0,
                 max: 9999999,
@@ -148,30 +150,32 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Enter the approximate sum of all monthly incentives earned by you, if any. Include only direct deposit or cheque payments. Exclude payments in hard cash and in-kind components."
                 }
-            }
+            },
+            autoNext: false,
+            skippable: true
         },
         {
             modelKey: "latestProfitAfterTax",
             title: "Latest year's profit after tax",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
-                min: 0,
+                min: 10000,
                 max: 9999999,
-                sliderMin: 0,
                 sliderMax: 3000000,
                 sliderStep: 5000,
                 purpose: "Profit After Tax",
                 tooltip: {
                     text: "Enter profit after tax as per your latest year's ITR."
                 }
-            }
+            },
+            autoNext: false
         },
         {
             modelKey: "totalEMI",
             title: "Total EMIs you currently pay per month (if any)",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 0,
                 max: 9999999,
@@ -182,13 +186,15 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Enter the sum of all monthly payments by you on your currently ongoing loans."
                 }
-            }
+            },
+            autoNext: false,
+            skippable: true
         },
         {
             modelKey: "costOfLand",
             title: "Cost of land",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 400000,
                 max: 20000000,
@@ -198,13 +204,14 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Enter value as per Sale Agreement or as per the Registered Sale Deed value, whichever is higher"
                 }
-            }
+            },
+            autoNext: false
         },
         {
             modelKey: "costOfProperty",
             title: "Cost of home/flat",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 400000,
                 max: 20000000,
@@ -214,13 +221,14 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Include only the following components of cost:Basic Cost, car parking (if being sold),Firefighting charges,electricity/water charges,Electrification charges,Power Back Up,Internal Development Charges (IDC),External Development Charges (EDC),Preferential Location Charges (PLC),Interest Free Maintenance Security Deposit ( IFMS),Club Membership,VAT & Service Tax,Stamp duty and registration charges"
                 }
-            }
+            },
+            autoNext: false
         },
         {
             modelKey: "costOfConstruction",
             title: "Cost of construction",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 400000,
                 max: 20000000,
@@ -230,13 +238,14 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Enter the cost of construction as per the engineering estimate."
                 }
-            }
+            },
+            autoNext: false
         },
         {
             modelKey: "dob",
             title: "What's your age (years completed)?",
             componentName: "Calendar",
-            properties: {
+            componentProps: {
                 variant: "DOB"
             }
         },
@@ -245,7 +254,7 @@ var slideManagerConfig = {
             modelKey: "coApplicantResidentCity",
             title: "Which city does co-applicant live in?",
             componentName: "City",
-            properties: {
+            componentProps: {
                 variant: "Resident" 
             }
         },
@@ -273,7 +282,7 @@ var slideManagerConfig = {
             modelKey: "coApplicantGrossMonthlyIncome",
             title: "Co-applicant's gross fixed monthly income",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 3000,
                 max: 9999999,
@@ -284,13 +293,14 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Enter your gross monthly salary as per his/her your monthly payslip before deductions. Include only direct deposit or cheque payments. Exclude payments in hard cash and in-kind components."
                 }
-            }
+            },
+            autoNext: false
         },
         {
             modelKey: "coApplicantAnnualBonus",
             title: "Co-applicant's total annual bonus (optional)",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 0,
                 max: 9999999,
@@ -299,13 +309,15 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Enter your annual bonus, if any, excluding any cash component."
                 }
-            }
+            },
+            autoNext: false,
+            skippable: true
         },
         {
             modelKey: "coApplicantMonthlyIncentives",
             title: "Co-applicant's average monthly incentives (optional)",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 0,
                 max: 9999999,
@@ -314,13 +326,15 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Enter the approximate sum of all monthly incentives earned by you, if any. Include only direct deposit or cheque payments. Exclude payments in hard cash and in-kind components."
                 }
-            }
+            },
+            autoNext: false,
+            skippable: true
         },
         {
             modelKey: "coApplicantLatestProfitAfterTax",
             title: "Latest year's profit after tax for co-applicant",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 0,
                 max: 9999999,
@@ -331,13 +345,14 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Enter profit after tax as per your latest year's ITR."
                 }
-            }
+            },
+            autoNext: false
         },
         {
             modelKey: "coApplicantTotalEMI",
             title: "Total EMIs paid by co-applicant per month currently (if any)",
             componentName: "Money",
-            properties: {
+            componentProps: {
                 currencyCode: "INR",
                 min: 0,
                 max: 9999999,
@@ -348,13 +363,15 @@ var slideManagerConfig = {
                 tooltip: {
                     text: "Enter the sum of all monthly payments by you on your currently ongoing loans."
                 }
-            }
+            },
+            autoNext: false,
+            skippable: true
         },
         {
             modelKey: "coApplicantDob",
             title: "Co-applicant's date of birth",
             componentName: "Calendar",
-            properties: {
+            componentProps: {
                 variant: "DOB"
             }
         },
