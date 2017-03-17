@@ -21,8 +21,8 @@ export default class Experience extends BaseComponent {
                 this.props = props;
             }
 
-            onCompletion = (modelKey, payload) => {
-                this.handleJoiningDateChanged(payload);
+            onCompletion = (modelKey, value) => {
+                this.handleJoiningDateChanged(value);
             }
         }();
     }

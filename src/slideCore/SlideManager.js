@@ -1,34 +1,60 @@
-import { connect } from 'react-redux';
-import { ActionCreators as UndoActionCreators } from 'redux-undo'
 import {Map} from 'immutable';
 
 import * as Components from '../components/';
 import StateMachine from '../vendor/state-machine.js';
-import SlideView from './SlideView.js';
-import {nextSlideAction} from './SlideActions.js';
-import CollectionUtils from '../utils/CollectionUtils';
 
-const fsmEventName = 'next';
-const fsmPeekEventName = 'peek.' + fsmEventName;
+export default class SlideManager {
+    static fsmEventName = 'next';
+    static fsmPeekEventName = 'peek.' + SlideManager.fsmEventName;
 
-const slideManager = new class {
-    constructor() {
-        let config = slideManagerConfig;    // A Global Variable defined elsewhere
-
-        this.firstSlideKey = config.firstSlide
+    constructor(config) {
         this.slidesConfig = this.createSlidesConfigMap(config.slides);
-        this.fsm = this.createStateMachine(this.firstSlideKey, config.transitions);
+        this.fsm = this.createStateMachine(config.firstSlide, config.transitions);
     }
 
-    peekIntoNextSlide = (currentSlide, model) => {
-        var nextSlideKey = this.fsm[fsmPeekEventName](currentSlide || this.fsm.current, model);
-        if(this.isLastSlide(nextSlideKey)) {
+    activeSlide() {
+        return this.fsm.current;
+    }
+
+    peekIntoNextSlide(model, currentSlide) {
+        let nextPossibleSlide = this.fsm[SlideManager.fsmPeekEventName](currentSlide, model);
+        if(this.isLastSlide(nextPossibleSlide)) {
             this.handleFormSubmit(model);
         } else {
-            return nextSlideKey;
+            return nextPossibleSlide;
         }
     }
 
+    // navigateToNextSlide(model) {
+    //     this.fsm[SlideManager.fsmEventName](model);
+    // }
+
+    createSlidesConfigMap(slides) {
+        var config = {};
+        slides.forEach(function(slide, index){
+            config[slide.modelKey] = slide;
+        });
+        return config;
+    }
+
+    createStateMachine(firstSlideKey, transitions) {
+        let events = transitions.map((e) => Object.assign({}, e, {name: e['trigger']}));
+        return StateMachine.create({initial: firstSlideKey, events: events});
+    }
+
+    configForSlideWithKey = (key, model) => {
+        let config = Map(this.slidesConfig[key]).toJS();
+        config.componentClass = eval("(Components." + config.componentName + ")");
+        Object.keys(config.componentProps || []).forEach(function(prop, index) {
+            if (typeof(config.componentProps[prop]) == 'function') {
+                config.componentProps[prop] = config.componentProps[prop](model);
+            }
+        });
+
+        return config;
+    }
+
+    /***TODO: REFACTOR THESE METHODS ****/
     isLastSlide(state) {
         if(state == 'End') {
             return true;
@@ -61,61 +87,4 @@ const slideManager = new class {
         inputElement.setAttribute("type", "hidden");
         return inputElement;
     }
-    
-    createSlidesConfigMap(slides) {
-        var config = {};
-        slides.forEach(function(slide, index){
-            config[slide.modelKey] = slide;
-        });
-        return config;
-    }
-
-    createStateMachine(firstSlideKey, transitions) {
-        let events = transitions.map((e) => Object.assign({}, e, {name: e['trigger']}));
-        return StateMachine.create({initial: firstSlideKey, events: events});
-    }
-
-    configForSlideWithKey = (key, model) => {
-        let config = Map(this.slidesConfig[key]).toJS();
-        config.componentClass = eval("(Components." + config.componentName + ")");
-        Object.keys(config.properties || []).forEach(function(prop, index) {
-            if (typeof(config.properties[prop]) == 'function') {
-                config.properties[prop] = config.properties[prop](model);
-            }
-        });
-
-        return config;
-    }
-};
-
-const mapStateToProps = (state) => {
-    let activeSlideKey = state.slide.main.present.activeSlide || slideManager.firstSlideKey;
-    console.log("Going to render the Slide with ID = " + activeSlideKey);
-
-    let activeModel = state.slide.main.present.model;
-    let slideConfig = slideManager.configForSlideWithKey(activeSlideKey, activeModel);
-
-    return {
-        title: slideConfig.title,
-        componentClass: slideConfig.componentClass,
-        componentProps:  slideConfig.properties,
-        modelKey: activeSlideKey,
-        prefillData: state.slide.prefillData,
-        canGoBack: state.slide.main.past.length > 0,
-        canGoForward: true
-    }
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        componentDataCollected: (key, payload) => {
-            dispatch(nextSlideAction(key, payload, slideManager));
-        },
-        goBackToPreviousSlide: () => {
-            dispatch(UndoActionCreators.undo());
-        }
-    }
-}
-
-const Slide = connect(mapStateToProps, mapDispatchToProps)(SlideView);
-export default Slide;

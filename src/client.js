@@ -13,18 +13,32 @@ import ReactDOM from 'react-dom';
 import {combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
 
-import Slide from './slideCore/SlideManager.js';
+import SlideManager from './slideCore/SlideManager.js';
+import SlideViewContainer from './slideCore/SlideView.js';
 import SlideStateReducer from './slideCore/SlideStateReducer';
 
+let slideManager = new SlideManager(slideManagerConfig);
 let rootReducer = combineReducers({slide: SlideStateReducer});
-let preloadedState = {}
+let preloadedState = {
+    slide: {
+        main: {
+            past: [], 
+            present: {
+                slideManager: slideManager, 
+                activeSlide: slideManager.activeSlide(),
+                model: {}
+            }, 
+            future: []
+        }
+    }
+}
 
 const reduxToolEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const globalStore = createStore(rootReducer, preloadedState, reduxToolEnhancer);
 
 ReactDOM.render(
     <Provider store={globalStore}>
-        <Slide />
+        <SlideViewContainer slideManager={slideManager}/>
     </Provider>,
     document.getElementById('elig-slide-content')
 );

@@ -6,12 +6,12 @@ import {ActionType} from './SlideActions.js';
 
 const mainReducer = (state = {}, action) => {
     switch (action.type) {
-        case ActionType.NEXT_SLIDE_ACTION:
-            let modelDelta = {[action.key]: action.payload};
+        case ActionType.COLLECT_DATA_ACTION:
+            let modelDelta = {[action.key]: action.value};
             let newModel = Map(state.model).merge(modelDelta).toJS();
-            let nextSlide = action.slideManager.peekIntoNextSlide(state.activeSlide, newModel);
+            let nextSlide = state.slideManager.peekIntoNextSlide(newModel, state.activeSlide);
 
-            return {model: newModel, activeSlide: nextSlide};
+            return {...state, model: newModel, activeSlide: nextSlide};
         default:
             return state;
     }
@@ -19,8 +19,8 @@ const mainReducer = (state = {}, action) => {
 
 const prefillDataReducer = (state = {}, action) => {
     switch (action.type) {
-        case ActionType.NEXT_SLIDE_ACTION:
-            let modelDelta = {[action.key]: action.payload};            
+        case ActionType.COLLECT_DATA_ACTION:
+            let modelDelta = {[action.key]: action.value};            
             return Map(state).merge(modelDelta).toJS();
         default:
             return state;

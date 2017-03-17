@@ -1,7 +1,7 @@
 export const ActionType = {
-    NEXT_SLIDE_ACTION: 'NEXT_SLIDE_ACTION'
+    COLLECT_DATA_ACTION: 'COLLECT_DATA_ACTION',
 };
 
-export const nextSlideAction = (key, payload, slideManager) => {
-    return {type: ActionType.NEXT_SLIDE_ACTION, key, payload, slideManager};
+export const collectDataAndMoveToNextSlide = (key, value) => {
+    return {type: ActionType.COLLECT_DATA_ACTION, key, value};
 }

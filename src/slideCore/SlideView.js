@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { connect } from 'react-redux';
+import { ActionCreators as UndoActionCreators } from 'redux-undo'
 
 import SlideStyle from './Slide.scss';
 import Sprite from '../widgets/Sprite.scss';
 import ActionHandler from '../components/ActionHandler';
+import {collectDataAndMoveToNextSlide} from './SlideActions.js';
 
-export default class SlideView extends React.Component {
+class SlidePresenter extends React.Component {
     state = {
         errorMessage: null
     }
@@ -19,9 +22,11 @@ export default class SlideView extends React.Component {
                 this.props = props;
             }
 
-            onCompletion = (modelKey, payload) => {
+            onCompletion = (modelKey, value) => {
                 this.componentActionHandler.clearError();
-                this.props.componentDataCollected(modelKey, payload);
+                if (!this.props.forceNextButtonClick) {
+                    this.props.collectDataAndMoveToNextSlide(modelKey, value);
+                }
             }
 
             showError = (message) => {
@@ -88,7 +93,7 @@ export default class SlideView extends React.Component {
 
     gotoNextSlideIfAllowed = () => {
         if (this.activeComponentInstance.validate()) {
-            this.activeComponentInstance.notifyCompletion();
+            this.props.collectDataAndMoveToNextSlide(this.props.modelKey, this.activeComponentInstance.getData());
         } else {
             // Show the error message
             console.log("Oops... The current slide is not completed.");
@@ -96,6 +101,35 @@ export default class SlideView extends React.Component {
     }
 }
 
-SlideView.contextTypes = {
-  store: React.PropTypes.object.isRequired
-};
+const mapReduxStateToProps = (state, ownProps) => {
+    let {activeSlide, model} = state.slide.main.present;
+    console.log("Going to render the Slide with ID = " + activeSlide);
+
+    let slideManager = ownProps.slideManager;
+    let slideConfig = slideManager.configForSlideWithKey(activeSlide, model);
+
+    return {
+        title: slideConfig.title,
+        componentClass: slideConfig.componentClass,
+        componentProps:  slideConfig.componentProps,
+        modelKey: activeSlide,
+        prefillData: state.slide.prefillData,
+        forceNextButtonClick: slideConfig.autoNext != undefined && !slideConfig.autoNext,
+        canGoBack: state.slide.main.past.length > 0,
+        canGoForward: true
+    }
+}
+
+const mapReduxDispatchToProps = (dispatch, ownProps) => {
+    return {
+        collectDataAndMoveToNextSlide: (key, value) => {
+            dispatch(collectDataAndMoveToNextSlide(key, value));
+        },
+        goBackToPreviousSlide: () => {
+            dispatch(UndoActionCreators.undo());
+        }
+    }
+}
+
+const SlideView = connect(mapReduxStateToProps, mapReduxDispatchToProps)(SlidePresenter);
+export default SlideView;
