@@ -1,0 +1,27 @@
+.container {
+    margin-top: 20px;
+}
+.icon {
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-residency-status-v1.png);
+    background-position: 0 150px;
+    background-repeat: no-repeat;
+    height: 108px;
+    width: 108px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.iconNRI {
+    composes: icon;
+    background-position: -123px -5px;
+}
+
+.iconPIOCardHolder {
+    composes: icon;
+    background-position: -241px -5px;
+}
+
+.iconIndianParents {
+    composes: icon;
+    background-position: -359px -5px;
+}
