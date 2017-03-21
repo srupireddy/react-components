@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Country from './Country.js';
+
 import BaseComponent from '../BaseComponent';
 import {DecorateWithImageAndLabel} from '../../widgets/Decorator';
 import ResidencyStatusStyle from './ResidencyStatus.scss';
@@ -24,13 +26,14 @@ export default class ResidencyStatus extends BaseComponent {
         )
     );
 
-return (
-    <div className= {ResidencyStatusStyle.container}>
-        {radioItems}
-        <div className="slideSecondHeader" style={{margin: "10px auto"}}>Residence Country</div>
-    </div>
-)
-}
+    return (
+        <div className= {ResidencyStatusStyle.container}>
+            {radioItems}
+            <div className="slideSecondHeader" style={{margin: "10px auto"}}>Residence Country</div>
+            <Country label="States"/>
+        </div>
+        )
+    }
 
 handleResidencyStatusSelection = (event) => {
     let value = event.target.value;

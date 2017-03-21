@@ -7,6 +7,7 @@ import './styles/react-tooltip.css';
 import './styles/react-rangeslider.scss';
 import './styles/react-datepicker.css';
 import './styles/react-autosuggest.css';
+import './styles/react-select.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

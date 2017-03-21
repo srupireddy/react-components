@@ -11,9 +11,10 @@ export {Gender, Calendar, Money, ExistingLoanDetails, CoApplicantRelationship, A
 
 
 import City from './location/City.js';
+import Country from './location/Country.js';
 import LandLocation from './location/LandLocation.js';
 import ResidencyStatus from './location/ResidencyStatus.js';
-export {City, LandLocation, ResidencyStatus};
+export {City, LandLocation, ResidencyStatus, Country};
 
 
 import EmploymentType from './employment/EmploymentType.js';
