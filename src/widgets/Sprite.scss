@@ -35,6 +35,25 @@
     background-position: -92px -49px;
 }
 
+.symbolName {
+    composes: symbol;
+    background-position: -136px -45px;
+    width: 28px;
+    height: 28px;
+}
+.symbolMobile {
+    background-position: -136px -5px;
+    composes: symbol;
+    width: 28px;
+    height: 32px;
+}
+.symbolEmail {
+    background-position: -92px -81px;
+    composes: symbol;
+    width: 28px;
+    height: 28px;
+}
+
 .slideSprite {
     background-image: url(https://www.bankbazaar.com//images/sprite/sprite-input-prepand-v3.png);
     vertical-align: middle;
