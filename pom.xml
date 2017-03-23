@@ -39,7 +39,7 @@
                     <!-- TODO: change this to maven repository -->
                     <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
                     <environmentVariables>
-                        <!--<NODE_ENV>production</NODE_ENV>-->
+                        <NODE_ENV>production</NODE_ENV>
                     </environmentVariables>
                 </configuration>
                 <executions>
