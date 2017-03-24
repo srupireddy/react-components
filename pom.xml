@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>websites</artifactId>
+        <artifactId>brint</artifactId>
         <groupId>com.bankbazaar</groupId>
         <version>website-refactoring</version>
     </parent>
@@ -39,7 +39,7 @@
                     <!-- TODO: change this to maven repository -->
                     <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
                     <environmentVariables>
-                        <NODE_ENV>production</NODE_ENV>
+                        <!--<NODE_ENV>production</NODE_ENV>-->
                     </environmentVariables>
                 </configuration>
                 <executions>
