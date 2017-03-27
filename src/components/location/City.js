@@ -21,29 +21,30 @@ export default class City extends BaseComponent {
     }
 
     state = {
-        selectedCity: this.props.value || ''
+        city: this.props.value,
+        country: null
     }
 
     render() {
         var variantStyle = this.props.variant == 'Resident' ? 'iconResidence' : 'iconProperty';
         return (
             <div className={CityStyle.cityCompContainer}>
-                <TopTierCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
-                <OtherCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                <TopTierCities selectedCity={this.state.city} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                <OtherCities selectedCity={this.state.city} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
             </div>
         );
     }
 
-    handleCitySelection = (value) => {
-        this.setState({selectedCity: value}, () => {this.notifyCompletion()});
+    handleCitySelection = (city, country) => {
+        this.setState({city, country}, () => {this.notifyCompletion()});
     }
 
     getData() {
-        return this.state.selectedCity;
+        return {name: this.state.city, country: this.state.country};
     }
 
     validate() {
-        if (this.state.selectedCity) {
+        if (this.state.city) {
             return true;            
         } else {
             this.props.handler.showError("Uh-oh! Please select a city! We’ve got tons!");
@@ -61,7 +62,7 @@ const TopTierCities = ({selectedCity, variantStyle, onChange}) => {
 
             return (
                 <DecorateWithImageAndLabel key={key} imageStyle={icon} label={label} containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" >
-                    <input type="radio" name='city' value={key} onChange={(e) => {e.preventDefault(); onChange(key)}} checked={selectedCity === key} data-value={key} />
+                    <input type="radio" name='city' value={key} onChange={(e) => {e.preventDefault(); onChange(key, 'INDIA')}} checked={selectedCity === key} data-value={key} />
                 </DecorateWithImageAndLabel>
             );
         }
@@ -90,7 +91,7 @@ class OtherCities extends React.Component {
                 prevState = item.state;
                 listItems.push(<li key={'State-' + item.state} className={CityStyle.listSectionHeading}>{titleCase(item.state)}</li>)
             }
-            listItems.push(<li key={item.city} onClick={(e) => {e.preventDefault(); onChange(item.city)}}><a href="">{titleCase(item.city)}</a></li>);
+            listItems.push(<li key={item.city} onClick={(e) => {e.preventDefault(); onChange(item.city, 'INDIA')}}><a href="">{titleCase(item.city)}</a></li>);
         })
 
         var selectedCity = this.props.selectedCity;
@@ -108,7 +109,11 @@ class OtherCities extends React.Component {
                     </DecorateInputFieldWithSymbol>
                     <div className={CityStyle.listContainer}>
                         <ul className={CityStyle.list} style={{columnCount}}>{listItems}</ul>
-                    </div>            
+                        <ul className={CityStyle.list}>
+                            <li className={CityStyle.listSectionHeading}>Others</li>
+                            <li><a onClick={(e) => {e.preventDefault(); onChange(null, 'OTHER')}}>I live outside India</a></li>
+                        </ul>
+                    </div>
                 </Modal>    
             </DecorateWithImageAndLabel>
         )       

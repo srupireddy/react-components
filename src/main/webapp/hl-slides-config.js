@@ -382,7 +382,20 @@ var slideManagerConfig = {
         }
     ],
     transitions: [
-        {trigger: "next", from: "residentCity",            to: "gender"},
+        {trigger: "next", from: "residentCity",
+            to: {
+                choices: [
+                    {
+                        to: "residencyStatus",
+                        guard: function(model, from) {
+                            return model["residentCity"]["country"] == "OTHER"
+                        }
+                    },
+                ],
+                default: "gender"
+            }
+        },
+        {trigger: "next", from: "residencyStatus",         to: "gender"},
         {trigger: "next", from: "gender",                  to: "propertyCity"},
         {trigger: "next", from: "propertyCity",            to: "employmentType"},
         {trigger: "next", from: "employmentType",
