@@ -33,7 +33,7 @@ export default class CoApplicantOwnershipSplit extends BaseComponent {
 
     handleCoAppOwnerSelection = (event) => {
         let value = event.target.value;
-        this.setState({selectedValue: Boolean(value)}, () => {this.notifyCompletion()});
+        this.setState({selectedValue: value == 'true'}, () => {this.notifyCompletion()});
     }
 
     getData() {
