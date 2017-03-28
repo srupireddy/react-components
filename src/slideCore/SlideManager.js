@@ -12,7 +12,7 @@ export default class SlideManager {
         this.fsm = this.createStateMachine(config.firstSlide, config.transitions);
     }
 
-    activeSlide() {
+    firstSlide() {
         return this.fsm.current;
     }
 

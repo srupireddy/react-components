@@ -18,7 +18,7 @@ const mainReducer = (state = {}, action) => {
 const prefillDataReducer = (state = {}, action) => {
     switch (action.type) {
         case ActionType.STORE_DATA_AND_MOVE_ACTION:
-            let modelDelta = {[action.key]: action.value};            
+            let modelDelta = action.data;       
             return Map(state).merge(modelDelta).toJS();
         default:
             return state;
