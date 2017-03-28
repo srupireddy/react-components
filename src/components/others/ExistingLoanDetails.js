@@ -76,7 +76,7 @@ export default class Existingloan extends BaseComponent {
 
 
     getData() {
-        return this.state.selectedExistingloan;
+        return {[this.props.modelKey]: this.state.selectedExistingloan};
     }
 
     validate() {

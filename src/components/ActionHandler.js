@@ -1,5 +1,5 @@
 export default class ActionHandler {
-    onCompletion = (modelKey, value) => {}
+    onCompletion = (data) => {}
     showError = (message) => {}
     clearError = () => {}
 }

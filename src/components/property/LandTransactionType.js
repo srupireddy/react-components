@@ -38,7 +38,7 @@ export default class LandTransactionType extends BaseComponent {
     }
 
     getData() {
-        return this.state.selectedType;
+        return {[this.props.modelKey]: this.state.selectedType};
     }
 
     validate() {

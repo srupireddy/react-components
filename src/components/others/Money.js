@@ -126,7 +126,7 @@ export default class Money extends BaseComponent{
     }
 
     getData() {
-        return this.state.value;
+        return {[this.props.modelKey]: this.state.value};
     }
 
     validate() {

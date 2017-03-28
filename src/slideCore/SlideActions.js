@@ -1,7 +1,7 @@
 export const ActionType = {
-    COLLECT_DATA_ACTION: 'COLLECT_DATA_ACTION',
+    STORE_DATA_AND_MOVE_ACTION: 'STORE_DATA_AND_MOVE_ACTION',
 };
 
-export const collectDataAndMoveToNextSlide = (key, value) => {
-    return {type: ActionType.COLLECT_DATA_ACTION, key, value};
+export const storeDataAndMoveToNextSlide = (data) => {
+    return {type: ActionType.STORE_DATA_AND_MOVE_ACTION, data};
 }

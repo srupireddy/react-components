@@ -64,7 +64,7 @@ export default class Builder extends BaseComponent {
 
 
     getData() {
-        return this.state.selectedBuilder;
+        return {[this.props.modelKey]: this.state.selectedBuilder};
     }
 
     validate() {

@@ -66,7 +66,7 @@ export default class Employer extends BaseComponent {
 
 
     getData() {
-        return this.state.selectedEmployer;
+        return {[this.props.modelKey]: this.state.selectedEmployer};
     }
 
     validate() {

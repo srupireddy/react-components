@@ -33,7 +33,7 @@ export default class Calendar extends BaseComponent {
     }
 
     getData() {
-        return this.state.selectedDateISO;
+        return {[this.props.modelKey]: this.state.selectedDateISO};
     }
 
     validate() {

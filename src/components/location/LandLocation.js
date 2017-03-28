@@ -39,7 +39,7 @@ export default class LandLocation extends BaseComponent {
     }
 
     getData() {
-        return this.state.selectedValue;
+        return {[this.props.modelKey]: this.state.selectedValue};
     }
 
     validate() {

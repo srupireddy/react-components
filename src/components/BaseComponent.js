@@ -22,7 +22,7 @@ export default class BaseComponent extends React.Component {
     }
 
     notifyCompletion = () => {
-        this.props.handler.onCompletion(this.props.modelKey, this.getData());
+        this.props.handler.onCompletion(this.getData());
     }
 
     static configurableProperties() {

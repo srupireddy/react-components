@@ -38,7 +38,7 @@ export default class SellerDetail extends BaseComponent {
     }
 
     getData() {
-        return this.state.selectedValue;
+        return {[this.props.modelKey]: this.state.selectedValue};
     }
 
     validate() {

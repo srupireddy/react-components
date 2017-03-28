@@ -39,7 +39,7 @@ export default class CoApplicantRelationship extends BaseComponent {
     }
 
     getData() {
-        return this.state.selectedRelationship;
+        return {[this.props.modelKey]: this.state.selectedRelationship};
     }
 
     validate() {

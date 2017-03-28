@@ -57,7 +57,7 @@ export default class Experience extends BaseComponent {
     }
 
     getData() {
-        return this.state;
+        return {[this.props.modelKey]: this.state};
     }
 
     validate() {

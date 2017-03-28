@@ -38,7 +38,7 @@ export default class HomeLoanPurpose extends BaseComponent {
     }
 
     getData() {
-        return this.state.selectedPurpose;
+        return {[this.props.modelKey]: this.state.selectedPurpose};
     }
 
     validate() {

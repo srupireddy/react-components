@@ -40,7 +40,7 @@ export default class PropertyType extends BaseComponent {
     }
 
     getData() {
-        return this.state.selectedType;
+        return {[this.props.modelKey]: this.state.selectedType};
     }
 
     validate() {

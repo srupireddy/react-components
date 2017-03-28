@@ -40,7 +40,7 @@ export default class Gender extends BaseComponent {
     }
 
     getData() {
-        return this.state.selectedGender;
+        return {[this.props.modelKey]: this.state.selectedGender};
     }
 
     validate() {

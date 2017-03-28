@@ -40,7 +40,7 @@ export default class City extends BaseComponent {
     }
 
     getData() {
-        return {name: this.state.city, country: this.state.country};
+        return {[this.props.modelKey]: this.state.city, [this.props.modelKey + 'Country']: this.state.country};
     }
 
     validate() {

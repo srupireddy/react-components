@@ -6,7 +6,7 @@ import { ActionCreators as UndoActionCreators } from 'redux-undo'
 import SlideStyle from './Slide.scss';
 import Sprite from '../widgets/Sprite.scss';
 import ActionHandler from '../components/ActionHandler';
-import {collectDataAndMoveToNextSlide} from './SlideActions.js';
+import {storeDataAndMoveToNextSlide} from './SlideActions.js';
 
 class SlidePresenter extends React.Component {
     state = {
@@ -22,10 +22,10 @@ class SlidePresenter extends React.Component {
                 this.props = props;
             }
 
-            onCompletion = (modelKey, value) => {
+            onCompletion = (data) => {
                 this.componentActionHandler.clearError();
                 if (!this.props.forceNextButtonClick) {
-                    this.props.collectDataAndMoveToNextSlide(modelKey, value);
+                    this.props.storeDataAndMoveToNextSlide(data);
                 }
             }
 
@@ -98,7 +98,7 @@ class SlidePresenter extends React.Component {
 
     gotoNextSlideIfAllowed = () => {
         if (this.activeComponentInstance.validate()) {
-            this.props.collectDataAndMoveToNextSlide(this.props.modelKey, this.activeComponentInstance.getData());
+            this.props.storeDataAndMoveToNextSlide(this.activeComponentInstance.getData());
         } else {
             // Show the error message
             console.log("Oops... The current slide is not completed.");
@@ -127,8 +127,8 @@ const mapReduxStateToProps = (state, ownProps) => {
 
 const mapReduxDispatchToProps = (dispatch, ownProps) => {
     return {
-        collectDataAndMoveToNextSlide: (key, value) => {
-            dispatch(collectDataAndMoveToNextSlide(key, value));
+        storeDataAndMoveToNextSlide: (data) => {
+            dispatch(storeDataAndMoveToNextSlide(data));
         },
         goBackToPreviousSlide: () => {
             dispatch(UndoActionCreators.undo());

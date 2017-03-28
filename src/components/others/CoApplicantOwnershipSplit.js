@@ -37,7 +37,7 @@ export default class CoApplicantOwnershipSplit extends BaseComponent {
     }
 
     getData() {
-        return this.state.selectedValue;
+        return {[this.props.modelKey]: this.state.selectedValue};
     }
 
     validate() {
