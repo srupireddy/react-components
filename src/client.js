@@ -26,10 +26,17 @@ let preloadedState = {
             past: [], 
             present: {
                 slideManager: slideManager, 
-                activeSlide: slideManager.activeSlide(),
+                activeSlide: slideManager.firstSlide(),
                 model: {}
-            }, 
-            future: []
+            },
+            future: [],
+            //TODO: Redux Undo has a bug wherein if we have a preloaded state, it is not considering the first transition as part of its Undo History
+            //unless this is also populated.
+            _latestUnfiltered: {
+                slideManager: slideManager, 
+                activeSlide: slideManager.firstSlide(),
+                model: {}
+            }
         }
     }
 }
