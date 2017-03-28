@@ -40,7 +40,8 @@ export default class City extends BaseComponent {
     }
 
     getData() {
-        return {[this.props.modelKey]: this.state.city, [this.props.modelKey + 'Country']: this.state.country};
+        //TODO: Fix this so that we dont need to hardcode the residentCountry attribute name
+        return {[this.props.modelKey]: this.state.city, 'residentCountry': this.state.country};
     }
 
     validate() {
@@ -111,7 +112,7 @@ class OtherCities extends React.Component {
                         <ul className={CityStyle.list} style={{columnCount}}>{listItems}</ul>
                         <ul className={CityStyle.list}>
                             <li className={CityStyle.listSectionHeading}>Others</li>
-                            <li><a onClick={(e) => {e.preventDefault(); onChange(null, 'OTHER')}}>I live outside India</a></li>
+                            <li><a onClick={(e) => {e.preventDefault(); onChange('Unknown', 'Other')}}>I live outside India</a></li>
                         </ul>
                     </div>
                 </Modal>    

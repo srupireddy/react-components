@@ -388,7 +388,7 @@ var slideManagerConfig = {
                     {
                         to: "residencyStatus",
                         guard: function(model, from) {
-                            return model["residentCity"]["country"] == "OTHER"
+                            return model["residentCountry"] == "Other"
                         }
                     },
                 ],

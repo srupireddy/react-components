@@ -52,7 +52,7 @@ export default class ResidencyStatus extends BaseComponent {
     }
 
     getData() {
-        return {[this.props.modelKey]: this.state};
+        return {[this.props.modelKey]: this.state.type, 'residentCountry': this.state.residentCountry};
     }
 
     isAllCollected() {

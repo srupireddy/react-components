@@ -6,7 +6,7 @@ import BaseComponent from '../BaseComponent';
 import ActionHandler from '../ActionHandler.js';
 import Calendar from '../others/Calendar.js';
 
-export default class Experience extends BaseComponent {
+export default class WorkExperience extends BaseComponent {
     state = {
         dateOfJoiningCurrentOrg: this.props.joiningDate,
         totalWorkExperience: this.props.totalWorkExperience
@@ -57,7 +57,8 @@ export default class Experience extends BaseComponent {
     }
 
     getData() {
-        return {[this.props.modelKey]: this.state};
+        //TODO: Fix this so that we dont need to hardcode the totalWorkExperience attribute name
+        return {[this.props.modelKey]: this.state.dateOfJoiningCurrentOrg, 'totalWorkExperience': this.state.totalWorkExperience};
     }
 
     validate() {
