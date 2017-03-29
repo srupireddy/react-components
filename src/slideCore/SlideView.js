@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { ActionCreators as UndoActionCreators } from 'redux-undo'
 
-import SlideStyle from './Slide.scss';
-import Sprite from '../widgets/Sprite.scss';
-import ActionHandler from '../components/ActionHandler';
-import {storeDataAndMoveToNextSlide} from './SlideActions.js';
+import DesktopLayout from './SlideViewDesktopLayout.js';
+import ActionHandler from '../components/ActionHandler.js';
+import { storeDataAndMoveToNextSlide } from './SlideActions.js';
 
 class SlidePresenter extends React.Component {
     state = {
@@ -41,58 +39,21 @@ class SlidePresenter extends React.Component {
 
     render() {
         let value = this.props.prefillData[this.props.modelKey];
+        let component = (
+            <this.props.componentClass 
+                    ref={(instance) => this.activeComponentInstance = instance}
+                    {...this.props.componentProps}
+                    modelKey={this.props.modelKey}
+                    handler={this.componentActionHandler}
+                    value={value}
+                    style={{margin: '20px auto'}}
+                />
+            );
+
         return (
-            <div className={SlideStyle.slideContainer}>
-                <div className={SlideStyle.slideLongHeader}><h2>Compare Home Loan Offers from Top Lenders. Apply Online and Get e-Approved Instantly.</h2></div>
-                <div className="container">
-                    <div className={SlideStyle.slideHeader}>
-                        {this.props.title}
-                        {this.state.errorMessage &&
-                            <span className={SlideStyle.errorContainer}>
-                                <span className={SlideStyle.errorContainerInner}>
-                                <span className={SlideStyle.errorImage}><img src="https://www.bankbazaar.com/images/icon-error.png"/></span>
-                                <span className={SlideStyle.errorMessage}>{this.state.errorMessage}</span>
-                                </span>
-                            </span>
-                        }
-                    </div>
-                    {/*<ReactCSSTransitionGroup
-                            transitionName="slide"
-                            transitionEnterTimeout={1000}
-                            component="div"
-                            className="carousel__slide"
-                            transitionLeaveTimeout={100}>*/}
-                        <div className={["clearfix", SlideStyle.slideContainerInner].join(' ')} key={this.props.modelKey} >
-                            <this.props.componentClass 
-                                    ref={(instance) => this.activeComponentInstance = instance}
-                                    {...this.props.componentProps}
-                                    modelKey={this.props.modelKey}
-                                    handler={this.componentActionHandler}
-                                    value={value}
-                                    style={{margin: '20px auto'}}
-                                />
-                        </div>
-                    {/*</ReactCSSTransitionGroup>*/}
-                    <div className={SlideStyle.slideControlPrev}>
-                        <button type="button" className={SlideStyle.icon} onClick={this.props.goBackToPreviousSlide} style={{display: this.props.canGoBack ? "" : "none" }}>
-                            <span className={Sprite.iconLeft}/>
-                        </button>
-                    </div>
-                    <div className={SlideStyle.slideControlNext}>
-                        <button type="button" className={SlideStyle.icon} onClick={this.gotoNextSlideIfAllowed} disabled={!this.props.canGoForward}>
-                            <span className={Sprite.iconRight}/>
-                        </button>
-                    </div>
-                    <div>
-                        <button type="button" className="btn" onClick={this.gotoNextSlideIfAllowed} disabled={!this.props.canGoForward}>
-                            Continue
-                        </button>
-                        {this.props.forceNextButtonClick &&
-                            <img src="https://www.bankbazaar.com/images/landing/pointing-arrow.gif" style={{position: 'absolute', marginTop: '-12px', overflow: 'hidden', display: 'inline'}}/>
-                        }
-                    </div>
-                </div>
-            </div>
+            <DesktopLayout {...this.props} gotoNextSlideIfAllowed={this.gotoNextSlideIfAllowed} errorMessage={this.state.errorMessage}>
+                {component}
+            </DesktopLayout>
         )
     }
 
