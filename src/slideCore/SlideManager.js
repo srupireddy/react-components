@@ -7,7 +7,8 @@ export default class SlideManager {
     static fsmEventName = 'next';
     static fsmPeekEventName = 'peek.' + SlideManager.fsmEventName;
 
-    constructor(config) {
+    constructor(context, config) {
+        this.context = context;
         this.slidesConfig = this.createSlidesConfigMap(config.slides);
         this.fsm = this.createStateMachine(config.firstSlide, config.transitions);
     }

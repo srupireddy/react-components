@@ -13,12 +13,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
+import MobileDetect from 'mobile-detect';
 
 import SlideManager from './slideCore/SlideManager.js';
 import SlideViewContainer from './slideCore/SlideView.js';
 import SlideStateReducer from './slideCore/SlideStateReducer';
 
-let slideManager = new SlideManager(slideManagerConfig);
+var deviceType = new MobileDetect(window.navigator.userAgent);
+
+let context = {
+    deviceType: deviceType.mobile() ? "mobile" : "desktop"
+};
+
+let slideManager = new SlideManager(context, slideManagerConfig);
 let rootReducer = combineReducers({slide: SlideStateReducer});
 let preloadedState = {
     slide: {
@@ -41,8 +48,8 @@ let preloadedState = {
     }
 }
 
-const reduxToolEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-const globalStore = createStore(rootReducer, preloadedState, reduxToolEnhancer);
+const reduxBrowserTool = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const globalStore = createStore(rootReducer, preloadedState, reduxBrowserTool);
 
 ReactDOM.render(
     <Provider store={globalStore}>
