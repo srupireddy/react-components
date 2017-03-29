@@ -1,0 +1,107 @@
+@-webkit-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -webkit-transform:translateY(0)
+    }
+    40% {
+        -webkit-transform:translateY(-30px)
+    }
+    60% {
+        -webkit-transform:translateY(-15px)
+    }
+}
+@-moz-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -moz-transform:translateY(0)
+    }
+    40% {
+        -moz-transform:translateY(-30px)
+    }
+    60% {
+        -moz-transform:translateY(-15px)
+    }
+}
+@-ms-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -ms-transform:translateY(0)
+    }
+    40% {
+        -ms-transform:translateY(-30px)
+    }
+    60% {
+        -ms-transform:translateY(-15px)
+    }
+}
+@-o-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -o-transform:translateY(0)
+    }
+    40% {
+        -o-transform:translateY(-30px)
+    }
+    60% {
+        -o-transform:translateY(-15px)
+    }
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform:translateY(0)
+    }
+    40% {
+        transform:translateY(-30px)
+    }
+    60% {
+        transform:translateY(-15px)
+    }
+}
+.errorContainer {
+    position: absolute;
+    margin: 0 10px 0 15px;
+}
+.errorContainerInner {
+    position: relative;
+    color: #fff;
+    background: #f1c40f;
+    border-radius: 6px;
+    padding: 5px;
+    line-height: .6;
+    text-align: left;
+    display: table;
+    font-weight: bold;
+    width: 100%;
+    Clear: both;
+    -moz-animation: bounce 1s 1 alternate;
+    -ms-animation: bounce 1s 1 alternate;
+    -o-animation: bounce 1s 1 alternate;
+    -webkit-animation: bounce 1s 1 alternate;
+    animation: bounce 1s 1 alternate
+}
+.errorContainerInner:after {
+    right: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136,183,213,0);
+    border-bottom-color: #f1c40f;
+    border-width: 10px;
+    color:#f1c40f;
+    top: 10px;
+    left: -20px;
+    border-right-color: #f1c40f;
+    border-bottom-color: rgba(136,183,213,0);
+}
+.errorImage {
+    display: table-cell;
+    padding-right: 5px
+}
+.errorMessage {
+    vertical-align: middle;
+    display: table-cell;
+    padding: 0;
+    line-height: normal;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff
+}

@@ -34,7 +34,7 @@ export default class Existingloan extends BaseComponent {
                         </DecorateInputFieldWithSymbol>
                     </Tooltip>
                 </div>
-                <div className="slideSecondHeader" style={{margin: "45px auto"}}>
+                <div className="font-xxlg" style={{margin: "45px auto"}}>
                     Outstanding balance on existing home loan
                 </div>
                 <div className={ExistingLoanDetailsStyle.innerContainer}>

@@ -30,7 +30,7 @@ export default class ResidencyStatus extends BaseComponent {
         return (
             <div className= {ResidencyStatusStyle.container}>
                 {radioItems}
-                <div className="slideSecondHeader" style={{margin: "10px auto"}}>Residence Country</div>
+                <div className="font-xxlg" style={{margin: "10px auto"}}>Residence Country</div>
                 <Country value={this.state.residentCountry} onChange={this.handleResidentCountrySelection}/>
             </div>
         );
