@@ -1,0 +1,33 @@
+.slideContainer {
+    color: #fff;
+    background: #116a9e;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    height:100vh;
+}
+
+.slideHeader {
+    background: #1698d8;
+    font-size: 26px;
+}
+
+.buttonsRow {
+    position: absolute;
+    bottom: 0;
+    display: table;
+    width: 100%;
+
+    button {
+        display: table-cell;
+        width: 50%;
+        border-radius: 0;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        padding: 16px 0 13px;
+
+        &:first-child {
+            border-right: 1px solid #fff;
+        }
+    }
+}

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ActionCreators as UndoActionCreators } from 'redux-undo'
 
 import DesktopLayout from './SlideViewDesktopLayout.js';
+import MobileLayout from './SlideViewMobileLayout.js';
 import ActionHandler from '../components/ActionHandler.js';
 import { storeDataAndMoveToNextSlide } from './SlideActions.js';
 
@@ -50,11 +51,20 @@ class SlidePresenter extends React.Component {
                 />
             );
 
-        return (
-            <DesktopLayout {...this.props} gotoNextSlideIfAllowed={this.gotoNextSlideIfAllowed} errorMessage={this.state.errorMessage}>
-                {component}
-            </DesktopLayout>
-        )
+        switch (this.props.slideManager.context.deviceType) {
+            case "mobile":
+                return (
+                    <MobileLayout {...this.props} gotoNextSlideIfAllowed={this.gotoNextSlideIfAllowed} errorMessage={this.state.errorMessage}>
+                        {component}
+                    </MobileLayout>
+                )
+            default:
+                return (
+                    <DesktopLayout {...this.props} gotoNextSlideIfAllowed={this.gotoNextSlideIfAllowed} errorMessage={this.state.errorMessage}>
+                        {component}
+                    </DesktopLayout>
+                )            
+        }
     }
 
     gotoNextSlideIfAllowed = () => {
