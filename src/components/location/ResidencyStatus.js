@@ -60,7 +60,7 @@ export default class ResidencyStatus extends BaseComponent {
     }
 
     validate() {
-        if (isAllCollected()) {
+        if (this.isAllCollected()) {
             return true;
         } else {
             this.props.handler.showError("Uh-oh! Please select an option to proceed");
