@@ -8,8 +8,25 @@
 }
 
 .slideHeader {
-    background: #1698d8;
-    font-size: 26px;
+    line-height: normal;
+    position: relative;
+    margin: 0;
+    font-weight: normal;
+    font-size: 16px;
+    padding: 10px 0;
+    background-color: #1698d8;
+    &:after {
+        right: 46%;
+        bottom: -20px;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-top-color: #1698d8;
+        border-width: 10px;
+    }
 }
 
 .buttonsRow {
@@ -17,17 +34,34 @@
     bottom: 0;
     display: table;
     width: 100%;
-
-    button {
+    a {
         display: table-cell;
         width: 50%;
         border-radius: 0;
         border-top: 1px solid #fff;
         border-bottom: 1px solid #fff;
         padding: 16px 0 13px;
-
         &:first-child {
             border-right: 1px solid #fff;
         }
+    }
+}
+
+.previousArrow, .nextArrow {
+    display: inline-block;
+    height: 18px;
+    margin-right: 5px;
+    width: 18px;
+    vertical-align: middle;
+}
+.previousArrow {
+    background: url(https://www.bankbazaar.com/images/offerflow/arrow-left.png) no-repeat;
+}
+.nextArrow {
+    background: url(https://www.bankbazaar.com/images/offerflow/arrow-right.png) no-repeat;
+}
+:global .radio-col {
+    input[type="checkbox"], input[type="radio"] {
+        display: none;
     }
 }

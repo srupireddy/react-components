@@ -1,8 +1,11 @@
 .font-xxlg {
     font-size: 26px;
-    line-height: 30px
+    line-height: 30px;
+    @media only screen and (max-width: 767px) {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }
-
 .mt-lg {
     margin-top: 10px;
 }
@@ -13,4 +16,4 @@
       vertical-align: top;
       margin-bottom: 5px;
       padding: 8px 10px;
-  }
+}

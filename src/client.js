@@ -1,7 +1,7 @@
 /*BB Global Style*/
 import './styles/bootstrap.css';
 import './styles/bbglobal.css';
-import './styles/bbglobalextra.css';
+import './styles/bbglobalextra.scss';
 
 /*React Component Style*/
 import './styles/react-tooltip.css';

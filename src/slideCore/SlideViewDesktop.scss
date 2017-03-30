@@ -40,3 +40,7 @@
     opacity: .9;
     filter: alpha(opacity=90);
 }
+:global .slideInputLabel {
+    width: 300px;
+    margin: 40px auto 50px;
+}

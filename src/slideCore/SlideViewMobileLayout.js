@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SlideStyle from './SlideViewMobile.scss';
+import ErrorMessageStyle from '../widgets/ErrorMessage.scss';
 import Sprite from '../widgets/Sprite.scss';
 
 const Layout = ({children, title, errorMessage, canGoBack, goBackToPreviousSlide, canGoForward, gotoNextSlideIfAllowed, forceNextButtonClick}) => {
@@ -9,10 +10,10 @@ const Layout = ({children, title, errorMessage, canGoBack, goBackToPreviousSlide
             <div className={SlideStyle.slideHeader}>
                 {title}
                 {errorMessage &&
-                    <span className={SlideStyle.errorContainer}>
-                        <span className={SlideStyle.errorContainerInner}>
-                            <span className={SlideStyle.errorImage}><img src="https://www.bankbazaar.com/images/icon-error.png"/></span>
-                            <span className={SlideStyle.errorMessage}>{errorMessage}</span>
+                    <span className={ErrorMessageStyle.errorContainer}>
+                        <span className={ErrorMessageStyle.errorContainerInner}>
+                            <span className={ErrorMessageStyle.errorImage}><img src="https://www.bankbazaar.com/images/icon-error.png"/></span>
+                            <span className={ErrorMessageStyle.errorMessage}>{errorMessage}</span>
                         </span>
                     </span>
                 }
@@ -21,12 +22,12 @@ const Layout = ({children, title, errorMessage, canGoBack, goBackToPreviousSlide
                 {children}
             </div>
             <div className={SlideStyle.buttonsRow}>
-                <button type="button" className="btn" onClick={goBackToPreviousSlide} style={{display: canGoBack ? "" : "none" }}>
-                    Back
-                </button>
-                <button type="button" className="btn" onClick={gotoNextSlideIfAllowed} disabled={!canGoForward}>
-                    Next
-                </button>
+                <a className="btn" onClick={goBackToPreviousSlide} style={{display: canGoBack ? "" : "none" }}>
+                    <span className={SlideStyle.previousArrow}></span> Previous
+                </a>
+                <a className="btn" onClick={gotoNextSlideIfAllowed} disabled={!canGoForward}>
+                    Next <span className={SlideStyle.nextArrow}></span>
+                </a>
             </div>
         </div>
     )
