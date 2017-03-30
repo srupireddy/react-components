@@ -376,3 +376,18 @@
     -webkit-transform: rotate(1turn);
   }
 }
+@media only screen and (max-width: 767px) {
+  .Select-menu-outer {
+    position: fixed;
+    top: 0%;
+    height: 100%;
+    max-height:inherit;
+    width: 100%;
+    left: 0;
+    overflow: hidden;
+  }
+  .Select-menu {
+    max-height: inherit;
+    overflow-y: auto;
+  }
+}

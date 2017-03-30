@@ -60,7 +60,7 @@ const TopTierCities = ({selectedCity, variantStyle, onChange}) => {
             var icon = CityStyle[variantStyle + label.replace(/ /g, '')];
 
             return (
-                <DecorateWithImageAndLabel key={key} imageStyle={icon} label={label} containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" >
+                <DecorateWithImageAndLabel key={key} imageStyle={icon} label={label} containerStyle="col-xs-5 col-sm-2 col-md-2 radio-col" >
                     <input type="radio" name='city' value={key} onChange={(e) => {e.preventDefault(); onChange(key)}} checked={selectedCity === key} data-value={key} />
                 </DecorateWithImageAndLabel>
             );
@@ -98,7 +98,7 @@ class OtherCities extends React.Component {
         var columnCount = Math.min(OtherCities.maxNumberOfColumns, parseInt(listItems.length/OtherCities.preferredNumberOfRows));
 
         return (
-            <DecorateWithImageAndLabel containerStyle="col-xs-2 col-sm-2 col-md-2 radio-col" imageStyle={icon} label="Other City">
+            <DecorateWithImageAndLabel containerStyle="col-xs-5 col-sm-2 col-md-2 radio-col" imageStyle={icon} label="Other City">
                 <input type="text" value={this.state.selectedCity} placeholder="Your city here" onClick={this.openOtherCitiesModal} onChange={onChange}/>
 
                 <Modal isOpen={this.state.otherCitiesModalVisible} className={ModalStyle.modal} overlayClassName={ModalStyle.overlay}  contentLabel="Other Cities Modal">

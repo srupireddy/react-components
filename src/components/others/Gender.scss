@@ -1,6 +1,9 @@
 .container {
     width: 600px;
     margin: 20px auto 0;
+    @media only screen and (max-width: 767px) {
+        width: 100%;
+    }
 }
 
 .icon {
@@ -29,4 +32,18 @@
     background-position: -479px -5px;
     width: 141px;
     height: 251px
+}
+
+@media only screen and (max-width: 767px) {
+    .icon {
+        background-image: url(https://www.bankbazaar.com/images/mobile/landing_page/sprite-gender.png);
+        height: 120px;
+        width: 34px;
+    }
+    .iconMale {
+        background-position: -49px -5px;
+    }
+    .iconFemale {
+        background-position: -5px -5px;
+    }
 }

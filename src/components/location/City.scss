@@ -1,7 +1,10 @@
+.cityCompContainer {
+    margin-top:70px
+}
 .iconResidence {
     background-image: url(https://www.bankbazaar.com/images/sprite/sprite-city.png);
     background-repeat: no-repeat;
-    background-position: -272px -138px;
+    background-position: 0 200px;
     display: inline-block;
     width: 132px;
     height: 132px;
@@ -68,6 +71,52 @@
     background-position: -573px -5px;
 }
 
+@media only screen and (max-width: 767px) {
+    .cityCompContainer {
+        margin-top:10px
+    }
+    .iconResidence {
+        background-image: url(https://www.bankbazaar.com/images/mobile/landing_page/sprite-city.png);
+        width: 60px;
+        height: 70px;
+    }
+    .iconResidenceMumbai {
+        background-position: -215px 0;
+    }
+    .iconResidenceChennai {
+        background-position: -75px -5px;
+    }
+    .iconResidenceNewDelhi {
+        background-position: -145px 0;
+    }
+    .iconResidenceBangalore {
+        background-position: -5px -5px;
+    }
+    .iconResidenceOther {
+        background-position: -285px -5px;
+    }
+    .iconProperty {
+        background-image: url(https://www.bankbazaar.com/images/sprite/sprite-property-mob-v1.png);
+        width: 60px;
+        height: 60px;
+    }
+    .iconPropertyMumbai {
+        background-position: -5px -5px;
+    }
+    .iconPropertyChennai {
+        background-position: -75px -5px;
+    }
+    .iconPropertyNewDelhi {
+        background-position: -145px -5px;
+    }
+    .iconPropertyBangalore {
+        background-position: -215px -5px;
+    }
+    .iconPropertyOther {
+        background-position: -285px -5px;
+    }
+}
+
 .listContainer {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -112,4 +161,4 @@
     }
 }
 
-.cityCompContainer {margin-top:70px }
+

@@ -19,7 +19,7 @@ export default class Gender extends BaseComponent {
                 let label = titleCase(option);
                 let icon = GenderStyle['icon' + label];
                 return (
-                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} containerStyle="col-md-5 col-xs-5 radio-col" >
+                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} containerStyle="col-xs-5 col-md-5 col-xs-5 radio-col" >
                         <input type="radio" value={option}
                             name='gender' onChange={this.handleGenderSelection} checked={this.state.selectedGender === option}/>
                     </DecorateWithImageAndLabel>

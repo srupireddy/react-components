@@ -1,68 +1,229 @@
-$backgroundImage: url(https://www.bankbazaar.com/images/sprite/elig-slider-v1.png);
-.slider-horizontal-ruler {
-  background-image: $backgroundImage;
-  height: 80px;
-  position: relative;
-  margin: 30px auto 60px;
+@media only screen and (min-width: 767px) {
+  $backgroundImage: url(https://www.bankbazaar.com/images/sprite/elig-slider-v1.png);
+  .slider-horizontal-ruler {
+    background-image: $backgroundImage;
+    height: 80px;
+    position: relative;
+    margin: 30px auto 60px;
 
-  &.ruler-0-7 {
-    background-position: -134px -405px;
-    width: 540px;
-    .rangeslider-horizontal {
-      width: 473px;
+    &.ruler-0-7 {
+      background-position: -134px -405px;
+      width: 540px;
+      .rangeslider-horizontal {
+        width: 473px;
+      }
+    }
+
+    &.ruler-18-70 {
+      background-position: -125px -537px;
+      width: 540px;
+      .rangeslider-horizontal {
+        width: 515px;
+      }
+    }
+
+    &.ruler-0-120000 {
+      background-position: 0 -140px;
+      width: 810px;
+      .rangeslider-horizontal {
+        width: 715px;
+      }
+    }
+
+    &.ruler-blank {
+      background-position: -63px -947px;
+      width: 675px;
+      .rangeslider-horizontal {
+        width: 617px;
+      }
     }
   }
 
-  &.ruler-18-70 {
-    background-position: -125px -537px;
-    width: 540px;
-    .rangeslider-horizontal {
-      width:515px;
-    }
+  .rangeslider__handle {
+    background-image: $backgroundImage;
+    margin: 0 auto;
+    height: 115px;
+    width: 112px;
+    background-position: -13px -12px;
+    top: -17px;
+    position: absolute;
+    cursor: pointer;
+    display: inline-block;
+    left: -54px;
+
+  }
+  .rangeslider__tooltip {
+    color: #000;
+    font-size: 20px;
+    margin-top: 40px;
   }
 
-  &.ruler-0-120000 {
-    background-position: 0 -140px;
-    width: 810px;
-    .rangeslider-horizontal {
-      width: 715px;
-    }
-  }
-
-  &.ruler-blank {
-    background-position: -63px -947px;
-    width: 675px;
-   .rangeslider-horizontal {
-      width: 617px;
-    }
+  .rangeslider-horizontal {
+    height: 70px;
+    margin: 0 auto;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
   }
 }
 
-.rangeslider__handle {
-  background-image: $backgroundImage;
-  margin: 0 auto;
-  height: 115px;
-  width: 112px;
-  background-position: -13px -12px;
-  top: -17px;
-  position: absolute;
-  cursor: pointer;
-  display: inline-block;
-  left:-54px;
+@media only screen and (max-width: 767px) {
+  /**
+  * Rangeslider
+  */
+  .rangeslider {
+    margin: 20px 0;
+    position: relative;
+    background: #6a97b1;
+  }
+  .rangeslider,
+  .rangeslider .rangeslider__fill {
+    display: block;
+  }
+  .rangeslider .rangeslider__handle {
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+  }
+  .rangeslider .rangeslider__tooltip {
+    padding: 3px 5px;
+    text-align: center;
+    position: relative;
+    background-color: #fff;
+    font-weight: normal;
+    font-size: 12px;
+    transition: all 100ms ease-in;
+    border-radius: 4px;
+    display: inline-block;
+    color: #555;
+    min-width: 30px;
+  }
+  .rangeslider .rangeslider__tooltip span {
+    display: inline-block;
+    line-height: 100%;
+  }
+  .rangeslider .rangeslider__tooltip:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  /**
+  * Rangeslider - Horizontal slider
+  */
+  .slider-horizontal-ruler{
+    width: 250px;
+    margin: 40px auto;
+    position: relative;
+  }
+  .rangeslider-horizontal {
+    height: 3px;
+    border-radius: 5px;
+  }
+  .rangeslider-horizontal .rangeslider__fill {
+    top: -1px;
+    height: 5px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  .rangeslider-horizontal .rangeslider__handle {
+    width: 30px;
+    height: 30px;
+    top: -14px;
+    border-radius: 51px;
+    box-shadow: 4px 4px 8px -2px rgba(0,0,0,0.6);
+  }
+  .rangeslider-horizontal .rangeslider__tooltip {
+    top: -28px;
+  }
+  .rangeslider-horizontal .rangeslider__tooltip:after {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #fff;
+    left: 11px;
+    bottom: -4px;
+  }
+  /**
+  * Rangeslider - Vertical slider
+  */
+  .rangeslider-vertical {
+    margin: 20px auto;
+    height: 150px;
+    max-width: 10px;
+    background-color: transparent;
+  }
+  .rangeslider-vertical .rangeslider__fill,
+  .rangeslider-vertical .rangeslider__handle {
+    position: absolute;
+  }
+  .rangeslider-vertical .rangeslider__fill {
+    width: 100%;
+    background-color: #1E88E5;
+    box-shadow: none;
+    bottom: 0;
+  }
+  .rangeslider-vertical .rangeslider__handle {
+    width: 30px;
+    height: 10px;
+    left: -10px;
+  }
+  .rangeslider-vertical .rangeslider__tooltip {
+    left: -55px;
+    top: -15px;
+  }
+  .rangeslider-vertical .rangeslider__tooltip:after {
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid rgba(0, 0, 0, 0.8);
+    left: 100%;
+    top: 12px;
+  }
+  /**
+  * Rangeslider - Reverse
+  */
+  .rangeslider-reverse.rangeslider-horizontal .rangeslider__fill {
+    right: 0;
+  }
+  .rangeslider-reverse.rangeslider-vertical .rangeslider__fill {
+    top: 0;
+    bottom: inherit;
+  }
+  /**
+  * Rangeslider - Labels
+  */
+  .rangeslider-vertical .rangeslider__label-list {
+    position: relative;
+    list-style-type: none;
+    margin: 0 0 0 24px;
+    padding: 0;
+    text-align: left;
+    width: 250px;
+  }
+  .rangeslider-vertical .rangeslider__label-list .rangeslider__label {
+    position: absolute;
+  }
+  .rangeslider-vertical .rangeslider__label-list .rangeslider__label::before {
+    content: '';
+    width: 10px;
+    height: 2px;
+    background: black;
+    position: absolute;
+    left: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1;
+  }
+  .rangeslider__label-list .rangeslider__label {
+    position: absolute;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+    top: 10px;
+  }
+
 
 }
-.rangeslider__tooltip {
-  color: #000;
-  font-size: 20px;
-  margin-top: 40px;
-}
-
-.rangeslider-horizontal {
-  height: 70px;
-  margin: 0 auto;
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  z-index: 1;
-}
-

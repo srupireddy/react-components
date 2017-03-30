@@ -1,15 +1,22 @@
+@media (min-width: 992px) {
+    .empTypeContainer {
+        margin: 20px auto;
+        width: 900px;
+    }
+}
 .icon {
     background-image: url(https://www.bankbazaar.com/images/sprite/sprite-employment.png);
-    background-position: 0 0;
     background-repeat: no-repeat;
     height: 108px;
     width: 108px;
     display: inline-block;
     vertical-align: middle;
+    background-position: 0 150px;
 }
 
 .iconSalaried {
     composes: icon;
+    background-position: 0 0;
 }
 
 .iconSalariedProfessional {
@@ -41,4 +48,38 @@
     composes: icon;
     background-position: -648px 0;
 }
+@media only screen and (max-width: 767px) {
+    .icon {
+        background-image: url(https://www.bankbazaar.com/images/mobile/landing_page/sprite-employment.png);
+        width: 60px;
+        height: 60px;
+    }
+    .iconSalaried {
+        background-position: 0 0;
+    }
 
+    .iconSalariedProfessional {
+        background-position: -60px 0;
+    }
+
+    .iconSelfEmployedBusiness {
+        background-position: -120px 0;
+    }
+
+    .iconSelfEmployedProfessional {
+        background-position: -180px 0;
+    }
+
+    .iconStudent {
+        background-position: -240px 0;
+    }
+
+    .iconRetired {
+        background-position: -300px 0;
+    }
+
+    .iconHomemaker {
+        background-position: -360px 0;
+    }
+
+}

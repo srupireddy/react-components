@@ -20,7 +20,7 @@ export default class EmploymentType extends BaseComponent {
                 let label = titleCase(option);
                 let icon = EmploymentTypeStyle['icon' + label.replace(/ /g, '')];
                 return (
-                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} containerStyle="col-md-3 col-xs-3 col-sm-3 radio-col">
+                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} containerStyle="col-md-3 col-xs-5 col-sm-3 radio-col">
                         <input type="radio" value={option}
                             name='employmentType' onChange={this.handleEmploymentTypeSelection} checked={this.state.selectedType === option}/>
                     </DecorateWithImageAndLabel>
@@ -29,7 +29,7 @@ export default class EmploymentType extends BaseComponent {
         );
 
         return (
-            <div style={{...this.props.style, width: '900px'}}>
+            <div className={EmploymentTypeStyle.empTypeContainer}>
                 {radioItems}
             </div>            
         )

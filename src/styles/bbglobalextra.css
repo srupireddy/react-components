@@ -6,3 +6,11 @@
 .mt-lg {
     margin-top: 10px;
 }
+/*Todo: class name need to change*/
+.radio-col {
+      display: inline-block;
+      float: none;
+      vertical-align: top;
+      margin-bottom: 5px;
+      padding: 8px 10px;
+  }

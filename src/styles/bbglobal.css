@@ -808,9 +808,3 @@ blockquote strong, blockquote p{font-weight:normal;}
     .sticky-button-mob {display:block;}
     .sticky-search-mob-button .btn-wide {width: 50%;}
 }
-.radio-col{
-    display: inline-block;
-    float: none;
-    vertical-align: top;
-    margin-bottom: 5px;
-}
