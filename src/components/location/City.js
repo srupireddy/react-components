@@ -26,12 +26,23 @@ export default class City extends BaseComponent {
 
     render() {
         var variantStyle = this.props.variant == 'Resident' ? 'iconResidence' : 'iconProperty';
-        return (
-            <div className={CityStyle.cityCompContainer}>
-                <TopTierCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
-                <OtherCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
-            </div>
-        );
+        variantStyle += this.shouldPreferMobileLayout() ? 'Mobile' : 'Desktop';  
+
+        if (this.shouldPreferMobileLayout()) {
+            return (
+                <div className={CityStyle.containerMobile}>
+                    <TopTierCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                    <OtherCitiesMobileLayout selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                </div>
+            );
+        } else {
+            return (
+                <div className={CityStyle.containerDesktop}>
+                    <TopTierCities selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                    <OtherCitiesDesktopLayout selectedCity={this.state.selectedCity} onChange={this.handleCitySelection} variantStyle={variantStyle}/>
+                </div>
+            );
+        }
     }
 
     handleCitySelection = (value) => {
@@ -60,7 +71,7 @@ const TopTierCities = ({selectedCity, variantStyle, onChange}) => {
             var icon = CityStyle[variantStyle + label.replace(/ /g, '')];
 
             return (
-                <DecorateWithImageAndLabel key={key} imageStyle={icon} label={label} containerStyle="col-xs-5 col-sm-2 col-md-2 radio-col" >
+                <DecorateWithImageAndLabel key={key} imageStyle={icon} label={label} checked={selectedCity === key} containerStyle="col-xs-5 col-sm-2 col-md-2 radio-col" >
                     <input type="radio" name='city' value={key} onChange={(e) => {e.preventDefault(); onChange(key)}} checked={selectedCity === key} data-value={key} />
                 </DecorateWithImageAndLabel>
             );
@@ -70,7 +81,7 @@ const TopTierCities = ({selectedCity, variantStyle, onChange}) => {
     return <div style={{display: 'inline'}}>{radioItems}</div>;    
 }
 
-class OtherCities extends React.Component {
+class OtherCitiesDesktopLayout extends React.Component {
     static maxNumberOfColumns = 6;
     static preferredNumberOfRows = 5;
 
@@ -95,7 +106,7 @@ class OtherCities extends React.Component {
 
         var selectedCity = this.props.selectedCity;
         var icon = CityStyle[this.props.variantStyle + 'Other'];
-        var columnCount = Math.min(OtherCities.maxNumberOfColumns, parseInt(listItems.length/OtherCities.preferredNumberOfRows));
+        var columnCount = Math.min(OtherCitiesDesktopLayout.maxNumberOfColumns, parseInt(listItems.length/OtherCitiesDesktopLayout.preferredNumberOfRows));
 
         return (
             <DecorateWithImageAndLabel containerStyle="col-xs-5 col-sm-2 col-md-2 radio-col" imageStyle={icon} label="Other City">
@@ -108,6 +119,73 @@ class OtherCities extends React.Component {
                     </DecorateInputFieldWithSymbol>
                     <div className={CityStyle.listContainer}>
                         <ul className={CityStyle.list} style={{columnCount}}>{listItems}</ul>
+                        <ul className={CityStyle.list}>
+                            <li className={CityStyle.listSectionHeading}>Others</li>
+                            <li><a onClick={(e) => {e.preventDefault(); onChange('OUTSIDE_INDIA')}}>I live outside India</a></li>
+                        </ul>
+                    </div>
+                </Modal>    
+            </DecorateWithImageAndLabel>
+        )       
+    }
+
+    openOtherCitiesModal = () => {
+        this.setState({otherCitiesModalVisible: true});
+    }
+
+    closeOtherCitiesModal = () => {
+        this.setState({otherCitiesModalVisible: false});
+    }
+
+    filterAvailableCities = (event) => {
+        let value = event.target.value.toUpperCase();
+        let availableCities = AllCities.filter((item) => item.city.indexOf(value) > -1);
+        
+        if (availableCities.length == 0) {
+            // TODO: Fire a AJAX call to get other cities
+        }
+
+        this.setState({value, availableCities: availableCities})
+    }
+}
+
+class OtherCitiesMobileLayout extends React.Component {
+    static maxNumberOfColumns = 6;
+    static preferredNumberOfRows = 5;
+
+    state = {
+        otherCitiesModalVisible: false,
+        value: this.props.selectedCity || '',
+        selectedCity: this.props.selectedCity || '',
+        availableCities: AllCities.filter((item) => item.group != 'SECONDARY_CITIES')
+    }
+
+    render() {
+        let onChange = this.props.onChange;
+        let listItems = [];
+        var prevState = null;
+        this.state.availableCities.forEach(function(item, index) {
+            if (!prevState || item.state != prevState) {
+                prevState = item.state;
+                listItems.push(<li key={'State-' + item.state} className={CityStyle.listSectionHeading}>{titleCase(item.state)}</li>)
+            }
+            listItems.push(<li key={item.city} onClick={(e) => {e.preventDefault(); onChange(item.city)}}><a href="">{titleCase(item.city)}</a></li>);
+        })
+
+        var selectedCity = this.props.selectedCity;
+        var icon = CityStyle[this.props.variantStyle + 'Other'];
+
+        return (
+            <DecorateWithImageAndLabel containerStyle="col-xs-5 col-sm-2 col-md-2 radio-col" imageStyle={icon} label="Other City">
+                <input type="text" value={this.state.selectedCity} placeholder="Your city here" onClick={this.openOtherCitiesModal} onChange={onChange}/>
+
+                <Modal isOpen={this.state.otherCitiesModalVisible} className={ModalStyle.modal} overlayClassName={ModalStyle.overlay}  contentLabel="Other Cities Modal">
+                    <a href="javascript:void(0)" className={ModalStyle.close} onClick={this.closeOtherCitiesModal}>X</a>
+                    <DecorateInputFieldWithSymbol iconStyle={SpriteStyle.symbolBuilding}>
+                        <input type="text" value={this.state.value} placeholder="ENTER CITY NAME" onChange={this.filterAvailableCities} style={{textTransform: 'uppercase'}}/>
+                    </DecorateInputFieldWithSymbol>
+                    <div className={CityStyle.listContainer}>
+                        <ul className={CityStyle.list} style={{columnCount: 2}}>{listItems}</ul>
                         <ul className={CityStyle.list}>
                             <li className={CityStyle.listSectionHeading}>Others</li>
                             <li><a onClick={(e) => {e.preventDefault(); onChange('OUTSIDE_INDIA')}}>I live outside India</a></li>

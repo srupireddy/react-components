@@ -19,7 +19,7 @@ export default class HomeLoanPurpose extends BaseComponent {
     render() {
         let radioItems = HomeLoanPurpose.options.map(
             (option) => (
-                <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col" imageStyle={option.imageStyle} label={option.label}>
+                <DecorateWithImageAndLabel key={option.label} imageStyle={option.imageStyle} label={option.label} checked={this.state.selectedPurpose === option.value} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col">
                     <input type="radio" value={option.value} name='purpose' onChange={this.handlePurposeSelection} checked={this.state.selectedPurpose === option.value}/>
                 </DecorateWithImageAndLabel>
             )

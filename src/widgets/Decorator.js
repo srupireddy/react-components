@@ -4,9 +4,14 @@ import DecoratorStyle from './Decorator.scss';
 
 export class DecorateWithImageAndLabel extends React.Component {
     render() {
+        var labelStyle = DecoratorStyle.labelContainer;
+        if (this.props.checked) {
+            labelStyle += ' ' + DecoratorStyle.checked;
+        }
+
         return (
             <div className={this.props.containerStyle}>
-                <label className={DecoratorStyle.labelContainer}>
+                <label className={labelStyle}>
                     <span className={this.props.imageStyle}/>
                     <span className={DecoratorStyle.label}>{this.props.label}</span>
                     {this.props.children}

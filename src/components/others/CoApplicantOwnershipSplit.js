@@ -18,7 +18,7 @@ export default class CoApplicantOwnershipSplit extends BaseComponent {
     render() {
         let radioItems = CoApplicantOwnershipSplit.options.map(
             (option) => (
-                <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-5 col-xs-5 radio-col" imageStyle={option.imageStyle} label={option.label}>
+                <DecorateWithImageAndLabel key={option.label} imageStyle={option.imageStyle} label={option.label} checked={this.state.selectedValue === option.value} containerStyle="col-md-5 col-xs-5 radio-col" >
                     <input type="radio" value={option.value} name='coAppOwner' onChange={this.handleCoAppOwnerSelection} checked={this.state.selectedValue === option.value}/>
                 </DecorateWithImageAndLabel>
             )

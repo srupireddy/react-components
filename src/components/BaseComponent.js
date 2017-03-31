@@ -6,7 +6,8 @@ export default class BaseComponent extends React.Component {
     static propTypes = {
         modelKey: React.PropTypes.string.isRequired,
         value: React.PropTypes.any,
-        handler: React.PropTypes.instanceOf(ActionHandler).isRequired
+        handler: React.PropTypes.instanceOf(ActionHandler).isRequired,
+        context: React.PropTypes.object
     }
 
     validate() {
@@ -23,6 +24,10 @@ export default class BaseComponent extends React.Component {
 
     notifyCompletion = () => {
         this.props.handler.onCompletion(this.getData());
+    }
+
+    shouldPreferMobileLayout = () => {
+        return this.props.context.deviceType == 'mobile';
     }
 
     static configurableProperties() {

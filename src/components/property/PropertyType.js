@@ -21,7 +21,7 @@ export default class PropertyType extends BaseComponent {
     render() {
         let radioItems = PropertyType.options.map(
             (option) => (
-                <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col" imageStyle={option.imageStyle} label={option.label}>
+                <DecorateWithImageAndLabel key={option.label} imageStyle={option.imageStyle} label={option.label} checked={this.state.selectedType === option.value} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col">
                     <input type="radio" value={option.value} name='propertyDetail' onChange={this.handlePropertyDetailSelection} checked={this.state.selectedType === option.value}/>
                 </DecorateWithImageAndLabel>
             )

@@ -1,7 +1,7 @@
-.cityCompContainer {
+.containerDesktop {
     margin-top:70px
 }
-.iconResidence {
+.iconResidenceDesktop {
     background-image: url(https://www.bankbazaar.com/images/sprite/sprite-city.png);
     background-repeat: no-repeat;
     background-position: 0 200px;
@@ -11,32 +11,32 @@
     vertical-align: middle;
 }
 
-.iconResidenceMumbai {
-    composes: iconResidence;
+.iconResidenceDesktopMumbai {
+    composes: iconResidenceDesktop;
     background-position: -2px -138px;
 }
 
-.iconResidenceChennai {
-    composes: iconResidence;
+.iconResidenceDesktopChennai {
+    composes: iconResidenceDesktop;
     background-position: -138px -2px;
 }
 
-.iconResidenceNewDelhi {
-    composes: iconResidence;
+.iconResidenceDesktopNewDelhi {
+    composes: iconResidenceDesktop;
     background-position: -138px -138px;
 }
 
-.iconResidenceBangalore {
-    composes: iconResidence;
+.iconResidenceDesktopBangalore {
+    composes: iconResidenceDesktop;
     background-position: -2px -2px;
 }
 
-.iconResidenceOther {
-    composes: iconResidence;
+.iconResidenceDesktopOther {
+    composes: iconResidenceDesktop;
     background-position: -274px -2px;
 }
 
-.iconProperty {
+.iconPropertyDesktop {
     background-image: url(https://www.bankbazaar.com/images/sprite/sprite-home-property.png);
     background-repeat: no-repeat;
     background-position: 0 200px;
@@ -46,75 +46,97 @@
     vertical-align: middle;
 }
 
-.iconPropertyMumbai {
-    composes: iconProperty;
+.iconPropertyDesktopMumbai {
+    composes: iconPropertyDesktop;
     background-position: -5px -5px;
 }
 
-.iconPropertyChennai {
-    composes: iconProperty;
+.iconPropertyDesktopChennai {
+    composes: iconPropertyDesktop;
     background-position: -147px -5px;
 }
 
-.iconPropertyNewDelhi {
-    composes: iconProperty;
+.iconPropertyDesktopNewDelhi {
+    composes: iconPropertyDesktop;
     background-position: -289px -5px;
 }
 
-.iconPropertyBangalore {
-    composes: iconProperty;
+.iconPropertyDesktopBangalore {
+    composes: iconPropertyDesktop;
     background-position: -431px -5px;
 }
 
-.iconPropertyOther {
-    composes: iconProperty;
+.iconPropertyDesktopOther {
+    composes: iconPropertyDesktop;
     background-position: -573px -5px;
 }
 
-@media only screen and (max-width: 767px) {
-    .cityCompContainer {
-        margin-top:10px
-    }
-    .iconResidence {
-        background-image: url(https://www.bankbazaar.com/images/mobile/landing_page/sprite-city.png);
-        width: 60px;
-        height: 70px;
-    }
-    .iconResidenceMumbai {
-        background-position: -215px 0;
-    }
-    .iconResidenceChennai {
-        background-position: -75px -5px;
-    }
-    .iconResidenceNewDelhi {
-        background-position: -145px 0;
-    }
-    .iconResidenceBangalore {
-        background-position: -5px -5px;
-    }
-    .iconResidenceOther {
-        background-position: -285px -5px;
-    }
-    .iconProperty {
-        background-image: url(https://www.bankbazaar.com/images/sprite/sprite-property-mob-v1.png);
-        width: 60px;
-        height: 60px;
-    }
-    .iconPropertyMumbai {
-        background-position: -5px -5px;
-    }
-    .iconPropertyChennai {
-        background-position: -75px -5px;
-    }
-    .iconPropertyNewDelhi {
-        background-position: -145px -5px;
-    }
-    .iconPropertyBangalore {
-        background-position: -215px -5px;
-    }
-    .iconPropertyOther {
-        background-position: -285px -5px;
-    }
+.containerMobile {
+    margin-top:10px
+}
+
+.iconResidenceMobile {
+    composes: iconResidenceDesktop;
+    background-image: url(https://www.bankbazaar.com/images/mobile/landing_page/sprite-city.png);
+    width: 60px;
+    height: 70px;
+}
+
+.iconResidenceMobileMumbai {
+    composes: iconResidenceMobile;
+    background-position: -215px 0;
+}
+
+.iconResidenceMobileChennai {
+    composes: iconResidenceMobile;
+    background-position: -75px -5px;
+}
+
+.iconResidenceMobileNewDelhi {
+    composes: iconResidenceMobile;
+    background-position: -145px 0;
+}
+
+.iconResidenceMobileBangalore {
+    composes: iconResidenceMobile;
+    background-position: -5px -5px;
+}
+
+.iconResidenceMobileOther {
+    composes: iconResidenceMobile;
+    background-position: -285px -5px;
+}
+
+.iconPropertyMobile {
+    composes: iconPropertyDesktop;
+    background-image: url(https://www.bankbazaar.com/images/sprite/sprite-property-mob-v1.png);
+    width: 60px;
+    height: 60px;
+}
+
+.iconPropertyMobileMumbai {
+    composes: iconPropertyMobile;
+    background-position: -5px -5px;
+}
+
+.iconPropertyMobileChennai {
+    composes: iconPropertyMobile;
+    background-position: -75px -5px;
+}
+
+.iconPropertyMobileNewDelhi {
+    composes: iconPropertyMobile;
+    background-position: -145px -5px;
+}
+
+.iconPropertyMobileBangalore {
+    composes: iconPropertyMobile;
+    background-position: -215px -5px;
+}
+
+.iconPropertyMobileOther {
+    composes: iconPropertyMobile;
+    background-position: -285px -5px;
 }
 
 .listContainer {

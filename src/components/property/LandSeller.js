@@ -19,7 +19,7 @@ export default class SellerDetail extends BaseComponent {
     render() {
         let radioItems = SellerDetail.options.map(
             (option) => (
-                <DecorateWithImageAndLabel key={option.label} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col" imageStyle={option.imageStyle} label={option.label}>
+                <DecorateWithImageAndLabel key={option.label} imageStyle={option.imageStyle} label={option.label} checked={this.state.selectedValue === option.value} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col">
                     <input type="radio" value={option.value} name='sellerDetail' onChange={this.handleSellerDetailSelection} checked={this.state.selectedValue === option.value}/>
                 </DecorateWithImageAndLabel>
             )

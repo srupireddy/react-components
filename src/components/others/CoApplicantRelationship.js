@@ -19,7 +19,7 @@ export default class CoApplicantRelationship extends BaseComponent {
                 let label = titleCase(option);
                 let icon = CoApplicantRelationshipStyle['icon' + label];
                 return (
-                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col">
+                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} checked={this.state.selectedRelationship === option} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col">
                         <input type="radio" value={option} name='coAppRelationship' onChange={this.handleCoAppRelationshipSelection} checked={this.state.selectedRelationship === option}/>
                     </DecorateWithImageAndLabel>
                 );

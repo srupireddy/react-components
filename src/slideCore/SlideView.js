@@ -46,6 +46,7 @@ class SlidePresenter extends React.Component {
                     {...this.props.componentProps}
                     modelKey={this.props.modelKey}
                     handler={this.componentActionHandler}
+                    context={this.props.slideManager.context}
                     value={value}
                     style={{margin: '20px auto'}}
                 />

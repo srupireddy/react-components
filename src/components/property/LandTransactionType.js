@@ -18,7 +18,7 @@ export default class LandTransactionType extends BaseComponent {
                 let label = titleCase(option);
                 let icon = LandTransactionTypeStyle['icon' + label.replace(/ /g, '')];
                 return (
-                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col">
+                    <DecorateWithImageAndLabel key={option} imageStyle={icon} label={label} checked={this.state.selectedType === option} containerStyle="col-md-2 col-xs-3 col-sm-3 radio-col">
                         <input type="radio" value={option} name='transactionType' onChange={this.handleTransactionTypeSelection} checked={this.state.selectedType === option}/>
                     </DecorateWithImageAndLabel>
                 );
